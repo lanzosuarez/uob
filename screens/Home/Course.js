@@ -63,7 +63,13 @@ class Course extends Component {
           paddingTop: 5
         }}
       >
+<<<<<<< HEAD
         <Text style={{ color: blue, fontSize: 11, fontFamily: "Roboto_light" }}>
+=======
+        <Text
+          style={{ color: blue, fontSize: 11, fontFamily: "Roboto_medium" }}
+        >
+>>>>>>> db730317981e5f1ceeab42a2fbf78041e816accb
           {item.title}
         </Text>
       </CardItem>

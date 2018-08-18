@@ -152,10 +152,17 @@ class UpcomingCourses extends Component {
               onRefresh={this.onRefresh}
             />
           }
+          contentContainerStyle={{
+            flex: 1
+          }}
         >
-          <ScrollView
-            stlye={{
-              flex: 1
+          <View
+            style={{
+              paddingTop: 20,
+              paddingRight: 10,
+              paddingLeft: 10,
+              flexWrap: "wrap",
+              flexDirection: "row"
             }}
           >
             {courses.length === 0 ? (
@@ -178,7 +185,7 @@ class UpcomingCourses extends Component {
                 />
               ))
             )}
-          </ScrollView>
+          </View>
         </Content>
       </Container>
     );

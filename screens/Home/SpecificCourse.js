@@ -17,7 +17,10 @@ import ConfirmDialog from "../ConfirmDialog";
 import ContentRepo from "../../services/ContentRepo";
 
 import Loading from "../Loading";
+<<<<<<< HEAD
 import Expo from "expo"
+=======
+>>>>>>> db730317981e5f1ceeab42a2fbf78041e816accb
 import { UserConnect } from "../../context/UserProvider";
 
 class SpecificCourse extends Component {
@@ -111,16 +114,23 @@ class SpecificCourse extends Component {
     this.toggleConfirm();
     this.toggleLoad();
     const { event_batch_id } = this.state.workshop.user_event;
-    console.log(event_batch_id);
     ContentRepo.withdrawFromWorkshop({ event_batch_id })
       .then(r => {
         this.toggleLoad();
         if (r.data) {
+<<<<<<< HEAD
           const { status, message,data } = r.data;
           if (status) {
             this.showToast(message);
             this.getWorkshop();
             let user = {...this.props.user};
+=======
+          const { status, message, data } = r.data;
+          if (status) {
+            this.showToast(message);
+            this.getWorkshop();
+            let user = { ...this.props.user };
+>>>>>>> db730317981e5f1ceeab42a2fbf78041e816accb
             user.credits_available = data.credits_available;
             this.props.setUser(user);
           } else {
@@ -241,6 +251,10 @@ class SpecificCourse extends Component {
   }
 }
 
+<<<<<<< HEAD
 export default UserConnect(["setUser","user"])(
   SpecificCourse
 )
+=======
+export default UserConnect(["setUser", "user"])(SpecificCourse);
+>>>>>>> db730317981e5f1ceeab42a2fbf78041e816accb

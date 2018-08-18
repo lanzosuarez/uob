@@ -110,7 +110,11 @@ class EvaluationsScreen extends Component {
       });
   };
 
+<<<<<<< HEAD
   goToEvaluate = (batchId,eventId) => {
+=======
+  goToEvaluate = (batchId, eventId) => {
+>>>>>>> db730317981e5f1ceeab42a2fbf78041e816accb
     const link = `https://demo.uobsummit.com/user_evaluations/new?event_batch_id=${batchId}&event_id=${eventId}`;
     Linking.openURL(link)
       .then(d => {

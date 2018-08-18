@@ -1,7 +1,7 @@
 import React from "react";
 
 import { Text, View } from "react-native";
-import { Card, Button, CardItem, Body } from "native-base";
+import { Button } from "native-base";
 
 const blue = "#00246a";
 

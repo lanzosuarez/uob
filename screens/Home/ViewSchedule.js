@@ -109,7 +109,11 @@ class ViewSchedule extends Component {
       : { event_batch_id };
     this.toggleConfirm();
     this.fireBookRq(payload).then(r => {
+<<<<<<< HEAD
       if(r){
+=======
+      if (r) {
+>>>>>>> db730317981e5f1ceeab42a2fbf78041e816accb
         const user = { ...this.props.user },
           creditToSubtract = this.props.navigation.getParam("credit", 0);
         user.credits_available = user.credits_available - creditToSubtract;
@@ -131,6 +135,7 @@ class ViewSchedule extends Component {
           });
           return true;
         } else {
+          return false;
           this.showToast(message);
           return false
         }
