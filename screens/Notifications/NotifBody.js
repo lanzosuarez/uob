@@ -27,7 +27,7 @@ const NotifBody = props => {
               style={{ color: blue }}
               name="chevron-left"
             />
-            <Text style={{ color: blue, fontFamily: "Roboto_medium" }}>
+            <Text style={{ color: blue, fontFamily: "Roboto_light" }}>
               Back
             </Text>
           </Button>
@@ -85,7 +85,7 @@ const styles = {
     fontFamily: "AgendaBold"
   },
   medium: {
-    fontFamily: "Roboto_medium"
+    fontFamily: "Roboto_light"
   },
   light: {
     fontFamily: "Roboto_light"

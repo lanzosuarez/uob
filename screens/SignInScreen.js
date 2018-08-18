@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { View, ToastAndroid, AsyncStorage } from "react-native";
+import { View, AsyncStorage } from "react-native";
 import {
   Item,
   Input,
@@ -10,6 +10,7 @@ import {
   Content,
   Form
 } from "native-base";
+import Toast from 'react-native-root-toast';
 
 import MessageDialog from "./MessageDialog";
 
@@ -52,7 +53,14 @@ class SignInScreen extends Component {
   toggleShowMessage = () =>
     this.setState({ showMessage: !this.state.showMessage });
 
-  showToast = text => ToastAndroid.show(text, ToastAndroid.SHORT);
+  showToast = text => Toast.show(text, {
+    duration: Toast.durations.SHORT,
+    position: Toast.positions.BOTTOM,
+    shadow: true,
+    animation: true,
+    hideOnPress: true,
+    delay: 0
+  })
 
   setTextValue = (key, val) => this.setState({ [key]: val });
 
@@ -176,7 +184,7 @@ class SignInScreen extends Component {
                   />
                 </Item>
               </View>
-              <View style={{ height: 50 }}>
+              <View style={{ height: 70 }}>
                 <View
                   style={{
                     marginTop: 15,
@@ -198,7 +206,7 @@ class SignInScreen extends Component {
                         fontSize: 12,
                         textDecorationLine: "underline",
                         textAlign: "center",
-                        fontFamily: "Roboto_medium"
+                        fontFamily: "Roboto_light"
                       }}
                     >
                       Forgot your password
@@ -217,9 +225,9 @@ class SignInScreen extends Component {
                     <Text
                       uppercase={false}
                       style={{
-                        color: "white",
-                        fontWeight: "300",
-                        fontFamily: "Roboto_medium"
+                        color: "white", fontSize: 12,
+                        
+                        fontFamily: "Roboto_light"
                       }}
                     >
                       Sign in
@@ -301,7 +309,7 @@ class SignInScreen extends Component {
                   </Item>
                 </View>
               </View>
-              <View style={{ height: 50 }}>
+              <View style={{ height: 70 }}>
                 <View
                   style={{
                     marginTop: 15,
@@ -323,7 +331,7 @@ class SignInScreen extends Component {
                         fontSize: 12,
                         textDecorationLine: "underline",
                         textAlign: "center",
-                        fontFamily: "Roboto_medium"
+                        fontFamily: "Roboto_light"
                       }}
                     >
                       Back to sign in
@@ -397,7 +405,7 @@ const styles = {
     fontSize: 12,
     color: blue,
     height: 35,
-    fontFamily: "Roboto_medium"
+    fontFamily: "Roboto_light"
   },
   forgotItem: {
     borderRadius: 7,
@@ -412,7 +420,7 @@ const styles = {
     borderWidth: 0,
     borderColor: "transparent",
     paddingLeft: 20,
-    fontFamily: "Roboto_medium"
+    fontFamily: "Roboto_light"
   },
   linkBtn: {
     width: "100%",

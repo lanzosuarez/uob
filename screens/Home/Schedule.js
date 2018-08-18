@@ -47,7 +47,7 @@ const Schedule = ({ sched, selectSchedule }) => {
               fontWeight: "100",
               color: blue,
               textAlign: "center",
-              fontFamily: "Roboto_medium"
+              fontFamily: "Roboto_light"
             }}
           >
             Available seats: {sched.available_slot} of {sched.slot}
@@ -81,7 +81,7 @@ const Schedule = ({ sched, selectSchedule }) => {
                   fontSize: 11,
                   fontWeight: "100",
                   color: blue,
-                  fontFamily: "Roboto_medium"
+                  fontFamily: "Roboto_light"
                 }}
               >
                 {sched.venue}
@@ -107,7 +107,7 @@ const Schedule = ({ sched, selectSchedule }) => {
                   fontSize: 12,
                   fontWeight: "100",
                   color: blue,
-                  fontFamily: "Roboto_medium"
+                  fontFamily: "Roboto_light"
                 }}
               >
                 {sched.time}

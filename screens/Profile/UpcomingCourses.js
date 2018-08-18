@@ -23,6 +23,7 @@ import {
 import Course from "./Course";
 
 import { ProfileConnect } from "../../context/ProfileProvider";
+import Toast from 'react-native-root-toast';
 
 import Profile from "../../services/Profile";
 import Loading from "../Loading";
@@ -44,7 +45,15 @@ class UpcomingCourses extends Component {
 
   toggleLoad = () => this.setState({ loading: !this.state.loading });
 
-  showToast = text => ToastAndroid.show(text, ToastAndroid.SHORT);
+  showToast = text => Toast.show(text, {
+    duration: Toast.durations.SHORT,
+    position: Toast.positions.BOTTOM,
+    shadow: true,
+    animation: true,
+    hideOnPress: true,
+    delay: 0
+  })
+
 
   toggleRefresh = () => this.setState({ refreshing: !this.state.refreshing });
   onRefresh = () => {
@@ -111,7 +120,7 @@ class UpcomingCourses extends Component {
                 style={{ color: blue }}
                 name="chevron-left"
               />
-              <Text style={{ color: blue, fontFamily: "Roboto_medium" }}>
+              <Text style={{ color: blue, fontFamily: "Roboto_light" }}>
                 Back
               </Text>
             </Button>
@@ -184,7 +193,7 @@ const styles = {
     fontFamily: "AgendaBold"
   },
   medium: {
-    fontFamily: "Roboto_medium"
+    fontFamily: "Roboto_light"
   },
   light: {
     fontFamily: "Roboto_light"

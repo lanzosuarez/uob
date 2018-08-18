@@ -1,7 +1,8 @@
 import React, { Component } from "react";
-import { Text, Image, View, Dimensions, ToastAndroid } from "react-native";
+import { Text, Image, View, Dimensions } from "react-native";
 
 import MessageDialog from "../MessageDialog";
+import Toast from 'react-native-root-toast';
 
 import {
   Container,
@@ -33,7 +34,15 @@ class Contact extends Component {
   };
 
   checkFields = fields => fields.some(field => this.state[field].length === 0);
-  showToast = text => ToastAndroid.show(text, ToastAndroid.SHORT);
+  showToast = text => Toast.show(text, {
+    duration: Toast.durations.SHORT,
+    position: Toast.positions.BOTTOM,
+    shadow: true,
+    animation: true,
+    hideOnPress: true,
+    delay: 0
+  })
+
   toggleLoad = () => this.setState({ loading: !this.state.loading });
   toggleShowModal = () => this.setState({ showModal: !this.state.showModal });
 
@@ -147,7 +156,7 @@ class Contact extends Component {
               >
                 <Text
                   style={{
-                    fontFamily: "Roboto_medium",
+                    fontFamily: "Roboto_light",
                     textDecorationLine: "underline",
                     fontWeight: "100",
                     color: "#00246a",
@@ -171,7 +180,7 @@ class Contact extends Component {
               <View style={{ marginBottom: 15 }}>
                 <Text
                   style={{
-                    fontFamily: "Roboto_medium",
+                    fontFamily: "Roboto_light",
                     color: blue,
                     fontSize: 10,
                     marginBottom: 5,
@@ -198,7 +207,7 @@ class Contact extends Component {
               <View style={{ marginBottom: 15 }}>
                 <Text
                   style={{
-                    fontFamily: "Roboto_medium",
+                    fontFamily: "Roboto_light",
                     color: blue,
                     fontSize: 10,
                     marginBottom: 5,
@@ -258,7 +267,7 @@ const styles = {
     borderRadius: 7,
     borderWidth: 0,
     borderColor: "transparent",
-    fontFamily: "Roboto_medium"
+    fontFamily: "Roboto_light"
   },
   tArea: {
     paddingTop: 20,
@@ -269,7 +278,7 @@ const styles = {
     borderRadius: 7,
     borderWidth: 0,
     borderColor: "transparent",
-    fontFamily: "Roboto_medium"
+    fontFamily: "Roboto_light"
   }
 };
 

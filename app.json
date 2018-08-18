@@ -1,6 +1,7 @@
 {
   "expo": {
     "sdkVersion": "29.0.0",
+    "privacy": "unlisted",
     "splash": {
       "image": "./assets/splash.png",
       "resizeMode": "cover",
@@ -10,14 +11,11 @@
       "package": "com.uobsummit.app",
       "versionCode": 1,
       "permissions": [],
-      "icon": "./logo.png"
+      "icon": "./assets/icon.png"
     },
     "ios": {
       "bundleIdentifier": "com.uosbsummit.app",
-      "versionCode": 1,
-      "buildNumber": 1,
-      "supportsTablet": true,
-      "icon": "./logo.png"
+      "icon": "./assets/icon.png"
 
     }
   }

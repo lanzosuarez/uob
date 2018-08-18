@@ -24,6 +24,7 @@ import {
 
 import Profile from "../../services/Profile";
 import Loading from "../Loading";
+import Toast from 'react-native-root-toast';
 
 const blue = "#00246a";
 
@@ -48,7 +49,14 @@ class SignAttendance extends Component {
 
   toggleLoad = () => this.setState({ loading: !this.state.loading });
 
-  showToast = text => ToastAndroid.show(text, ToastAndroid.SHORT);
+  showToast = text => Toast.show(text, {
+    duration: Toast.durations.SHORT,
+    position: Toast.positions.BOTTOM,
+    shadow: true,
+    animation: true,
+    hideOnPress: true,
+    delay: 0
+  })
 
   toggleRefresh = () => this.setState({ refreshing: !this.state.refreshing });
 
@@ -90,6 +98,7 @@ class SignAttendance extends Component {
         if (status) {
           this.setState({ event: data });
         } else {
+          this.setState({ event: { name: "dsadsa", schedule: "dsadsa" } });
           this.showToast(message);
         }
       })
@@ -160,7 +169,7 @@ class SignAttendance extends Component {
                 style={{ color: blue }}
                 name="chevron-left"
               />
-              <Text style={{ color: blue, fontFamily: "Roboto_medium" }}>
+              <Text style={{ color: blue, fontFamily: "Roboto_light" }}>
                 Back
               </Text>
             </Button>
@@ -249,7 +258,7 @@ class SignAttendance extends Component {
                 </Text>
               </View>
               <ExpoPixi.Sketch
-                height={height * 0.6}
+                height={height * 0.4}
                 strokeColor={color}
                 strokeWidth={width}
                 strokeAlpha={alpha}
@@ -272,7 +281,7 @@ class SignAttendance extends Component {
               />
               <View
                 style={{
-                  marginTop: 20,
+                  marginTop: 40,
                   paddingLeft: 20,
                   paddingRight: 20,
                   display: "flex",
@@ -374,7 +383,7 @@ const styles = {
     fontFamily: "AgendaBold"
   },
   medium: {
-    fontFamily: "Roboto_medium"
+    fontFamily: "Roboto_light"
   },
   light: {
     fontFamily: "Roboto_light"

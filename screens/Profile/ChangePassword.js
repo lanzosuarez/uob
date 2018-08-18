@@ -22,6 +22,7 @@ import { Text, View, ToastAndroid, Dimensions } from "react-native";
 import { DrawerActions } from "react-navigation";
 import Profile from "../../services/Profile";
 import Loading from "../Loading";
+import Toast from 'react-native-root-toast';
 
 const blue = "#00246a";
 const { height } = Dimensions.get("window");
@@ -98,7 +99,14 @@ class ChangePassword extends Component {
     }
   };
 
-  showToast = text => ToastAndroid.show(text, ToastAndroid.SHORT);
+  showToast = text => Toast.show(text, {
+    duration: Toast.durations.SHORT,
+    position: Toast.positions.BOTTOM,
+    shadow: true,
+    animation: true,
+    hideOnPress: true,
+    delay: 0
+  })
 
   render() {
     const { bold, txt, f, light } = styles;
@@ -113,7 +121,7 @@ class ChangePassword extends Component {
                 style={{ color: blue }}
                 name="chevron-left"
               />
-              <Text style={{ color: blue, fontFamily: "Roboto_medium" }}>
+              <Text style={{ color: blue, fontFamily: "Roboto_light" }}>
                 Back
               </Text>
             </Button>
@@ -223,7 +231,7 @@ const styles = {
     fontFamily: "AgendaBold"
   },
   medium: {
-    fontFamily: "Roboto_medium"
+    fontFamily: "Roboto_light"
   },
   light: {
     fontFamily: "Roboto_light"

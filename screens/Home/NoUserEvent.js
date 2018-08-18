@@ -57,7 +57,7 @@ const NoUserEvent = props => {
                 color: blue,
                 lineHeight: 20,
                 marginTop: 20,
-                fontFamily: "Roboto_medium",
+                fontFamily: "Roboto_light",
                 textAlign: "center"
               }}
             >

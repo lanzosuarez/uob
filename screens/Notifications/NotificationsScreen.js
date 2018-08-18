@@ -18,6 +18,7 @@ import { DrawerActions } from "react-navigation";
 import ContentRepo from "../../services/ContentRepo";
 
 import NotificationItem from "./NotificationItem";
+import Toast from 'react-native-root-toast';
 
 import Loading from "../Loading";
 
@@ -38,7 +39,14 @@ class NotificationsScreen extends Component {
     }
   }
 
-  showToast = text => ToastAndroid.show(text, ToastAndroid.SHORT);
+  showToast = text => Toast.show(text, {
+    duration: Toast.durations.SHORT,
+    position: Toast.positions.BOTTOM,
+    shadow: true,
+    animation: true,
+    hideOnPress: true,
+    delay: 0
+  })
 
   toggleLoad = () => this.setState({ loading: !this.state.loading });
 

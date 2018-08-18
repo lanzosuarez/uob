@@ -18,6 +18,7 @@ import Profile from "../../services/Profile";
 import Loading from "../Loading";
 import CourseBookingItem from "./CourseBookingItem";
 import { TeamCoursesConnect } from "../../context/TeamCourses";
+import Toast from 'react-native-root-toast';
 
 const blue = "#00246a";
 
@@ -37,7 +38,14 @@ class CourseBookings extends Component {
   toggleLoad = () => this.setState({ loading: !this.state.loading });
   toggleRefresh = () => this.setState({ refreshing: !this.state.refreshing });
 
-  showToast = text => ToastAndroid.show(text, ToastAndroid.SHORT);
+  showToast = text => Toast.show(text, {
+    duration: Toast.durations.SHORT,
+    position: Toast.positions.BOTTOM,
+    shadow: true,
+    animation: true,
+    hideOnPress: true,
+    delay: 0
+  })
 
   getCourses = () => {
     this.toggleLoad();
@@ -125,7 +133,7 @@ class CourseBookings extends Component {
                 style={{ color: blue }}
                 name="chevron-left"
               />
-              <Text style={{ color: blue, fontFamily: "Roboto_medium" }}>
+              <Text style={{ color: blue, fontFamily: "Roboto_light" }}>
                 Back
               </Text>
             </Button>
@@ -157,7 +165,7 @@ class CourseBookings extends Component {
               onRefresh={this.onRefresh}
             />
           }
-          contentContainerStyle={{ flex: 1, padding: 30, paddingTop: 40 }}
+          contentContainerStyle={{ padding: 30, paddingTop: 40 }}
         >
           <View
             stlye={{
@@ -200,7 +208,7 @@ const styles = {
     fontFamily: "AgendaBold"
   },
   medium: {
-    fontFamily: "Roboto_medium"
+    fontFamily: "Roboto_light"
   },
   light: {
     fontFamily: "Roboto_light"

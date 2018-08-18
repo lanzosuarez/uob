@@ -53,7 +53,7 @@ const MessageDialog = props => {
                   fontSize: 20,
                   marginBottom: 10,
                   textAlign: "center",
-                  fontFamily: "Roboto_medium"
+                  fontFamily: "Roboto_light"
                 }}
               >
                 {heading}

@@ -1,15 +1,13 @@
 import React, { Component, Fragment } from "react";
 import {
-  View,
-  ScrollView,
   TouchableOpacity,
-  ToastAndroid,
   AsyncStorage,
   RefreshControl
 } from "react-native";
+import Toast from 'react-native-root-toast';
 import { DrawerActions } from "react-navigation";
 import { WorkshopConnect } from "../../context/WorkshopProvider";
-import { Icon } from "native-base";
+import { Icon,Container,Content } from "native-base";
 
 import axios from "axios";
 import ContentRepo from "../../services/ContentRepo";
@@ -62,7 +60,15 @@ export class Courses extends Component {
     this.cancelToken.cancel();
   }
 
-  showToast = text => ToastAndroid.show(text, ToastAndroid.SHORT);
+  showToast = text => Toast.show(text, {
+    duration: Toast.durations.SHORT,
+    position: Toast.positions.BOTTOM,
+    shadow: true,
+    animation: true,
+    hideOnPress: true,
+    delay: 0
+  })
+
   toggleLoad = () => this.setState({ loading: !this.state.loading });
   toggleError = () => this.setState({ error: !this.state.error });
   changeActiveItem = index => this.setState({ activeSlide: index });
@@ -135,22 +141,26 @@ export class Courses extends Component {
 
   render() {
     return (
-      <ScrollView
-        refreshControl={
-          <RefreshControl
-            tintColor="#00246a"
-            refreshing={this.state.refreshing}
-            onRefresh={this.onRefresh}
-          />
-        }
-        style={{ flex: 1, backgroundColor: "white" }}
-      >
-        <MessageDialog
-          onOk={this.authorizeApp}
-          isVisible={this.state.showAuthMessage}
-          okText="I agree"
-          heading="Authorization"
-          message="I understand and agree that my personal data may be shared to third party partners for course registration purposes"
+      <Container>
+        <Content 
+           refreshControl={
+            <RefreshControl
+              tintColor="#00246a"
+              refreshing={this.state.refreshing}
+              onRefresh={this.onRefresh}
+            />
+          }
+          contentContainerStyle={{ 
+            backgroundColor: "white",
+            marginTop: Expo.Constants.statusBarHeight
+            }}
+          >
+           <MessageDialog
+            onOk={this.authorizeApp}
+            isVisible={this.state.showAuthMessage}
+            okText="I agree"
+            heading="Authorization"
+            message="I understand and agree that my personal data may be shared to third party partners for course registration purposes"
         />
         <TouchableOpacity
           onPress={() => this.openDrawer()}
@@ -170,7 +180,7 @@ export class Courses extends Component {
             name="menu"
           />
         </TouchableOpacity>
-        <ScrollView onScroll={() => {}} style={styles.container}>
+     
           {this.state.loading ? (
             <Loading
               isVisible={true}
@@ -187,8 +197,10 @@ export class Courses extends Component {
               <CourseItems genres={this.props.genres} />
             </Fragment>
           )}
-        </ScrollView>
-      </ScrollView>
+      
+
+        </Content>
+      </Container>
     );
   }
 }

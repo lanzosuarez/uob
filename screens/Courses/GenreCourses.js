@@ -12,7 +12,8 @@ import {
   Button
 } from "native-base";
 
-import { Text, View, ToastAndroid } from "react-native";
+import { Text, View } from "react-native";
+import Toast from 'react-native-root-toast';
 import { DrawerActions } from "react-navigation";
 import ContentRepo from "../../services/ContentRepo";
 import { CourseConnect } from "../../context/CourseProvider";
@@ -34,7 +35,14 @@ class GenreCourses extends Component {
     this.getGenreCourses(genreId);
   }
 
-  showToast = text => ToastAndroid.show(text, ToastAndroid.SHORT);
+  showToast = text => Toast.show(text, {
+    duration: Toast.durations.SHORT,
+    position: Toast.positions.BOTTOM,
+    shadow: true,
+    animation: true,
+    hideOnPress: true,
+    delay: 0
+  })
 
   toggleLoad = () => this.setState({ loading: !this.state.loading });
 

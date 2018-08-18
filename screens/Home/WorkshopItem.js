@@ -44,11 +44,10 @@ const WorkshopItem = props => {
           >
             <View style={{ flex: 2 }}>
               <Text
+                numberOfLines={3}
                 style={{
-                  fontSize: 13,
-                  fontWeight: "100",
                   color: blue,
-                  fontFamily: "Roboto_medium"
+                  fontFamily: "Roboto_light"
                 }}
               >
                 {type}
@@ -58,7 +57,7 @@ const WorkshopItem = props => {
                   fontSize: 10,
                   fontWeight: "100",
                   color: blue,
-                  fontFamily: "Roboto_medium"
+                  fontFamily: "Roboto_light"
                 }}
               >
                 {credit} credits
@@ -70,7 +69,7 @@ const WorkshopItem = props => {
                 style={{
                   padding: 3,
                   height: 35,
-                  width: "100%",
+                  flex:1,
                   borderRadius: 10,
                   justifyContent: "center",
                   display: "flex",
@@ -83,7 +82,7 @@ const WorkshopItem = props => {
                     color: "white",
                     fontSize: 10,
                     textAlign: "center",
-                    fontFamily: "Roboto_medium"
+                    fontFamily: "Roboto_light"
                   }}
                 >
                   View Schedule

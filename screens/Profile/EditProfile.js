@@ -16,7 +16,9 @@ import {
   Input
 } from "native-base";
 
-import { Text, View, ToastAndroid, Dimensions } from "react-native";
+import { Text, View, Dimensions } from "react-native";
+
+import Toast from 'react-native-root-toast';
 
 import { DrawerActions } from "react-navigation";
 
@@ -62,7 +64,14 @@ class EditProfile extends Component {
 
   toggleLoad = () => this.setState({ loading: !this.state.loading });
 
-  showToast = text => ToastAndroid.show(text, ToastAndroid.SHORT);
+  showToast = text => Toast.show(text, {
+    duration: Toast.durations.SHORT,
+    position: Toast.positions.BOTTOM,
+    shadow: true,
+    animation: true,
+    hideOnPress: true,
+    delay: 0
+  })
 
   openDrawer = () => {
     this.props.navigation.dispatch(DrawerActions.openDrawer());
@@ -116,7 +125,7 @@ class EditProfile extends Component {
                 style={{ color: blue }}
                 name="chevron-left"
               />
-              <Text style={{ color: blue, fontFamily: "Roboto_medium" }}>
+              <Text style={{ color: blue, fontFamily: "Roboto_light" }}>
                 Back
               </Text>
             </Button>
@@ -213,7 +222,7 @@ const styles = {
     fontFamily: "AgendaBold"
   },
   medium: {
-    fontFamily: "Roboto_medium"
+    fontFamily: "Roboto_light"
   },
   light: {
     fontFamily: "Roboto_light"

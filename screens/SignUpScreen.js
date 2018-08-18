@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { View, ToastAndroid, AsyncStorage } from "react-native";
+import { View, AsyncStorage } from "react-native";
 import {
   Item,
   Input,
@@ -11,6 +11,7 @@ import {
   Content
 } from "native-base";
 import Loading from "./Loading";
+import Toast from 'react-native-root-toast';
 
 import AuthService from "../services/Auth";
 import UserResource from "../services/UserResource";
@@ -55,7 +56,14 @@ class SignUpScreen extends Component {
 
   setTextValue = (key, val) => this.setState({ [key]: val });
 
-  showToast = text => ToastAndroid.show(text, ToastAndroid.SHORT);
+  showToast = text => Toast.show(text, {
+    duration: Toast.durations.SHORT,
+    position: Toast.positions.BOTTOM,
+    shadow: true,
+    animation: true,
+    hideOnPress: true,
+    delay: 0
+  })
 
   signUp = () => {
     //sign upp code
@@ -220,7 +228,7 @@ class SignUpScreen extends Component {
                   <Button onPress={() => this.signUp()} style={loginBtn}>
                     <Text
                       uppercase={false}
-                      style={{ color: "white", fontSize: 12 }}
+                      style={{ color: "white", fontSize: 12,fontFamily: "Roboto_light"}}
                     >
                       Create an account
                     </Text>
@@ -289,7 +297,7 @@ class SignUpScreen extends Component {
                         fontSize: 12,
                         textDecorationLine: "underline",
                         textAlign: "center",
-                        fontFamily: "Roboto_medium"
+                        fontFamily: "Roboto_light"
                       }}
                     >
                       Resend activation code
@@ -382,7 +390,7 @@ const styles = {
     fontSize: 12,
     color: blue,
     height: 35,
-    fontFamily: "Roboto_medium"
+    fontFamily: "Roboto_light"
   },
   verifyItem: {
     borderRadius: 7,
@@ -397,7 +405,7 @@ const styles = {
     borderWidth: 0,
     borderColor: "transparent",
     paddingLeft: 20,
-    fontFamily: "Roboto_medium"
+    fontFamily: "Roboto_light"
   },
   linkBtn: {
     width: "100%",
@@ -414,7 +422,7 @@ export default UserConnect(["setUser"])(SignUpScreen);
 
 // await Expo.Font.loadAsync({
 //   Roboto: require("./assets/Fonts/AgendaLight.ttf"),
-//   Roboto_medium: require("./assets/Fonts/AgendaMedium.ttf"),
+//   Roboto_light: require("./assets/Fonts/AgendaMedium.ttf"),
 //   AgendaBold: require("./assets/Fonts/AgendaBold.ttf")
 // });
 

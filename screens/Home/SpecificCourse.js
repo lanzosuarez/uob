@@ -1,14 +1,12 @@
 import React, { Component } from "react";
 
 import {
-  View,
   Text,
   TouchableOpacity,
-  ToastAndroid,
   RefreshControl,
   ScrollView
 } from "react-native";
-
+import Toast from 'react-native-root-toast';
 import { Icon } from "native-base";
 
 import BannerImage from "./BannerImage";
@@ -19,6 +17,8 @@ import ConfirmDialog from "../ConfirmDialog";
 import ContentRepo from "../../services/ContentRepo";
 
 import Loading from "../Loading";
+import Expo from "expo"
+import { UserConnect } from "../../context/UserProvider";
 
 class SpecificCourse extends Component {
   constructor(props) {
@@ -67,7 +67,15 @@ class SpecificCourse extends Component {
   toggleLoad = () => this.setState({ loading: !this.state.loading });
   toggleConfirm = () => this.setState({ showConfirm: !this.state.showConfirm });
 
-  showToast = text => ToastAndroid.show(text, ToastAndroid.SHORT);
+  showToast = text => Toast.show(text, {
+    duration: Toast.durations.SHORT,
+    position: Toast.positions.BOTTOM,
+    shadow: true,
+    animation: true,
+    hideOnPress: true,
+    delay: 0
+  })
+
 
   getWorkshop = () => {
     const { navigation } = this.props;
@@ -108,10 +116,13 @@ class SpecificCourse extends Component {
       .then(r => {
         this.toggleLoad();
         if (r.data) {
-          const { status, message } = r.data;
+          const { status, message,data } = r.data;
           if (status) {
             this.showToast(message);
             this.getWorkshop();
+            let user = {...this.props.user};
+            user.credits_available = data.credits_available;
+            this.props.setUser(user);
           } else {
             this.showToast(message);
           }
@@ -176,7 +187,7 @@ class SpecificCourse extends Component {
             onRefresh={this.onRefresh}
           />
         }
-        style={{ flex: 1 }}
+        contentContainerStyle={{ flex: 1, marginTop: Expo.Constants.statusBarHeight }}
       >
         <TouchableOpacity
           onPress={() => this.goBack()}
@@ -195,14 +206,14 @@ class SpecificCourse extends Component {
             style={{ color: "white" }}
             name="chevron-left"
           />
-          <Text style={{ color: "white", fontFamily: "Roboto_medium" }}>
+          <Text style={{ color: "white", fontFamily: "Roboto_light" }}>
             Back
           </Text>
         </TouchableOpacity>
         {this.state.loading ? (
           <Loading isVisible={this.state.loading} transparent={false} />
         ) : (
-          <View style={{ flex: 1 }}>
+          <ScrollView style={{ flex: 1 }}>
             <BannerImage image_url={w ? w.image_url : "image"} />
             {w &&
             w.user_event &&
@@ -214,7 +225,7 @@ class SpecificCourse extends Component {
             ) : (
               <NoUserEvent workshop={this.state.workshop} />
             )}
-          </View>
+          </ScrollView>
         )}
         <ConfirmDialog
           isVisible={this.state.showConfirm}
@@ -223,11 +234,13 @@ class SpecificCourse extends Component {
           message="Are you sure you want to proceed with the withdrawal of the course? Your slot will be released for other learners."
           onCancel={this.toggleConfirm}
           onOk={this.withdraw}
-          height={155}
+          height={210}
         />
       </ScrollView>
     );
   }
 }
 
-export default SpecificCourse;
+export default UserConnect(["setUser","user"])(
+  SpecificCourse
+)

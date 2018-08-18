@@ -45,7 +45,7 @@ const BannerCarousel = props => {
           <View style={{ marginBottom: 40, marginLeft: 20 }}>
             <Text
               style={{
-                fontFamily: "Roboto_medium",
+                fontFamily: "Roboto_light",
                 color: "white",
                 fontSize: 15
               }}
@@ -54,7 +54,7 @@ const BannerCarousel = props => {
             </Text>
             <Text
               style={{
-                fontFamily: "Roboto_medium",
+                fontFamily: "Roboto_light",
                 color: "white",
                 fontSize: 15
               }}

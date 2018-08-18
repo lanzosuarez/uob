@@ -15,13 +15,13 @@ import {
 
 import {
   View,
-  ToastAndroid,
   Linking,
   Text,
   RefreshControl
 } from "react-native";
 import { DrawerActions } from "react-navigation";
 import Evaluation from "../../services/Evaluation";
+import Toast from 'react-native-root-toast';
 
 import Loading from "../Loading";
 
@@ -50,7 +50,14 @@ class EvaluationsScreen extends Component {
     }
   }
 
-  showToast = text => ToastAndroid.show(text, ToastAndroid.SHORT);
+  showToast = text => Toast.show(text, {
+    duration: Toast.durations.SHORT,
+    position: Toast.positions.BOTTOM,
+    shadow: true,
+    animation: true,
+    hideOnPress: true,
+    delay: 0
+  })
 
   toggleLoad = () => this.setState({ loading: !this.state.loading });
 
@@ -103,8 +110,8 @@ class EvaluationsScreen extends Component {
       });
   };
 
-  goToEvaluate = id => {
-    const link = `https://demo.uobsummit.com/evaluations/new?event_batch_id=${id}`;
+  goToEvaluate = (batchId,eventId) => {
+    const link = `https://demo.uobsummit.com/user_evaluations/new?event_batch_id=${batchId}&event_id=${eventId}`;
     Linking.openURL(link)
       .then(d => {
         this.showToast("Opening browser");
@@ -169,7 +176,7 @@ class EvaluationsScreen extends Component {
                 {this.state.evaluations.map(evaluation => (
                   <EvaluationsItem
                     goToEvaluate={this.goToEvaluate}
-                    key={evaluation.id}
+                    key={evaluation.event_id}
                     evaluation={evaluation}
                   />
                 ))}

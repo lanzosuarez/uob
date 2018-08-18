@@ -1,6 +1,6 @@
 import React, { Component, Fragment } from "react";
-import { Text, View, SafeAreaView, ScrollView, Dimensions } from "react-native";
-
+import { Text, View, SafeAreaView, ScrollView, Dimensions, Platform } from "react-native";
+import Expo from "expo";
 import {
   createDrawerNavigator,
   DrawerItems,
@@ -33,13 +33,14 @@ const blue = "#00246a";
 const { width } = Dimensions.get("window");
 
 const CustomDrawerComponent = props => (
-  <SafeAreaView style={{ flex: 1, backgroundColor: blue }}>
+  <SafeAreaView style={{ flex: 1, backgroundColor: blue, marginTop: Expo.Constants.statusBarHeight }}>
     <View
       style={{
         justifyContent: "center",
         paddingLeft: 40,
         paddingTop: 40,
-        paddingBottom: 35
+        paddingBottom: 35,
+        
       }}
     >
       <UserComsumer>
@@ -60,7 +61,7 @@ const CustomDrawerComponent = props => (
                 color: "white",
                 fontSize: 14,
                 fontWeight: "100",
-                fontFamily: "Roboto_medium"
+                fontFamily: "Roboto_light"
               }}
             >
               Remaining credits:{" "}

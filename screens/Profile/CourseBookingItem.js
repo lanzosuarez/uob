@@ -16,7 +16,8 @@ const CourseBookingItem = props => {
         flexDirection: "column",
         justifyContent: "center",
         borderBottomColor: "#bfc8da",
-        borderBottomWidth: 2
+        borderBottomWidth: 2,
+        marginBottom: 20
       }}
     >
       <View style={{ ...frow }}>
@@ -62,7 +63,7 @@ const styles = {
     fontFamily: "AgendaBold"
   },
   medium: {
-    fontFamily: "Roboto_medium"
+    fontFamily: "Roboto_light"
   },
   light: {
     fontFamily: "Roboto_light"

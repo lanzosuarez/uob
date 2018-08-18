@@ -7,6 +7,7 @@ import {
   AsyncStorage,
   Dimensions
 } from "react-native";
+import Toast from 'react-native-root-toast';
 import { Button, Container, Content } from "native-base";
 import { Row, Grid, Col } from "react-native-easy-grid";
 
@@ -19,7 +20,7 @@ import Loading from "./Loading";
 import { StackActions, NavigationActions } from "react-navigation";
 import { UserConnect } from "../context/UserProvider";
 
-const { height } = Dimensions.get("window");
+const { height, width } = Dimensions.get("window");
 
 class LoginRegister extends Component {
   constructor(props) {
@@ -60,7 +61,14 @@ class LoginRegister extends Component {
     }
   }
 
-  showToast = text => ToastAndroid.show(text, ToastAndroid.SHORT);
+  showToast = text => Toast.show(text, {
+    duration: Toast.durations.LONG,
+    position: Toast.positions.BOTTOM,
+    shadow: true,
+    animation: true,
+    hideOnPress: true,
+    delay: 0
+  })
 
   renderTabStyle = tabId =>
     this.state.active === tabId ? styles.activeTab : styles.inActiveTab;
@@ -162,11 +170,11 @@ const styles = {
     justifyContent: "center"
   },
   imgBg: {
-    flex: 1,
-    resizeMode: "stretch",
+    
+    resizeMode: "cover",
     position: "absolute",
     width: "100%",
-    height: "100%"
+    height
   },
   logoCon: {
     width: "100%",
@@ -175,8 +183,7 @@ const styles = {
     display: "flex"
   },
   logo: {
-    width: "50%",
-    height: "50%",
+    width:50,
     resizeMode: "center"
   },
   tab: {
@@ -190,7 +197,7 @@ const styles = {
   tabText: {
     color: "white",
     textAlign: "center",
-    fontFamily: "Roboto_medium"
+    fontFamily: "Roboto_light"
   },
   activeTab: {
     borderBottomWidth: 8

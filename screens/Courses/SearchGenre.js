@@ -12,9 +12,10 @@ import {
   Input
 } from "native-base";
 
-import { Text, View, ToastAndroid } from "react-native";
+import { Text, View } from "react-native";
 import { DrawerActions } from "react-navigation";
 import { CourseComsumer } from "../../context/CourseProvider";
+import Toast from 'react-native-root-toast';
 
 import Genre from "./Genre";
 
@@ -27,7 +28,14 @@ class SearchGenre extends Component {
 
   state = { searchTitle: "", loading: false };
 
-  showToast = text => ToastAndroid.show(text, ToastAndroid.SHORT);
+  showToast = text => Toast.show(text, {
+    duration: Toast.durations.SHORT,
+    position: Toast.positions.BOTTOM,
+    shadow: true,
+    animation: true,
+    hideOnPress: true,
+    delay: 0
+  })
 
   changeSearchTitle = searchTitle => this.setState({ searchTitle });
 
@@ -63,13 +71,13 @@ class SearchGenre extends Component {
               <Icon type="MaterialIcons" active name="search" />
               <Input
                 onChangeText={e => this.changeSearchTitle(e)}
-                style={{ fontFamily: "Roboto_medium" }}
+                style={{ fontFamily: "Roboto_light" }}
               />
             </Item>
           </Body>
           <Right style={{ flex: 1 }}>
             <Button onPress={() => this.back()} transparent>
-              <Text style={{ color: blue, fontFamily: "Roboto_medium" }}>
+              <Text style={{ color: blue, fontFamily: "Roboto_light" }}>
                 Cancel
               </Text>
             </Button>
