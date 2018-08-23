@@ -12,15 +12,18 @@ import {
 } from "native-base";
 
 import Toast from 'react-native-root-toast';
-import { Text, View, RefreshControl } from "react-native";
+import { Text, View, RefreshControl ,Dimensions } from "react-native";
 import { DrawerActions } from "react-navigation";
 import ContentRepo from "../../services/ContentRepo";
 import { CourseConnect } from "../../context/CourseProvider";
 
 import Loading from "../Loading";
 import CourseItem from "./CourseItem";
+import { headerBGcolor, headerFontColor } from "../../global";
 
 const blue = "#00246a";
+
+const { width } = Dimensions.get("window");
 
 class CourseList extends Component {
   constructor(props) {
@@ -133,10 +136,10 @@ class CourseList extends Component {
     return (
       <Container>
         <Loading isVisible={this.state.loading} transparent={false} />
-        <Header style={{ backgroundColor: "#f6f6f6" }}>
+        <Header style={{ backgroundColor: headerBGcolor }}>
           <Left style={{ flex: 1 }}>
             <Button onPress={() => this.openDrawer()} transparent>
-              <Icon type="MaterialIcons" style={{ color: blue }} name="menu" />
+              <Icon type="MaterialIcons" style={{ color: headerFontColor }} name="menu" />
             </Button>
           </Left>
           <Body
@@ -149,8 +152,8 @@ class CourseList extends Component {
             <Text
               style={{
                 fontFamily: "AgendaBold",
-                fontSize: 13,
-                color: "#00246a"
+                fontSize: 16,
+                color: headerFontColor
               }}
             >
               {this.state.title}
@@ -160,7 +163,7 @@ class CourseList extends Component {
             <Button onPress={() => this.search()} transparent>
               <Icon
                 type="MaterialIcons"
-                style={{ color: blue }}
+                style={{ color: headerFontColor }}
                 name="search"
               />
             </Button>
@@ -179,8 +182,8 @@ class CourseList extends Component {
             style={{
               flex: 1,
               paddingTop: 20,
-              paddingRight: 10,
-              paddingLeft: 10,
+              // paddingRight: width * 0.05,
+              paddingLeft: width * 0.05,
               flexWrap: "wrap",
               flexDirection: "row"
             }}

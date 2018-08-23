@@ -1,13 +1,18 @@
 import React, { Component, Fragment } from "react";
-import {
-  TouchableOpacity,
-  AsyncStorage,
-  RefreshControl
-} from "react-native";
-import Toast from 'react-native-root-toast';
+import { Text, RefreshControl } from "react-native";
+import Toast from "react-native-root-toast";
 import { DrawerActions } from "react-navigation";
 import { WorkshopConnect } from "../../context/WorkshopProvider";
-import { Icon,Container,Content } from "native-base";
+import {
+  Icon,
+  Container,
+  Content,
+  Header,
+  Right,
+  Left,
+  Body,
+  Button
+} from "native-base";
 
 import axios from "axios";
 import ContentRepo from "../../services/ContentRepo";
@@ -18,8 +23,11 @@ import CourseItems from "./CourseItems";
 import MessageDialog from "../MessageDialog";
 import { UserConnect } from "../../context/UserProvider";
 import UserResource from "../../services/UserResource";
+import Profile from "../../services/Profile";
+import { headerBGcolor } from "../../global";
 
 const { CancelToken } = axios;
+
 
 export class Courses extends Component {
   constructor(props) {
@@ -48,14 +56,15 @@ export class Courses extends Component {
     this.cancelToken.cancel();
   }
 
-  showToast = text => Toast.show(text, {
-    duration: Toast.durations.SHORT,
-    position: Toast.positions.BOTTOM,
-    shadow: true,
-    animation: true,
-    hideOnPress: true,
-    delay: 0
-  })
+  showToast = text =>
+    Toast.show(text, {
+      duration: Toast.durations.SHORT,
+      position: Toast.positions.BOTTOM,
+      shadow: true,
+      animation: true,
+      hideOnPress: true,
+      delay: 0
+    });
 
   toggleLoad = () => this.setState({ loading: !this.state.loading });
   toggleError = () => this.setState({ error: !this.state.error });
@@ -79,7 +88,7 @@ export class Courses extends Component {
           this.toggleLoad();
           const { data } = r.data;
           console.log(data);
-          console.log(this.props.user.is_authorize);
+
           if (this.props.user.is_authorize === false) {
             this.showAuthMsg();
           }
@@ -102,8 +111,9 @@ export class Courses extends Component {
   authorizeApp = async () => {
     const user = await UserResource.getUser();
     user.is_authorize = true;
-    UserResource.setUser(user);
+    await UserResource.setUser(user);
     this.setState({ showAuthMessage: false });
+    await Profile.updateProfile({ is_authorize: true }, user.id);
   };
 
   onRefresh = () => {
@@ -123,48 +133,57 @@ export class Courses extends Component {
       });
   };
 
+  openDrawer = () => {
+    this.props.navigation.dispatch(DrawerActions.openDrawer());
+  };
+
   render() {
     return (
       <Container>
-        <Content 
-           refreshControl={
+        <Header style={{ backgroundColor: headerBGcolor }}>
+          <Left style={{ flex: 1 }}>
+            <Button onPress={() => this.openDrawer()} transparent>
+              <Icon type="MaterialIcons" style={{ color: "white" }} name="menu" />
+            </Button>
+          </Left>
+          <Body
+            style={{
+              flex: 2,
+              justifyContent: "center",
+              alignItems: "center"
+            }}
+          >
+            <Text
+              style={{
+                fontFamily: "AgendaBold",
+                fontSize: 16,
+                color: "white"
+              }}
+            >
+              Home
+            </Text>
+          </Body>
+          <Right style={{ flex: 1 }} />
+        </Header>
+        <Content
+          refreshControl={
             <RefreshControl
               tintColor="#00246a"
               refreshing={this.state.refreshing}
               onRefresh={this.onRefresh}
             />
           }
-          contentContainerStyle={{ 
-            backgroundColor: "white",
-            marginTop: Expo.Constants.statusBarHeight
-            }}
-          >
-           <MessageDialog
+          contentContainerStyle={{
+            backgroundColor: "white"
+          }}
+        >
+          <MessageDialog
             onOk={this.authorizeApp}
             isVisible={this.state.showAuthMessage}
             okText="I agree"
             heading="Authorization"
             message="I understand and agree that my personal data may be shared to third party partners for course registration purposes"
-        />
-        <TouchableOpacity
-          onPress={() => this.openDrawer()}
-          style={{
-            position: "absolute",
-            left: 10,
-            top: 10,
-            zIndex: 2,
-            display: "flex",
-            flexDirection: "row",
-            alignItems: "center"
-          }}
-        >
-          <Icon
-            type="MaterialIcons"
-            style={{ color: "white", fontSize: 25 }}
-            name="menu"
           />
-        </TouchableOpacity>
-     
           {this.state.loading ? (
             <Loading
               isVisible={true}
@@ -174,6 +193,7 @@ export class Courses extends Component {
           ) : (
             <Fragment>
               <BannerCarousel
+                genres={this.props.genres}
                 banners={this.props.banners}
                 navigateToSpecifiCourse={this.navigateToSpecifiCourse}
                 changeActiveItem={this.changeActiveItem}
@@ -182,8 +202,6 @@ export class Courses extends Component {
               <CourseItems genres={this.props.genres} />
             </Fragment>
           )}
-      
-
         </Content>
       </Container>
     );

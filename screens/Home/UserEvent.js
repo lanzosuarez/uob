@@ -37,7 +37,7 @@ class UserEvent extends Component {
           <Text
             style={{
               fontFamily: "AgendaBold",
-              fontSize: 20,
+              fontSize: 22,
               fontWeight: "bold",
               color: blue
             }}
@@ -46,7 +46,7 @@ class UserEvent extends Component {
           </Text>
           <Text
             style={{
-              fontSize: 12,
+              fontSize: 15,
               fontWeight: "100",
               color: blue,
               fontFamily: "Roboto_light"
@@ -68,7 +68,7 @@ class UserEvent extends Component {
           >
             <Text
               style={{
-                fontSize: 13,
+                fontSize: 16,
                 fontWeight: "bold",
                 color: blue,
                 fontFamily: "AgendaBold"
@@ -78,7 +78,7 @@ class UserEvent extends Component {
             </Text>
             <Text
               style={{
-                fontSize: 11,
+                fontSize: 14,
                 fontWeight: "100",
                 color: blue,
                 fontFamily: "Roboto_light"
@@ -102,7 +102,7 @@ class UserEvent extends Component {
           >
             <Text
               style={{
-                fontSize: 13,
+                fontSize: 16,
                 fontWeight: "bold",
                 color: blue,
                 fontFamily: "AgendaBold"
@@ -112,7 +112,7 @@ class UserEvent extends Component {
             </Text>
             <Text
               style={{
-                fontSize: 11,
+                fontSize: 14,
                 fontWeight: "100",
                 color: blue,
                 fontFamily: "Roboto_light"
@@ -135,7 +135,7 @@ class UserEvent extends Component {
           >
             <Text
               style={{
-                fontSize: 13,
+                fontSize: 16,
                 fontWeight: "bold",
                 color: blue,
                 fontFamily: "AgendaBold"
@@ -145,7 +145,7 @@ class UserEvent extends Component {
             </Text>
             <Text
               style={{
-                fontSize: 11,
+                fontSize: 14,
                 fontWeight: "100",
                 color: blue,
                 fontFamily: "Roboto_light"
@@ -157,7 +157,7 @@ class UserEvent extends Component {
         </View>
         <View
           style={{
-            marginBottom: 20,
+            marginBottom: 22,
             alignItems: "center"
           }}
         >
@@ -176,7 +176,7 @@ class UserEvent extends Component {
           >
             <Text
               style={{
-                fontSize: 15,
+                fontSize: 17,
                 fontWeight: "900",
                 color: "white",
                 fontFamily: "AgendaBold"
@@ -188,11 +188,12 @@ class UserEvent extends Component {
         </View>
         <Text
           style={{
-            fontSize: 14,
+            fontSize: 15,
             fontWeight: "100",
             color: blue,
             fontFamily: "Roboto_light",
-            lineHeight: 20
+            lineHeight: 22,
+            textAlign: "left"
           }}
         >
           {w ? w.description : ""}

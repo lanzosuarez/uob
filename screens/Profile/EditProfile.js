@@ -16,6 +16,7 @@ import {
   Input
 } from "native-base";
 
+
 import { Text, View, Dimensions } from "react-native";
 
 import Toast from 'react-native-root-toast';
@@ -28,6 +29,7 @@ import Loading from "../Loading";
 
 const blue = "#00246a";
 const { height } = Dimensions.get("window");
+import { headerBGcolor, headerFontColor } from "../../global";
 
 const FieldName = ({ field, value, last = false }) => {
   const { bold, txt, f, light } = styles;
@@ -117,15 +119,15 @@ class EditProfile extends Component {
     return (
       <Container>
         <Loading isVisible={this.state.loading} transparent={false} />
-        <Header style={{ backgroundColor: "white" }}>
+        <Header style={{ backgroundColor: headerBGcolor }}>
           <Left style={{ flex: 1 }}>
             <Button onPress={() => this.props.navigation.goBack()} transparent>
               <Icon
                 type="MaterialIcons"
-                style={{ color: blue }}
+                style={{ color: headerFontColor }}
                 name="chevron-left"
               />
-              <Text style={{ color: blue, fontFamily: "Roboto_light" }}>
+              <Text style={{ color: headerFontColor, fontFamily: "Roboto_light" }}>
                 Back
               </Text>
             </Button>
@@ -139,8 +141,8 @@ class EditProfile extends Component {
           >
             <Title
               style={{
-                fontSize: 13,
-                color: "#00246a",
+                fontSize: 16,
+                color: headerFontColor,
                 fontFamily: "AgendaBold"
               }}
             >
@@ -229,7 +231,7 @@ const styles = {
   },
   txt: {
     color: blue,
-    fontSize: 14
+    fontSize: 16
   }
 };
 

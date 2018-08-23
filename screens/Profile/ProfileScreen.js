@@ -17,7 +17,6 @@ import {
 import {
   Text,
   View,
-  ToastAndroid,
   TouchableOpacity,
   AsyncStorage
 } from "react-native";
@@ -31,6 +30,8 @@ import { ProfileConnect } from "../../context/ProfileProvider";
 import { WorkshopConnect } from "../../context/WorkshopProvider";
 import Profile from "../../services/Profile";
 import Toast from 'react-native-root-toast';
+
+import { headerBGcolor, headerFontColor } from "../../global";
 
 const blue = "#00246a";
 import Loading from "../Loading";
@@ -53,7 +54,7 @@ const CourseFieldName = ({ field, last = false, onPress = () => {} }) => {
   const { bold, iconTxt, f, txt, light } = styles;
   return (
     <ListItem onPress={onPress} last={last}>
-      <Left style={{ ...f }}>
+      <Left style={{ flex:2 }}>
         <Text style={{ ...bold, ...txt }}>{field}</Text>
       </Left>
       <Body style={{ ...f }} />
@@ -151,10 +152,10 @@ class ProfileScreen extends Component {
     return (
       <Container>
         <Loading isVisible={this.state.loading} transparent={false} />
-        <Header style={{ backgroundColor: "#f6f6f6" }}>
+        <Header style={{ backgroundColor: headerBGcolor }}>
           <Left style={{ flex: 1 }}>
             <Button onPress={() => this.openDrawer()} transparent>
-              <Icon type="MaterialIcons" style={{ color: blue }} name="menu" />
+              <Icon type="MaterialIcons" style={{ color: headerFontColor }} name="menu" />
             </Button>
           </Left>
           <Body
@@ -166,8 +167,8 @@ class ProfileScreen extends Component {
           >
             <Title
               style={{
-                fontSize: 13,
-                color: "#00246a",
+                fontSize: 16,
+                color: headerFontColor,
                 fontFamily: "AgendaBold"
               }}
             >
@@ -179,7 +180,7 @@ class ProfileScreen extends Component {
         <Content>
           {this.props.profile === null ? null : (
             <View style={{ flex: 1 }}>
-              <Separator style={{ backgroundColor: "#f4f4ff" }} bordered>
+              <Separator style={{ backgroundColor: "#f4f4ff", height: 50 }} bordered>
                 <View
                   style={{
                     ...f,
@@ -197,6 +198,7 @@ class ProfileScreen extends Component {
                   >
                     <Text
                       style={{
+                        color: blue,
                         ...light,
                         textDecorationLine: "underline",
                         paddingRight: 10
@@ -241,7 +243,7 @@ class ProfileScreen extends Component {
                   </TouchableOpacity>
                 </Body>
               </ListItem>
-              <Separator style={{ backgroundColor: "#f4f4ff" }} bordered>
+              <Separator style={{ backgroundColor: "#f4f4ff", height: 50 }} bordered>
                 <Text style={{ ...bold, ...sep, color: blue }}>COURSES</Text>
               </Separator>
               <CourseFieldName
@@ -259,7 +261,9 @@ class ProfileScreen extends Component {
               />
               {this.props.user && this.props.user.is_supervisor ? (
                 <Fragment>
-                  <Separator bordered>
+                  <Separator
+                    style={{ backgroundColor: "#f4f4ff", height: 50 }}
+                    bordered>
                     <Text style={{ ...bold, ...sep, color: blue }}>
                       SUPERVISOR
                     </Text>
@@ -329,14 +333,14 @@ const styles = {
   },
   txt: {
     color: blue,
-    fontSize: 12
+    fontSize: 15
   },
   sep: {
-    fontSize: 14
+    fontSize: 16
   },
   iconTxt: {
     color: blue,
-    fontSize: 20
+    fontSize: 22
   }
 };
 

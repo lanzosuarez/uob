@@ -12,13 +12,14 @@ import {
   Content
 } from "native-base";
 
-import { Text, View, ToastAndroid, RefreshControl } from "react-native";
+import { Text, View, RefreshControl } from "react-native";
 
 import Profile from "../../services/Profile";
 import Loading from "../Loading";
 import CourseBookingItem from "./CourseBookingItem";
 import { TeamCoursesConnect } from "../../context/TeamCourses";
 import Toast from 'react-native-root-toast';
+import { headerBGcolor, headerFontColor } from "../../global";
 
 const blue = "#00246a";
 
@@ -70,10 +71,10 @@ class CourseBookings extends Component {
       });
   };
 
-  confirmBooking = (bookingId, status) => {
-    console.log(bookingId, status);
+  confirmBooking = (bookingId, bookingStatus) => {
+    console.log(bookingId, bookingStatus);
     this.toggleLoad();
-    Profile.confirmBooking(status, bookingId)
+    Profile.confirmBooking(bookingStatus, bookingId)
       .then(r => {
         this.toggleLoad();
         const { status, message, data } = r.data;
@@ -82,7 +83,7 @@ class CourseBookings extends Component {
             teamCourseIndex = teamCourses.findIndex(t => t.id === bookingId);
           if (teamCourseIndex > -1) {
             let teamCourse = teamCourses[teamCourseIndex];
-            teamCourse.status = status;
+            teamCourse.status = bookingStatus;
             teamCourses.splice(teamCourseIndex, 1, teamCourse);
             this.props.setTeamCourses(teamCourses);
           }
@@ -125,30 +126,30 @@ class CourseBookings extends Component {
     return (
       <Container>
         <Loading isVisible={this.state.loading} transparent={false} />
-        <Header style={{ backgroundColor: "#f6f6f6" }}>
+        <Header style={{ backgroundColor: headerBGcolor }}>
           <Left style={{ flex: 1 }}>
             <Button onPress={() => this.props.navigation.goBack()} transparent>
               <Icon
                 type="MaterialIcons"
-                style={{ color: blue }}
+                style={{ color: headerFontColor }}
                 name="chevron-left"
               />
-              <Text style={{ color: blue, fontFamily: "Roboto_light" }}>
+              <Text style={{ color: headerFontColor, fontFamily: "Roboto_light" }}>
                 Back
               </Text>
             </Button>
           </Left>
           <Body
             style={{
-              flex: 1,
+              flex: 2,
               justifyContent: "center",
               alignItems: "center"
             }}
           >
             <Title
               style={{
-                fontSize: 13,
-                color: "#00246a",
+                fontSize: 16,
+                color: headerFontColor,
                 fontFamily: "AgendaBold"
               }}
             >
@@ -176,6 +177,7 @@ class CourseBookings extends Component {
             {courses.length === 0 ? (
               <Text
                 style={{
+                  fontSize: 17,
                   color: blue,
                   fontFamily: "Roboto_light",
                   textAlign: "center",

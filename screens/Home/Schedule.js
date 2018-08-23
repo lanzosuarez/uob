@@ -32,8 +32,8 @@ const Schedule = ({ sched, selectSchedule }) => {
         >
           <Text
             style={{
-              fontSize: 18,
-              fontWeight: "bold",
+              fontSize: 20,
+
               color: blue,
               textAlign: "center",
               fontFamily: "AgendaBold"
@@ -43,8 +43,8 @@ const Schedule = ({ sched, selectSchedule }) => {
           </Text>
           <Text
             style={{
-              fontSize: 12,
-              fontWeight: "100",
+              fontSize: 15,
+
               color: blue,
               textAlign: "center",
               fontFamily: "Roboto_light"
@@ -63,13 +63,12 @@ const Schedule = ({ sched, selectSchedule }) => {
           <Body>
             <View
               style={{
-                marginBottom: 10
+                marginBottom: 13
               }}
             >
               <Text
                 style={{
                   fontSize: 15,
-                  fontWeight: "bold",
                   color: blue,
                   fontFamily: "AgendaBold"
                 }}
@@ -78,8 +77,7 @@ const Schedule = ({ sched, selectSchedule }) => {
               </Text>
               <Text
                 style={{
-                  fontSize: 11,
-                  fontWeight: "100",
+                  fontSize: 15,
                   color: blue,
                   fontFamily: "Roboto_light"
                 }}
@@ -89,13 +87,13 @@ const Schedule = ({ sched, selectSchedule }) => {
             </View>
             <View
               style={{
-                marginBottom: 10
+                marginBottom: 13
               }}
             >
               <Text
                 style={{
                   fontSize: 15,
-                  fontWeight: "bold",
+
                   color: blue,
                   fontFamily: "AgendaBold"
                 }}
@@ -104,8 +102,8 @@ const Schedule = ({ sched, selectSchedule }) => {
               </Text>
               <Text
                 style={{
-                  fontSize: 12,
-                  fontWeight: "100",
+                  fontSize: 15,
+
                   color: blue,
                   fontFamily: "Roboto_light"
                 }}
@@ -132,7 +130,7 @@ const Schedule = ({ sched, selectSchedule }) => {
               padding: 3,
               height: 40,
               width: 150,
-              borderRadius: 10,
+              borderRadius: 13,
               justifyContent: "center",
               display: "flex",
               alignItems: "center",
@@ -141,8 +139,8 @@ const Schedule = ({ sched, selectSchedule }) => {
           >
             <Text
               style={{
-                fontSize: 10,
-                fontWeight: "bold",
+                fontSize: 13,
+
                 color: "white",
                 textAlign: "center",
                 fontFamily: "AgendaBold"

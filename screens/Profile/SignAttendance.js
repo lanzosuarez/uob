@@ -8,23 +8,22 @@ import {
   Left,
   Right,
   Container,
-  Button,
-  Content
+  Button
 } from "native-base";
 
 import {
   Text,
   View,
-  ScrollView,
-  ToastAndroid,
   Dimensions,
   ImageStore,
-  RefreshControl
+  ImageEditor,
+  Image
 } from "react-native";
 
 import Profile from "../../services/Profile";
 import Loading from "../Loading";
 import Toast from 'react-native-root-toast';
+import { headerBGcolor, headerFontColor } from "../../global";
 
 const blue = "#00246a";
 
@@ -98,7 +97,6 @@ class SignAttendance extends Component {
         if (status) {
           this.setState({ event: data });
         } else {
-          this.setState({ event: { name: "dsadsa", schedule: "dsadsa" } });
           this.showToast(message);
         }
       })
@@ -111,28 +109,45 @@ class SignAttendance extends Component {
       });
   };
 
+  signRq = signature => { 
+      const {
+      id: user_event_id,
+      event_id,
+      event_batch_id,
+      class_schedule_id
+    } = this.state;
+    const payload = {
+      user_event_id,
+      event_batch_id,
+      event_id,
+      class_schedule_id,
+      signature
+    };
+   this.signAttendance(payload); 
+  }
+
   sign = () => {
-    ImageStore.getBase64ForTag(
-      this.state.imagePath,
-      data => {
-        const {
-          id: user_event_id,
-          event_id,
-          event_batch_id,
-          class_schedule_id
-        } = this.state;
-        const payload = {
-          user_event_id,
-          event_batch_id,
-          event_id,
-          class_schedule_id,
-          signature: data
-        };
-        this.signAttendance(payload);
-      },
-      e => console.warn("getBase64ForTag: ", e)
-    );
-  };
+    const imageURL = this.state.imagePath
+    Image.getSize(imageURL, (width, height) => {
+      let imageSize = {
+        size: {
+          width,
+          height
+        },
+        offset: {
+          x: 0,
+          y: 0,
+        },
+      };
+      ImageEditor.cropImage(imageURL, imageSize, (imageURI) => {
+        console.log(imageURI);
+        ImageStore.getBase64ForTag(imageURI, (base64Data) => {
+          this.signRq(imageURI);
+          ImageStore.removeImageForTag(imageURI);
+        }, (reason) => console.warn(reason) )
+      }, (reason) => console.warn(reason) )
+    }, (reason) => console.warn(reason))
+  }
 
   signAttendance = payload => {
     this.toggleLoad();
@@ -161,30 +176,30 @@ class SignAttendance extends Component {
     return (
       <Container>
         <Loading isVisible={this.state.loading} transparent={false} />
-        <Header style={{ backgroundColor: "#f6f6f6" }}>
+        <Header style={{ backgroundColor: headerBGcolor }}>
           <Left style={{ flex: 1 }}>
             <Button onPress={() => this.props.navigation.goBack()} transparent>
               <Icon
                 type="MaterialIcons"
-                style={{ color: blue }}
+                style={{ color: headerFontColor }}
                 name="chevron-left"
               />
-              <Text style={{ color: blue, fontFamily: "Roboto_light" }}>
+              <Text style={{ color: headerFontColor, fontFamily: "Roboto_light" }}>
                 Back
               </Text>
             </Button>
           </Left>
           <Body
             style={{
-              flex: 1,
+              flex: 2,
               justifyContent: "center",
               alignItems: "center"
             }}
           >
             <Title
               style={{
-                fontSize: 13,
-                color: "#00246a",
+                fontSize: 16,
+                color: headerFontColor,
                 fontFamily: "AgendaBold"
               }}
             >
@@ -193,18 +208,10 @@ class SignAttendance extends Component {
           </Body>
           <Right style={{ flex: 1 }} />
         </Header>
-        <Content
-          refreshControl={
-            <RefreshControl
-              tintColor="#00246a"
-              refreshing={this.state.refreshing}
-              onRefresh={this.onRefresh}
-            />
-          }
-          contentContainerStyle={{ flex: 1 }}
+        <View style={{ flex:1 }}
         >
           {event ? (
-            <ScrollView
+            <View
               stlye={{
                 flex: 1,
                 alignItems: "center"
@@ -221,7 +228,7 @@ class SignAttendance extends Component {
                 <Text
                   style={{
                     fontFamily: "Roboto_light",
-                    fontSize: 15,
+                    fontSize: 17,
                     color: blue
                   }}
                 >
@@ -238,7 +245,7 @@ class SignAttendance extends Component {
                 <Text
                   style={{
                     fontFamily: "AgendaBold",
-                    fontSize: 15,
+                    fontSize: 17,
                     color: blue,
                     marginBottom: 5,
                     textAlign: "center"
@@ -249,7 +256,7 @@ class SignAttendance extends Component {
                 <Text
                   style={{
                     fontFamily: "Roboto_light",
-                    fontSize: 15,
+                    fontSize: 17,
                     color: blue,
                     textAlign: "center"
                   }}
@@ -334,7 +341,7 @@ class SignAttendance extends Component {
                   </Text>
                 </Button>
               </View>
-            </ScrollView>
+            </View>
           ) : (
             <View
               style={{
@@ -348,7 +355,7 @@ class SignAttendance extends Component {
               <Text
                 style={{
                   fontFamily: "Roboto_light",
-                  fontSize: 15,
+                  fontSize: 17,
                   color: blue,
                   textAlign: "center",
                   marginBottom: 10
@@ -360,7 +367,7 @@ class SignAttendance extends Component {
               <Text
                 style={{
                   fontFamily: "Roboto_light",
-                  fontSize: 15,
+                  fontSize: 17,
                   color: blue,
                   textAlign: "center"
                 }}
@@ -369,7 +376,7 @@ class SignAttendance extends Component {
               </Text>
             </View>
           )}
-        </Content>
+        </View>
       </Container>
     );
   }

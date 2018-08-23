@@ -12,10 +12,13 @@ import {
   Input
 } from "native-base";
 
-import { Text, View } from "react-native";
+import { Text, View,Dimensions } from "react-native";
 import { DrawerActions } from "react-navigation";
 import { CourseComsumer } from "../../context/CourseProvider";
 import Toast from 'react-native-root-toast';
+const { width } = Dimensions.get("window");
+import { headerBGcolor, headerFontColor } from "../../global";
+
 
 import Genre from "./Genre";
 
@@ -56,7 +59,7 @@ class SearchGenre extends Component {
   render() {
     return (
       <Container>
-        <Header style={{ backgroundColor: "#f6f6f6" }}>
+        <Header style={{ backgroundColor: headerBGcolor }}>
           <Body
             style={{
               flex: 4,
@@ -65,26 +68,34 @@ class SearchGenre extends Component {
             }}
           >
             <Item
-              style={{ borderColor: blue, height: 35, borderRadius: 8 }}
+              style={{ borderColor: headerFontColor, height: 35, borderRadius: 8 }}
               rounded
             >
-              <Icon type="MaterialIcons" active name="search" />
+              <Icon 
+                style={{ color: headerFontColor }}
+                type="MaterialIcons" active name="search" />
               <Input
                 onChangeText={e => this.changeSearchTitle(e)}
-                style={{ fontFamily: "Roboto_light" }}
+                style={{ fontFamily: "Roboto_light", color: headerFontColor }}
               />
             </Item>
           </Body>
           <Right style={{ flex: 1 }}>
             <Button onPress={() => this.back()} transparent>
-              <Text style={{ color: blue, fontFamily: "Roboto_light" }}>
+              <Text style={{ color: headerFontColor, fontFamily: "Roboto_light" }}>
                 Cancel
               </Text>
             </Button>
           </Right>
         </Header>
         <Content contentContainerStyle={{ backgroundColor: "white" }}>
-          <View style={{ flex: 1, alignItems: "center" }}>
+          <View  style={{ 
+              flex: 1,
+              paddingTop: 20,
+              // paddingRight: width * 0.05,
+              paddingLeft: width * 0.05,
+              flexWrap: "wrap",
+              flexDirection: "row" }}>
             <CourseComsumer>
               {({ courses }) => {
                 const searechedCourses = courses.filter(

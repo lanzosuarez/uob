@@ -22,6 +22,8 @@ import {
 import { DrawerActions } from "react-navigation";
 import Evaluation from "../../services/Evaluation";
 import Toast from 'react-native-root-toast';
+import { headerBGcolor, headerFontColor } from "../../global";
+
 
 import Loading from "../Loading";
 
@@ -110,11 +112,7 @@ class EvaluationsScreen extends Component {
       });
   };
 
-<<<<<<< HEAD
   goToEvaluate = (batchId,eventId) => {
-=======
-  goToEvaluate = (batchId, eventId) => {
->>>>>>> db730317981e5f1ceeab42a2fbf78041e816accb
     const link = `https://demo.uobsummit.com/user_evaluations/new?event_batch_id=${batchId}&event_id=${eventId}`;
     Linking.openURL(link)
       .then(d => {
@@ -129,10 +127,10 @@ class EvaluationsScreen extends Component {
     return (
       <Container>
         <Loading isVisible={this.state.loading} transparent={false} />
-        <Header style={{ backgroundColor: "#f6f6f6" }}>
+        <Header style={{ backgroundColor: headerBGcolor }}>
           <Left style={{ flex: 1 }}>
             <Button onPress={() => this.openDrawer()} transparent>
-              <Icon type="MaterialIcons" style={{ color: blue }} name="menu" />
+              <Icon type="MaterialIcons" style={{ color: headerFontColor }} name="menu" />
             </Button>
           </Left>
           <Body
@@ -146,7 +144,7 @@ class EvaluationsScreen extends Component {
               style={{
                 fontFamily: "AgendaBold",
                 fontSize: 15,
-                color: "#00246a"
+                color: headerFontColor
               }}
             >
               Evaluations

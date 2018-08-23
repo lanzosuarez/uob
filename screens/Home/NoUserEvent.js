@@ -32,7 +32,7 @@ const NoUserEvent = props => {
           <View style={{ width: "100%" }}>
             <Text
               style={{
-                fontSize: 20,
+                fontSize: 22,
                 fontWeight: "bold",
                 marginBottom: 30,
                 color: blue,
@@ -43,7 +43,7 @@ const NoUserEvent = props => {
               {w ? w.title : ""}
             </Text>
           </View>
-          <View style={{ paddingLeft: 20, paddingRight: 20 }}>
+          <View style={{ paddingLeft: 0, paddingRight: 0 }}>
             <Workshops
               workshopId={w ? w.id : ""}
               workshop_types={w ? w.workshop_types : []}
@@ -52,13 +52,13 @@ const NoUserEvent = props => {
           <View>
             <Text
               style={{
-                fontSize: 14,
+                fontSize: 16,
                 fontWeight: "100",
                 color: blue,
-                lineHeight: 20,
-                marginTop: 20,
+                lineHeight: 22,
+                marginTop: 22,
                 fontFamily: "Roboto_light",
-                textAlign: "center"
+                textAlign: "left"
               }}
             >
               {w ? w.description : ""}

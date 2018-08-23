@@ -1,57 +1,62 @@
 import React from "react";
 
-import { View, TouchableOpacity, Image, Text, Dimensions } from "react-native";
+import { Image, Text, Dimensions } from "react-native";
+import {CardItem, Card} from "native-base";
 
 const { width } = Dimensions.get("window");
+const blue = "#00246a";
 
 const Genre = ({ course, goToWorkshop }) => (
-  <View style={{ height: 200, width }}>
-    <TouchableOpacity
-      onPress={() => goToWorkshop(course)}
-      style={{ flex: 1, justifyContent: "center", alignItems: "center" }}
+  <Card
+      style={{
+        borderColor: "#f0f0f0",
+        borderRadius: 8,
+        borderBottomWidth: 2,
+        width: width * 0.4,
+        marginRight: width * 0.05
+      }}
     >
-      <Image
+      <CardItem
+        button
+        onPress={() => goToWorkshop(course)}
         style={{
-          flex: 1,
-          resizeMode: "cover",
-          position: "absolute",
-          width: "100%",
-          height: "100%"
+          borderTopLeftRadius: 8,
+          borderTopRightRadius: 8
         }}
-        source={{
-          cache: "only-if-cached",
-          uri: course.image_url
-        }}
-      />
-      <View
+        cardBody
+      >
+        <Image
+          defaultSource={ require("../../assets/defaultimg.png" )}
+          source={{ uri: course.image_url }}
+          style={{
+            flex: 1,
+            height: 100,
+            width: null,
+            borderTopLeftRadius: 8,
+            borderTopRightRadius: 8
+          }}
+        />
+      </CardItem>
+      <CardItem
         style={{
-          flex: 1,
-          position: "absolute",
-          width: "100%",
-          height: "100%",
-          backgroundColor: "rgba(0, 0, 0, 0.3)"
-        }}
-      />
-      <View
-        style={{
-          justifyContent: "center",
-          alignItems: "center",
-          display: "flex"
+          borderBottomLeftRadius: 8,
+          borderBottomRightRadius: 8,
+          paddingLeft: 5,
+          paddingTop: 5,
+          flexDirection:"column",
+          alignItems: "flex-start"
         }}
       >
         <Text
-          style={{
-            fontFamily: "Roboto_light",
-            color: "#F5FCFC",
-            fontSize: 15,
-            textAlign: "center"
-          }}
+          style={{ color: blue, fontSize: 15, fontFamily: "Roboto_light" }}
         >
           {course.title}
         </Text>
-      </View>
-    </TouchableOpacity>
-  </View>
+        <Text
+           style={{ color: blue, fontSize: 13, fontFamily: "Roboto_light" }}
+          >{course.credit} credits</Text>
+      </CardItem>
+    </Card>
 );
 
 export default Genre;

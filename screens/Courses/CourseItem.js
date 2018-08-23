@@ -15,9 +15,8 @@ const CourseItem = ({ course, goToCourseSchedules }) => {
         borderColor: "#f0f0f0",
         borderRadius: 8,
         borderBottomWidth: 2,
-        width: "47%",
-        marginLeft: 5,
-        marginRight: 5
+        width: width * 0.4,
+        marginRight: width * 0.05
       }}
     >
       <CardItem
@@ -30,7 +29,8 @@ const CourseItem = ({ course, goToCourseSchedules }) => {
         cardBody
       >
         <Image
-          source={{ uri: course.image_url, cache: "only-if-cached" }}
+          defaultSource={ require("../../assets/defaultimg.png" )}
+          source={{ uri: course.image_url }}
           style={{
             flex: 1,
             height: 100,
@@ -45,14 +45,19 @@ const CourseItem = ({ course, goToCourseSchedules }) => {
           borderBottomLeftRadius: 8,
           borderBottomRightRadius: 8,
           paddingLeft: 5,
-          paddingTop: 5
+          paddingTop: 5,
+          flexDirection:"column",
+          alignItems: "flex-start"
         }}
       >
         <Text
-          style={{ color: blue, fontSize: 11, fontFamily: "Roboto_light" }}
+          style={{ color: blue, fontSize: 15, fontFamily: "Roboto_light" }}
         >
           {course.title}
         </Text>
+        <Text
+           style={{ color: blue, fontSize: 13, fontFamily: "Roboto_light" }}
+          >{course.credit} credits</Text>
       </CardItem>
     </Card>
   );

@@ -7,9 +7,6 @@
       "resizeMode": "cover",
       "backgroundColor": "#ffffff"
     },
-    "androidStatusBar": {
-      "backgroundColor": "#808080"
-    },
     "android": {
       "package": "com.uobsummit.app",
       "versionCode": 1,
@@ -18,8 +15,8 @@
     },
     "ios": {
       "bundleIdentifier": "com.uosbsummit.app",
-      "icon": "./assets/icon.png"
-
+      "icon": "./assets/icon.png",
+      "buildNumber": "2"
     }
   }
 }

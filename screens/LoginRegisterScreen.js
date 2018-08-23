@@ -3,13 +3,13 @@ import {
   Image,
   View,
   Text,
-  ToastAndroid,
   AsyncStorage,
   Dimensions
 } from "react-native";
 import Toast from 'react-native-root-toast';
 import { Button, Container, Content } from "native-base";
 import { Row, Grid, Col } from "react-native-easy-grid";
+import Expo from "expo";
 
 import UserResource from "../services/UserResource";
 
@@ -20,7 +20,7 @@ import Loading from "./Loading";
 import { StackActions, NavigationActions } from "react-navigation";
 import { UserConnect } from "../context/UserProvider";
 
-const { height, width } = Dimensions.get("window");
+const { height } = Dimensions.get("window");
 
 class LoginRegister extends Component {
   constructor(props) {
@@ -97,7 +97,7 @@ class LoginRegister extends Component {
     const { tabButton, imgBg, logo, tabs, tab, tabText } = styles;
 
     return (
-      <Container style={{ flex: 1 }}>
+      <Container style={{ flex: 1,marginTop: Expo.Constants.statusBarHeight  }}>
         <Image style={imgBg} source={require("../assets/signin.jpg")} />
         {this.state.loading ? (
           <Loading isVisible={this.state.loading} />
@@ -170,7 +170,6 @@ const styles = {
     justifyContent: "center"
   },
   imgBg: {
-    
     resizeMode: "cover",
     position: "absolute",
     width: "100%",
@@ -183,7 +182,7 @@ const styles = {
     display: "flex"
   },
   logo: {
-    width:50,
+    
     resizeMode: "center"
   },
   tab: {
@@ -197,7 +196,8 @@ const styles = {
   tabText: {
     color: "white",
     textAlign: "center",
-    fontFamily: "Roboto_light"
+    fontFamily: "Roboto_light",
+    fontSize: 17
   },
   activeTab: {
     borderBottomWidth: 8

@@ -45,11 +45,12 @@ class Course extends Component {
         cardBody
       >
         <Image
-          source={{ uri: item.image_url, cache: "only-if-cached" }}
+          defaultSource={ require("../../assets/defaultimg.png" )}
+          source={{ uri: item.image_url }}
           style={{
             flex: 1,
             height: 100,
-            width: null,
+            width:"100%",
             borderTopLeftRadius: 8,
             borderTopRightRadius: 8
           }}
@@ -63,13 +64,9 @@ class Course extends Component {
           paddingTop: 5
         }}
       >
-<<<<<<< HEAD
-        <Text style={{ color: blue, fontSize: 11, fontFamily: "Roboto_light" }}>
-=======
-        <Text
-          style={{ color: blue, fontSize: 11, fontFamily: "Roboto_medium" }}
-        >
->>>>>>> db730317981e5f1ceeab42a2fbf78041e816accb
+        <Text 
+          onPress={() => this.navigateToSpecifiCourse(item.id)}
+          style={{ color: blue, fontSize: 15, fontFamily: "Roboto_light" }}>
           {item.title}
         </Text>
       </CardItem>
@@ -79,7 +76,7 @@ class Course extends Component {
   render() {
     const { genre } = this.props;
     return (
-      <View style={{ height: 160, marginBottom: 15 }}>
+      <View style={{ height: 180, marginBottom: 15, paddingBottom: 10 }}>
         <View
           style={{
             paddingLeft: 15,
@@ -91,7 +88,7 @@ class Course extends Component {
           }}
         >
           <Text
-            style={{ fontSize: 15, color: blue, fontFamily: "Roboto_light" }}
+            style={{ fontSize: 18, color: blue, fontFamily: "Roboto_light" }}
           >
             {genre.title}
           </Text>
@@ -102,7 +99,7 @@ class Course extends Component {
               style={{
                 color: blue,
                 textDecorationLine: "underline",
-                fontSize: 11,
+                fontSize: 15,
                 fontWeight: "100",
                 fontFamily: "Roboto_light"
               }}
@@ -111,8 +108,9 @@ class Course extends Component {
             </Text>
           </TouchableOpacity>
         </View>
-        <View style={{ flex: 1, paddingLeft: 15 }}>
+        <View style={{ flex: 1, paddingLeft: 15}}>
           <Carousel
+            style={{ marginBottom: 10 }}
             activeSlideAlignment="start"
             layoutCardOffset={4}
             data={genre.items}
@@ -121,7 +119,7 @@ class Course extends Component {
             itemWidth={200}
           />
         </View>
-      </View>
+      </View> 
     );
   }
 }

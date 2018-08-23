@@ -22,7 +22,7 @@ class App extends React.Component {
     isAppReady: false
   };
 
-  _cacheResourcesAsync = async (  ) => {
+  _cacheResourcesAsync = async () => {
     SplashScreen.hide();
     const images = [require("./assets/signin.jpg")];
 
@@ -77,8 +77,7 @@ class App extends React.Component {
     return (
       <View
         style={{
-          flex: 1,
-          paddingTop: Platform.OS === "ios" ? 0: Expo.Constants.statusBarHeight
+          flex: 1
         }}
       >
         <UserProvider>

@@ -17,15 +17,15 @@ import {
   List
 } from "native-base";
 
-import { Text, View, ToastAndroid, Dimensions } from "react-native";
+import { Text, View, Dimensions } from "react-native";
 
 import { DrawerActions } from "react-navigation";
 import Profile from "../../services/Profile";
 import Loading from "../Loading";
+import { headerBGcolor, headerFontColor } from "../../global";
 import Toast from 'react-native-root-toast';
 
 const blue = "#00246a";
-const { height } = Dimensions.get("window");
 
 const FieldName = ({ field, value, last = false }) => {
   const { bold, txt, f, light } = styles;
@@ -113,15 +113,15 @@ class ChangePassword extends Component {
     return (
       <Container>
         <Loading isVisible={this.state.loading} transparent={false} />
-        <Header style={{ backgroundColor: "white" }}>
+        <Header style={{ backgroundColor: headerBGcolor }}>
           <Left style={{ flex: 1 }}>
             <Button onPress={() => this.props.navigation.goBack()} transparent>
               <Icon
                 type="MaterialIcons"
-                style={{ color: blue }}
+                style={{ color: headerFontColor }}
                 name="chevron-left"
               />
-              <Text style={{ color: blue, fontFamily: "Roboto_light" }}>
+              <Text style={{ color: headerFontColor, fontFamily: "Roboto_light" }}>
                 Back
               </Text>
             </Button>
@@ -135,8 +135,8 @@ class ChangePassword extends Component {
           >
             <Title
               style={{
-                fontSize: 13,
-                color: "#00246a",
+                fontSize: 16,
+                color: headerFontColor,
                 fontFamily: "AgendaBold"
               }}
             >
@@ -207,7 +207,7 @@ class ChangePassword extends Component {
                 <Text
                   style={{
                     ...light,
-                    fontSize: 14,
+                    fontSize: 16,
                     color: "white",
                     textAlign: "center"
                   }}
@@ -238,7 +238,7 @@ const styles = {
   },
   txt: {
     color: blue,
-    fontSize: 14
+    fontSize: 16
   }
 };
 

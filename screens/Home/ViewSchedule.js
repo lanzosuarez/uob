@@ -20,6 +20,7 @@ import ConfirmDialog from "../ConfirmDialog";
 import Schedule from "./Schedule";
 import { UserConnect } from "../../context/UserProvider";
 import Toast from 'react-native-root-toast';
+import { headerBGcolor, headerFontColor } from "../../global";
 
 const blue = "#00246a";
 
@@ -109,11 +110,7 @@ class ViewSchedule extends Component {
       : { event_batch_id };
     this.toggleConfirm();
     this.fireBookRq(payload).then(r => {
-<<<<<<< HEAD
       if(r){
-=======
-      if (r) {
->>>>>>> db730317981e5f1ceeab42a2fbf78041e816accb
         const user = { ...this.props.user },
           creditToSubtract = this.props.navigation.getParam("credit", 0);
         user.credits_available = user.credits_available - creditToSubtract;
@@ -174,7 +171,7 @@ class ViewSchedule extends Component {
               onCancel={this.cancel}
               onOk={this.bookNow}
             />
-            <Header style={{ backgroundColor: "#f6f6f6" }}>
+            <Header style={{ backgroundColor: headerBGcolor }}>
               <Left style={{ flex: 1 }}>
                 <Button
                   onPress={() => this.props.navigation.goBack()}
@@ -182,10 +179,10 @@ class ViewSchedule extends Component {
                 >
                   <Icon
                     type="MaterialIcons"
-                    style={{ color: blue }}
+                    style={{ color: headerFontColor }}
                     name="chevron-left"
                   />
-                  <Text style={{ color: blue, fontFamily: "Roboto_light" }}>
+                  <Text style={{ color: headerFontColor, fontFamily: "Roboto_light" }}>
                     Back
                   </Text>
                 </Button>
@@ -200,8 +197,8 @@ class ViewSchedule extends Component {
                 <Title
                   style={{
                     fontFamily: "AgendaBold",
-                    fontSize: 15,
-                    color: "#00246a"
+                    fontSize: 16,
+                    color: headerFontColor
                   }}
                 >
                   Select Class

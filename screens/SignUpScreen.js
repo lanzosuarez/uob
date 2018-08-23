@@ -228,7 +228,7 @@ class SignUpScreen extends Component {
                   <Button onPress={() => this.signUp()} style={loginBtn}>
                     <Text
                       uppercase={false}
-                      style={{ color: "white", fontSize: 12,fontFamily: "Roboto_light"}}
+                      style={{ color: "white", fontSize: 15,fontFamily: "Roboto_light"}}
                     >
                       Create an account
                     </Text>
@@ -243,13 +243,14 @@ class SignUpScreen extends Component {
                     }}
                   >
                     <View style={{ display: "flex", flexDirection: "row" }}>
-                      <Text style={{ color: "white", fontSize: 11 }}>
-                        By signing up, I agree to UOB's{" "}
+                      <Text style={{ color: "white", fontSize: 13, fontFamily: "Roboto_light" }}>
+                        By signing up, I agree to UOB's
                       </Text>
                       <Text
                         style={{
+                          fontFamily: "Roboto_light",
                           color: "red",
-                          fontSize: 11,
+                          fontSize: 13,
                           textDecorationLine: "underline"
                         }}
                       >
@@ -294,7 +295,7 @@ class SignUpScreen extends Component {
                       uppercase={false}
                       style={{
                         color: "white",
-                        fontSize: 12,
+                        fontSize: 15,
                         textDecorationLine: "underline",
                         textAlign: "center",
                         fontFamily: "Roboto_light"
@@ -310,7 +311,7 @@ class SignUpScreen extends Component {
                   <Button onPress={() => this.activate()} style={loginBtn}>
                     <Text
                       uppercase={false}
-                      style={{ color: "white", fontSize: 12 }}
+                      style={{ color: "white", fontSize: 15, fontFamily: "Roboto_light" }}
                     >
                       Sign up
                     </Text>
@@ -325,13 +326,13 @@ class SignUpScreen extends Component {
                     }}
                   >
                     <View style={{ display: "flex", flexDirection: "row" }}>
-                      <Text style={{ color: "white", fontSize: 11 }}>
+                      <Text style={{ color: "white", fontSize: 13 }}>
                         By signing up, I agree to UOB's{" "}
                       </Text>
                       <Text
                         style={{
                           color: "red",
-                          fontSize: 11,
+                          fontSize: 13,
                           textDecorationLine: "underline"
                         }}
                       >
@@ -384,10 +385,10 @@ const styles = {
   },
   iconFont: {
     color: "#143473",
-    fontSize: 12
+    fontSize: 15
   },
   input: {
-    fontSize: 12,
+    fontSize: 15,
     color: blue,
     height: 35,
     fontFamily: "Roboto_light"
@@ -398,7 +399,7 @@ const styles = {
     borderColor: "transparent"
   },
   verifyInput: {
-    fontSize: 12,
+    fontSize: 15,
     color: blue,
     backgroundColor: transparentBg,
     borderRadius: 7,

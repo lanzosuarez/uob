@@ -11,14 +11,11 @@ import {
   Button,
   Content
 } from "native-base";
+import { headerBGcolor, headerFontColor } from "../../global";
 
-import {
-  Text,
-  View,
-  ToastAndroid,
-  RefreshControl,
-  ScrollView
-} from "react-native";
+import { Text, View, RefreshControl, Dimensions } from "react-native";
+
+const { width } = Dimensions.get("window");
 
 import Course from "./Course";
 
@@ -26,7 +23,7 @@ import { ProfileConnect } from "../../context/ProfileProvider";
 
 import Profile from "../../services/Profile";
 import Loading from "../Loading";
-import Toast from 'react-native-root-toast';
+import Toast from "react-native-root-toast";
 
 const blue = "#00246a";
 
@@ -45,14 +42,15 @@ class PastCourses extends Component {
 
   toggleLoad = () => this.setState({ loading: !this.state.loading });
 
-  showToast = text => Toast.show(text, {
-    duration: Toast.durations.SHORT,
-    position: Toast.positions.BOTTOM,
-    shadow: true,
-    animation: true,
-    hideOnPress: true,
-    delay: 0
-  })
+  showToast = text =>
+    Toast.show(text, {
+      duration: Toast.durations.SHORT,
+      position: Toast.positions.BOTTOM,
+      shadow: true,
+      animation: true,
+      hideOnPress: true,
+      delay: 0
+    });
 
   toggleRefresh = () => this.setState({ refreshing: !this.state.refreshing });
   onRefresh = () => {
@@ -111,30 +109,30 @@ class PastCourses extends Component {
     return (
       <Container>
         <Loading isVisible={this.state.loading} transparent={false} />
-        <Header style={{ backgroundColor: "#f6f6f6" }}>
+        <Header style={{ backgroundColor: headerBGcolor }}>
           <Left style={{ flex: 1 }}>
             <Button onPress={() => this.props.navigation.goBack()} transparent>
               <Icon
                 type="MaterialIcons"
-                style={{ color: blue }}
+                style={{ color: headerFontColor }}
                 name="chevron-left"
               />
-              <Text style={{ color: blue, fontFamily: "Roboto_light" }}>
+              <Text style={{ color: headerFontColor, fontFamily: "Roboto_light" }}>
                 Back
               </Text>
             </Button>
           </Left>
           <Body
             style={{
-              flex: 1,
+              flex: 2,
               justifyContent: "center",
               alignItems: "center"
             }}
           >
             <Title
               style={{
-                fontSize: 13,
-                color: "#00246a",
+                fontSize: 16,
+                color: headerFontColor,
                 fontFamily: "AgendaBold"
               }}
             >
@@ -157,9 +155,10 @@ class PastCourses extends Component {
         >
           <View
             style={{
+              flex: 1,
               paddingTop: 20,
-              paddingRight: 10,
-              paddingLeft: 10,
+              // paddingRight: width * 0.05,
+              paddingLeft: width * 0.05,
               flexWrap: "wrap",
               flexDirection: "row"
             }}
@@ -167,6 +166,7 @@ class PastCourses extends Component {
             {courses.length === 0 ? (
               <Text
                 style={{
+                  fontSize: 15,
                   color: blue,
                   fontFamily: "Roboto_light",
                   textAlign: "center",

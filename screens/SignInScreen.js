@@ -10,7 +10,7 @@ import {
   Content,
   Form
 } from "native-base";
-import Toast from 'react-native-root-toast';
+import Toast from "react-native-root-toast";
 
 import MessageDialog from "./MessageDialog";
 
@@ -46,30 +46,45 @@ class SignInScreen extends Component {
 
   checkFields = fields => fields.some(field => this.state[field].length === 0);
 
-  toggleForgot = () => this.setState({ forgotMode: !this.state.forgotMode });
+  toggleForgot = () =>
+    this.setState({
+      forgotMode: !this.state.forgotMode
+    });
 
-  toggleLoad = () => this.setState({ loading: !this.state.loading });
+  toggleLoad = () =>
+    this.setState({
+      loading: !this.state.loading
+    });
 
   toggleShowMessage = () =>
-    this.setState({ showMessage: !this.state.showMessage });
+    this.setState({
+      showMessage: !this.state.showMessage
+    });
 
-  showToast = text => Toast.show(text, {
-    duration: Toast.durations.SHORT,
-    position: Toast.positions.BOTTOM,
-    shadow: true,
-    animation: true,
-    hideOnPress: true,
-    delay: 0
-  })
+  showToast = text =>
+    Toast.show(text, {
+      duration: Toast.durations.SHORT,
+      position: Toast.positions.BOTTOM,
+      shadow: true,
+      animation: true,
+      hideOnPress: true,
+      delay: 0
+    });
 
-  setTextValue = (key, val) => this.setState({ [key]: val });
+  setTextValue = (key, val) =>
+    this.setState({
+      [key]: val
+    });
 
   signIn = () => {
     //sign in code
     if (this.checkFields(["email", "password"]) === false) {
       const { email, password } = this.state;
       this.toggleLoad();
-      AuthService.signIn({ email, password })
+      AuthService.signIn({
+        email,
+        password
+      })
         .then(r => {
           this.toggleLoad();
           const { status, message, data } = r.data;
@@ -99,7 +114,9 @@ class SignInScreen extends Component {
     if (this.checkFields(["forgotEmail"]) === false) {
       const { forgotEmail: email } = this.state;
       this.toggleLoad();
-      AuthService.forgotPassword({ email })
+      AuthService.forgotPassword({
+        email
+      })
         .then(r => {
           const { status, message } = r.data;
           this.toggleLoad();
@@ -151,8 +168,13 @@ class SignInScreen extends Component {
         />
         <Loading isVisible={this.state.loading} />
         <Content>
+          
           {this.state.forgotMode === false ? (
-            <Form style={{ flex: 1 }}>
+            <Form
+              style={{
+                flex: 1
+              }}
+            >
               <View style={form}>
                 <Item style={item}>
                   <Icon
@@ -184,7 +206,11 @@ class SignInScreen extends Component {
                   />
                 </Item>
               </View>
-              <View style={{ height: 70 }}>
+              <View
+                style={{
+                  height: 70
+                }}
+              >
                 <View
                   style={{
                     marginTop: 15,
@@ -203,7 +229,7 @@ class SignInScreen extends Component {
                       uppercase={false}
                       style={{
                         color: "white",
-                        fontSize: 12,
+                        fontSize: 15,
                         textDecorationLine: "underline",
                         textAlign: "center",
                         fontFamily: "Roboto_light"
@@ -214,19 +240,23 @@ class SignInScreen extends Component {
                   </Button>
                 </View>
               </View>
-              <View style={{ height: 80 }}>
-                <View style={{ width: "100%" }}>
-                  <Button
-                    
-                  
-                    onPress={() => this.signIn()}
-                    style={loginBtn}
-                  >
+              <View
+                style={{
+                  height: 80
+                }}
+              >
+                <View
+                  style={{
+                    width: "100%"
+                  }}
+                >
+                  <Button onPress={() => this.signIn()} style={loginBtn}>
                     <Text
                       uppercase={false}
                       style={{
-                        color: "white", fontSize: 12,
-                        
+                        color: "white",
+                        fontSize: 15,
+
                         fontFamily: "Roboto_light"
                       }}
                     >
@@ -242,20 +272,25 @@ class SignInScreen extends Component {
                       alignItems: "center"
                     }}
                   >
-                    <View style={{ display: "flex", flexDirection: "row" }}>
+                    <View
+                      style={{
+                        display: "flex",
+                        flexDirection: "row"
+                      }}
+                    >
                       <Text
                         style={{
                           color: "white",
-                          fontSize: 11,
+                          fontSize: 13,
                           fontFamily: "Roboto_light"
                         }}
                       >
-                        By signing in, I agree to UOB's{" "}
+                        By signing in , I agree to UOB 's
                       </Text>
                       <Text
                         style={{
                           color: "red",
-                          fontSize: 11,
+                          fontSize: 13,
                           textDecorationLine: "underline",
                           fontFamily: "Roboto_light"
                         }}
@@ -268,8 +303,16 @@ class SignInScreen extends Component {
               </View>
             </Form>
           ) : (
-            <Form style={{ flex: 1 }}>
-              <View style={{ marginBottom: 20 }}>
+            <Form
+              style={{
+                flex: 1
+              }}
+            >
+              <View
+                style={{
+                  marginBottom: 20
+                }}
+              >
                 <View
                   style={{
                     width: "100%",
@@ -284,7 +327,7 @@ class SignInScreen extends Component {
                       fontFamily: "Roboto_light"
                     }}
                   >
-                    Forgot your password?
+                    Forgot your password ?
                   </Text>
                   <Text
                     style={{
@@ -298,8 +341,17 @@ class SignInScreen extends Component {
                   </Text>
                 </View>
               </View>
-              <View style={{ height: 30, marginBottom: 20 }}>
-                <View style={{ width: "100%" }}>
+              <View
+                style={{
+                  height: 30,
+                  marginBottom: 20
+                }}
+              >
+                <View
+                  style={{
+                    width: "100%"
+                  }}
+                >
                   <Item style={forgotItem} rounded>
                     <Input
                       onChangeText={e => this.setTextValue("forgotEmail", e)}
@@ -309,7 +361,11 @@ class SignInScreen extends Component {
                   </Item>
                 </View>
               </View>
-              <View style={{ height: 70 }}>
+              <View
+                style={{
+                  height: 70
+                }}
+              >
                 <View
                   style={{
                     marginTop: 15,
@@ -328,7 +384,7 @@ class SignInScreen extends Component {
                       uppercase={false}
                       style={{
                         color: "white",
-                        fontSize: 12,
+                        fontSize: 15,
                         textDecorationLine: "underline",
                         textAlign: "center",
                         fontFamily: "Roboto_light"
@@ -340,10 +396,12 @@ class SignInScreen extends Component {
                 </View>
               </View>
               <View>
-                <View style={{ width: "100%" }}>
+                <View
+                  style={{
+                    width: "100%"
+                  }}
+                >
                   <Button
-                    
-                  
                     onPress={() => this.forgotPassword()}
                     style={loginBtn}
                   >
@@ -351,8 +409,8 @@ class SignInScreen extends Component {
                       uppercase={false}
                       style={{
                         color: "white",
-                        fontWeight: "300",
-                        fontFamily: "AgendaBold"
+                        fontSize: 15,
+                        fontFamily: "Roboto_light"
                       }}
                     >
                       Reset password
@@ -399,10 +457,10 @@ const styles = {
   },
   iconFont: {
     color: "#143473",
-    fontSize: 12
+    fontSize: 15
   },
   input: {
-    fontSize: 12,
+    fontSize: 15,
     color: blue,
     height: 35,
     fontFamily: "Roboto_light"
@@ -413,7 +471,7 @@ const styles = {
     borderColor: "transparent"
   },
   forgotInput: {
-    fontSize: 12,
+    fontSize: 15,
     color: blue,
     backgroundColor: transparentBg,
     borderRadius: 7,

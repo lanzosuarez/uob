@@ -1,7 +1,7 @@
 import { AsyncStorage } from "react-native";
 
 class UserResource {
-  static setUser(user) {
+  static async setUser(user) {
     console.log("set user", user);
     return AsyncStorage.setItem("user", JSON.stringify(user));
   }

@@ -19,7 +19,12 @@ const BannerCarousel = props => {
     }
   };
 
-  const banners = props.banners || [];
+  let banners = props.banners || [];
+  if(props.banners){
+    if(props.banners.length === 0){
+      banners = props.courses || [];
+    }
+  }
   const renderItem = ({ item, index }) => {
     return (
       <View
@@ -36,9 +41,9 @@ const BannerCarousel = props => {
           }}
         >
           <Image
-            onProgress={e => console.log(e)}
+            defaultSource={ require("../../assets/defaultimg.png" )}
             style={styles.imgBg}
-            source={{ uri: item.image_url, cache: "only-if-cached" }}
+            source={{ uri: item.image_url }}
           />
           <View
             style={{
@@ -54,7 +59,7 @@ const BannerCarousel = props => {
               style={{
                 fontFamily: "Roboto_light",
                 color: "white",
-                fontSize: 15
+                fontSize: 20
               }}
             >
               {item.title}
@@ -63,7 +68,7 @@ const BannerCarousel = props => {
               style={{
                 fontFamily: "Roboto_light",
                 color: "white",
-                fontSize: 15
+                fontSize: 18
               }}
             >
               {item.credit} credits
@@ -83,7 +88,6 @@ const BannerCarousel = props => {
           <Fragment>
             <Carousel
               swipeThreshold={10}
-              enableMomentum
               onSnapToItem={changeActiveItem}
               data={banners || []}
               renderItem={renderItem}
