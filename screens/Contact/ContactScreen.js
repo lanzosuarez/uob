@@ -183,7 +183,7 @@ class Contact extends Component {
                   style={{
                     fontFamily: "Roboto_light",
                     color: blue,
-                    fontSize: 10,
+                    fontSize: 13,
                     marginBottom: 5,
                     marginLeft: 5
                   }}

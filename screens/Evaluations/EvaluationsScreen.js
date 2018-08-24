@@ -13,17 +13,12 @@ import {
   List
 } from "native-base";
 
-import {
-  View,
-  Linking,
-  Text,
-  RefreshControl
-} from "react-native";
+import { View, Linking, Text, RefreshControl } from "react-native";
 import { DrawerActions } from "react-navigation";
 import Evaluation from "../../services/Evaluation";
-import Toast from 'react-native-root-toast';
+import Toast from "react-native-root-toast";
 import { headerBGcolor, headerFontColor } from "../../global";
-
+import UserResource from "../../services/UserResource";
 
 import Loading from "../Loading";
 
@@ -52,14 +47,15 @@ class EvaluationsScreen extends Component {
     }
   }
 
-  showToast = text => Toast.show(text, {
-    duration: Toast.durations.SHORT,
-    position: Toast.positions.BOTTOM,
-    shadow: true,
-    animation: true,
-    hideOnPress: true,
-    delay: 0
-  })
+  showToast = text =>
+    Toast.show(text, {
+      duration: Toast.durations.SHORT,
+      position: Toast.positions.BOTTOM,
+      shadow: true,
+      animation: true,
+      hideOnPress: true,
+      delay: 0
+    });
 
   toggleLoad = () => this.setState({ loading: !this.state.loading });
 
@@ -112,8 +108,9 @@ class EvaluationsScreen extends Component {
       });
   };
 
-  goToEvaluate = (batchId,eventId) => {
-    const link = `https://demo.uobsummit.com/user_evaluations/new?event_batch_id=${batchId}&event_id=${eventId}`;
+  goToEvaluate = async (batchId, eventId) => {
+    const { authentication_token } = await UserResource.getUser();
+    const link = `https://demo.uobsummit.com/user_evaluations/new?event_batch_id=${batchId}&event_id=${eventId}&auth_token=${authentication_token}`;
     Linking.openURL(link)
       .then(d => {
         this.showToast("Opening browser");
@@ -130,7 +127,11 @@ class EvaluationsScreen extends Component {
         <Header style={{ backgroundColor: headerBGcolor }}>
           <Left style={{ flex: 1 }}>
             <Button onPress={() => this.openDrawer()} transparent>
-              <Icon type="MaterialIcons" style={{ color: headerFontColor }} name="menu" />
+              <Icon
+                type="MaterialIcons"
+                style={{ color: headerFontColor }}
+                name="menu"
+              />
             </Button>
           </Left>
           <Body

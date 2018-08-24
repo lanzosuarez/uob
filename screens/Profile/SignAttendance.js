@@ -93,6 +93,7 @@ class SignAttendance extends Component {
       .then(r => {
         this.toggleLoad();
         const { status, message, data } = r.data;
+        console.log("get event batch")
         console.log(data, status);
         if (status) {
           this.setState({ event: data });
