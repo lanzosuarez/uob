@@ -16,7 +16,7 @@
     "ios": {
       "bundleIdentifier": "com.uosbsummit.app",
       "icon": "./assets/icon.png",
-      "buildNumber": "2"
+      "buildNumber": "3"
     }
   }
 }
