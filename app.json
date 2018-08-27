@@ -16,7 +16,10 @@
     "ios": {
       "bundleIdentifier": "com.uosbsummit.app",
       "icon": "./assets/icon.png",
-      "buildNumber": "3"
+      "buildNumber": "3",
+      "infoPlist": {
+        "NSLocationAlwaysUsageDescription": "Allow uobsummit to access you location"
+      }
     }
   }
 }
