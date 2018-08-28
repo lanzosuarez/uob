@@ -122,14 +122,14 @@ class UpcomingCourses extends Component {
                 style={{ color: headerFontColor }}
                 name="chevron-left"
               />
-              <Text style={{ color: headerFontColor, fontFamily: "Roboto_light" }}>
+              <Text style={{ color: headerFontColor, fontFamily: "Roboto_light", fontSize: 17 }}>
                 Back
               </Text>
             </Button>
           </Left>
           <Body
             style={{
-              flex: 2,
+              flex: 3,
               justifyContent: "center",
               alignItems: "center"
             }}

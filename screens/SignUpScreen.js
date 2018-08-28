@@ -11,7 +11,7 @@ import {
   Content
 } from "native-base";
 import Loading from "./Loading";
-import Toast from 'react-native-root-toast';
+import Toast from "react-native-root-toast";
 
 import AuthService from "../services/Auth";
 import UserResource from "../services/UserResource";
@@ -56,14 +56,15 @@ class SignUpScreen extends Component {
 
   setTextValue = (key, val) => this.setState({ [key]: val });
 
-  showToast = text => Toast.show(text, {
-    duration: Toast.durations.SHORT,
-    position: Toast.positions.BOTTOM,
-    shadow: true,
-    animation: true,
-    hideOnPress: true,
-    delay: 0
-  })
+  showToast = text =>
+    Toast.show(text, {
+      duration: Toast.durations.SHORT,
+      position: Toast.positions.BOTTOM,
+      shadow: true,
+      animation: true,
+      hideOnPress: true,
+      delay: 0
+    });
 
   signUp = () => {
     //sign upp code
@@ -228,7 +229,11 @@ class SignUpScreen extends Component {
                   <Button onPress={() => this.signUp()} style={loginBtn}>
                     <Text
                       uppercase={false}
-                      style={{ color: "white", fontSize: 15,fontFamily: "Roboto_light"}}
+                      style={{
+                        color: "white",
+                        fontSize: 15,
+                        fontFamily: "Roboto_light"
+                      }}
                     >
                       Create an account
                     </Text>
@@ -243,7 +248,13 @@ class SignUpScreen extends Component {
                     }}
                   >
                     <View style={{ display: "flex", flexDirection: "row" }}>
-                      <Text style={{ color: "white", fontSize: 13, fontFamily: "Roboto_light" }}>
+                      <Text
+                        style={{
+                          color: "white",
+                          fontSize: 13,
+                          fontFamily: "Roboto_light"
+                        }}
+                      >
                         By signing up, I agree to UOB's
                       </Text>
                       <Text
@@ -274,6 +285,40 @@ class SignUpScreen extends Component {
                       placeholder="Enter activation code"
                     />
                   </Item>
+                </View>
+              </View>
+              <View
+                style={{
+                  height: 70
+                }}
+              >
+                <View
+                  style={{
+                    marginTop: 15,
+                    marginBottom: 20,
+                    width: "100%",
+                    display: "flex",
+                    alignItems: "center"
+                  }}
+                >
+                  <Button
+                    onPress={() => this.toggleSignUpVerify()}
+                    style={linkBtn}
+                    transparent
+                  >
+                    <Text
+                      uppercase={false}
+                      style={{
+                        color: "white",
+                        fontSize: 15,
+                        textDecorationLine: "underline",
+                        textAlign: "center",
+                        fontFamily: "Roboto_light"
+                      }}
+                    >
+                      Back to signup
+                    </Text>
+                  </Button>
                 </View>
               </View>
               <View style={{ height: 50 }}>
@@ -311,7 +356,11 @@ class SignUpScreen extends Component {
                   <Button onPress={() => this.activate()} style={loginBtn}>
                     <Text
                       uppercase={false}
-                      style={{ color: "white", fontSize: 15, fontFamily: "Roboto_light" }}
+                      style={{
+                        color: "white",
+                        fontSize: 15,
+                        fontFamily: "Roboto_light"
+                      }}
                     >
                       Sign up
                     </Text>

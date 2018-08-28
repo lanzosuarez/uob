@@ -50,7 +50,7 @@ const Course = ({ course, goToCourseSchedules }) => (
       }}
     >
       <Text style={{ color: blue, fontSize: 11, fontFamily: "Roboto_light" }}>
-        {course.title}
+      {course.title.length > 25 ? `${course.title.slice(0, 25)}...` : course.title}
       </Text>
       <Text
            style={{ color: blue, fontSize: 11, fontFamily: "Roboto_light" }}

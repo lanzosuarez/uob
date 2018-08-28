@@ -1,8 +1,7 @@
 import React, { Component } from "react";
 import { Text, Image, View, Dimensions } from "react-native";
-
+import Toast from "react-native-root-toast";
 import MessageDialog from "../MessageDialog";
-import Toast from 'react-native-root-toast';
 
 import {
   Container,
@@ -20,7 +19,8 @@ import {
 } from "native-base";
 import HelpDesk from "../../services/HelpDesk";
 import Loading from "../Loading";
-import { headerBGcolor, headerFontColor } from "../../global";
+import { headerFontColor } from "../../global";
+import { DrawerActions } from "react-navigation";
 
 const blue = "#00246a";
 
@@ -28,24 +28,24 @@ const { width, height } = Dimensions.get("window");
 
 class Contact extends Component {
   state = {
-    showModal: false,
+    show: false,
     issue: "",
     contact_number: "",
     loading: false
   };
 
   checkFields = fields => fields.some(field => this.state[field].length === 0);
-  showToast = text => Toast.show(text, {
-    duration: Toast.durations.SHORT,
-    position: Toast.positions.BOTTOM,
-    shadow: true,
-    animation: true,
-    hideOnPress: true,
-    delay: 0
-  })
-
+  showToast = text =>
+    Toast.show(text, {
+      duration: Toast.durations.SHORT,
+      position: Toast.positions.BOTTOM,
+      shadow: true,
+      animation: true,
+      hideOnPress: true,
+      delay: 0
+    });
   toggleLoad = () => this.setState({ loading: !this.state.loading });
-  toggleShowModal = () => this.setState({ showModal: !this.state.showModal });
+  toggleShow = () => this.setState({ show: !this.state.show });
 
   sendHelp = () => {
     if (this.checkFields(["issue", "contact_number"]) === false) {
@@ -56,8 +56,9 @@ class Contact extends Component {
         .then(r => {
           this.toggleLoad();
           const { status, message } = r.data;
+          console.log(status, message);
           if (status) {
-            this.toggleShowModal();
+            this.toggleShow();
             this.setState({ contact_number: "", issue: "" });
           } else {
             this.showToast(message);
@@ -74,24 +75,35 @@ class Contact extends Component {
     }
   };
 
+  openDrawer = () => {
+    this.props.navigation.dispatch(DrawerActions.openDrawer());
+  };
+
   changeText = (key, val) => this.setState({ [key]: val });
 
   render() {
     return (
       <Container>
-        <Loading tip="Sending inquiry" isVisible={this.state.loading} />
-        <Header style={{ backgroundColor: headerBGcolor }}>
+        <MessageDialog
+          height={150}
+          onOk={this.toggleShow}
+          heading="Form Sent"
+          message="Your inquiry has been sent successfully. Our representative will get back to you shortly."
+          isVisible={this.state.show}
+        />
+        <Header style={{ backgroundColor: "#4c64a4" }}>
           <Left style={{ flex: 1 }}>
-            <Button
-              onPress={() => this.props.navigation.openDrawer()}
-              transparent
-            >
-              <Icon type="MaterialIcons" style={{ color: headerFontColor }} name="menu" />
+            <Button onPress={() => this.openDrawer()} transparent>
+              <Icon
+                type="MaterialIcons"
+                style={{ color: headerFontColor }}
+                name="menu"
+              />
             </Button>
           </Left>
           <Body
             style={{
-              flex: 2,
+              flex: 1,
               justifyContent: "center",
               alignItems: "center"
             }}
@@ -109,13 +121,6 @@ class Contact extends Component {
           <Right style={{ flex: 1 }} />
         </Header>
         <Content style={{ flex: 1 }}>
-          <MessageDialog
-            height={150}
-            onOk={this.toggleShowModal}
-            heading="Form Sent"
-            message="Your inquiry has been sent successfully. Our representative will get back to you shortly."
-            isVisible={this.state.showModal}
-          />
           <Image
             style={styles.imgBg}
             source={require("../../assets/adult.png")}
@@ -132,7 +137,7 @@ class Contact extends Component {
           >
             <View
               style={{
-                height: 500,
+                height: 490,
                 width: width * 0.8,
                 backgroundColor: "#f3f2f1",
                 borderRadius: 6,
@@ -157,11 +162,11 @@ class Contact extends Component {
               >
                 <Text
                   style={{
-                    fontFamily: "Roboto_light",
+                    fontFamily: "AgendaBold",
                     textDecorationLine: "underline",
                     fontWeight: "100",
                     color: "#00246a",
-                    fontSize: 17
+                    fontSize: 16
                   }}
                 >
                   View our FAQ's{" "}
@@ -171,17 +176,17 @@ class Contact extends Component {
                     fontFamily: "Roboto_light",
                     fontWeight: "100",
                     color: "#00246a",
-                    fontSize: 17
+                    fontSize: 16
                   }}
                 >
                   or send us a message and we will get back to you as soon as
-                  possible
+                  possible.
                 </Text>
               </Text>
               <View style={{ marginBottom: 15 }}>
                 <Text
                   style={{
-                    fontFamily: "Roboto_light",
+                    fontFamily: "AgendaBold",
                     color: blue,
                     fontSize: 13,
                     marginBottom: 5,
@@ -208,7 +213,7 @@ class Contact extends Component {
               <View style={{ marginBottom: 15 }}>
                 <Text
                   style={{
-                    fontFamily: "Roboto_light",
+                    fontFamily: "AgendaBold",
                     color: blue,
                     fontSize: 13,
                     marginBottom: 5,
@@ -226,6 +231,7 @@ class Contact extends Component {
                 />
               </View>
               <Button
+                disabled={this.state.loading}
                 onPress={() => this.sendHelp()}
                 style={{
                   borderRadius: 8,
@@ -233,7 +239,8 @@ class Contact extends Component {
                   backgroundColor: blue,
                   width: "100%",
                   justifyContent: "center",
-                  alignItems: "center"
+                  alignItems: "center",
+                  opacity: this.state.loading ? 0.5 : 1
                 }}
               >
                 <Text
@@ -243,7 +250,7 @@ class Contact extends Component {
                     fontFamily: "AgendaBold"
                   }}
                 >
-                  Submit
+                  {this.state.loading ? "Sending Inquiry..." : "Submit"}
                 </Text>
               </Button>
             </View>
@@ -268,7 +275,7 @@ const styles = {
     borderRadius: 7,
     borderWidth: 0,
     borderColor: "transparent",
-    fontFamily: "Roboto_light"
+    fontFamily: "AgendaBold"
   },
   tArea: {
     paddingTop: 20,
@@ -279,7 +286,7 @@ const styles = {
     borderRadius: 7,
     borderWidth: 0,
     borderColor: "transparent",
-    fontFamily: "Roboto_light"
+    fontFamily: "AgendaBold"
   }
 };
 

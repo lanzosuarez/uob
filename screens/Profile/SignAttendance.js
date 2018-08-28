@@ -22,7 +22,7 @@ import {
 
 import Profile from "../../services/Profile";
 import Loading from "../Loading";
-import Toast from 'react-native-root-toast';
+import Toast from "react-native-root-toast";
 import { headerBGcolor, headerFontColor } from "../../global";
 
 const blue = "#00246a";
@@ -48,14 +48,15 @@ class SignAttendance extends Component {
 
   toggleLoad = () => this.setState({ loading: !this.state.loading });
 
-  showToast = text => Toast.show(text, {
-    duration: Toast.durations.SHORT,
-    position: Toast.positions.BOTTOM,
-    shadow: true,
-    animation: true,
-    hideOnPress: true,
-    delay: 0
-  })
+  showToast = text =>
+    Toast.show(text, {
+      duration: Toast.durations.SHORT,
+      position: Toast.positions.BOTTOM,
+      shadow: true,
+      animation: true,
+      hideOnPress: true,
+      delay: 0
+    });
 
   toggleRefresh = () => this.setState({ refreshing: !this.state.refreshing });
 
@@ -93,7 +94,7 @@ class SignAttendance extends Component {
       .then(r => {
         this.toggleLoad();
         const { status, message, data } = r.data;
-        console.log("get event batch")
+        console.log("get event batch");
         console.log(data, status);
         if (status) {
           this.setState({ event: data });
@@ -110,8 +111,8 @@ class SignAttendance extends Component {
       });
   };
 
-  signRq = signature => { 
-      const {
+  signRq = signature => {
+    const {
       id: user_event_id,
       event_id,
       event_batch_id,
@@ -124,31 +125,44 @@ class SignAttendance extends Component {
       class_schedule_id,
       signature
     };
-   this.signAttendance(payload); 
-  }
+    this.signAttendance(payload);
+  };
 
   sign = () => {
-    const imageURL = this.state.imagePath
-    Image.getSize(imageURL, (width, height) => {
-      let imageSize = {
-        size: {
-          width,
-          height
-        },
-        offset: {
-          x: 0,
-          y: 0,
-        },
-      };
-      ImageEditor.cropImage(imageURL, imageSize, (imageURI) => {
-        console.log(imageURI);
-        ImageStore.getBase64ForTag(imageURI, (base64Data) => {
-          this.signRq(imageURI);
-          ImageStore.removeImageForTag(imageURI);
-        }, (reason) => console.warn(reason) )
-      }, (reason) => console.warn(reason) )
-    }, (reason) => console.warn(reason))
-  }
+    const imageURL = this.state.imagePath;
+    Image.getSize(
+      imageURL,
+      (width, height) => {
+        let imageSize = {
+          size: {
+            width,
+            height
+          },
+          offset: {
+            x: 0,
+            y: 0
+          }
+        };
+        ImageEditor.cropImage(
+          imageURL,
+          imageSize,
+          imageURI => {
+            console.log(imageURI);
+            ImageStore.getBase64ForTag(
+              imageURI,
+              base64Data => {
+                this.signRq(imageURI);
+                ImageStore.removeImageForTag(imageURI);
+              },
+              reason => console.warn(reason)
+            );
+          },
+          reason => console.warn(reason)
+        );
+      },
+      reason => console.warn(reason)
+    );
+  };
 
   signAttendance = payload => {
     this.toggleLoad();
@@ -185,7 +199,13 @@ class SignAttendance extends Component {
                 style={{ color: headerFontColor }}
                 name="chevron-left"
               />
-              <Text style={{ color: headerFontColor, fontFamily: "Roboto_light" }}>
+              <Text
+                style={{
+                  color: headerFontColor,
+                  fontFamily: "Roboto_light",
+                  fontSize: 17
+                }}
+              >
                 Back
               </Text>
             </Button>
@@ -209,8 +229,7 @@ class SignAttendance extends Component {
           </Body>
           <Right style={{ flex: 1 }} />
         </Header>
-        <View style={{ flex:1 }}
-        >
+        <View style={{ flex: 1 }}>
           {event ? (
             <View
               stlye={{

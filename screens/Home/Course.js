@@ -45,12 +45,12 @@ class Course extends Component {
         cardBody
       >
         <Image
-          defaultSource={ require("../../assets/defaultimg.png" )}
+          defaultSource={require("../../assets/defaultimg.png")}
           source={{ uri: item.image_url }}
           style={{
             flex: 1,
             height: 100,
-            width:"100%",
+            width: "100%",
             borderTopLeftRadius: 8,
             borderTopRightRadius: 8
           }}
@@ -64,10 +64,11 @@ class Course extends Component {
           paddingTop: 5
         }}
       >
-        <Text 
+        <Text
           onPress={() => this.navigateToSpecifiCourse(item.id)}
-          style={{ color: blue, fontSize: 15, fontFamily: "Roboto_light" }}>
-          {item.title}
+          style={{ color: blue, fontSize: 15, fontFamily: "Roboto_light" }}
+        >
+          {item.title.length > 25 ? `${item.title.slice(0, 25)}...` : item.title}
         </Text>
       </CardItem>
     </Card>
@@ -108,7 +109,7 @@ class Course extends Component {
             </Text>
           </TouchableOpacity>
         </View>
-        <View style={{ flex: 1, paddingLeft: 15}}>
+        <View style={{ flex: 1, paddingLeft: 15 }}>
           <Carousel
             style={{ marginBottom: 10 }}
             activeSlideAlignment="start"
@@ -117,9 +118,11 @@ class Course extends Component {
             renderItem={this.renderItem}
             sliderWidth={width}
             itemWidth={200}
+            inactiveSlideOpacity={1}
+            inactiveSlideScale={1}
           />
         </View>
-      </View> 
+      </View>
     );
   }
 }

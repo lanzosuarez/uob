@@ -117,7 +117,7 @@ class PastCourses extends Component {
                 style={{ color: headerFontColor }}
                 name="chevron-left"
               />
-              <Text style={{ color: headerFontColor, fontFamily: "Roboto_light" }}>
+              <Text style={{ color: headerFontColor, fontFamily: "Roboto_light",fontSize: 17 }}>
                 Back
               </Text>
             </Button>

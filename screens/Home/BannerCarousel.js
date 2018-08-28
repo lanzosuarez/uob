@@ -57,9 +57,10 @@ const BannerCarousel = props => {
           <View style={{ marginBottom: 40, marginLeft: 20 }}>
             <Text
               style={{
-                fontFamily: "Roboto_light",
+                fontFamily: "AgendaBold",
                 color: "white",
-                fontSize: 20
+                fontSize: 20,
+                backgroundColor: "rgba(0, 0, 0, 0.2)"
               }}
             >
               {item.title}

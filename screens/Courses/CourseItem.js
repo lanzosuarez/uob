@@ -53,7 +53,7 @@ const CourseItem = ({ course, goToCourseSchedules }) => {
         <Text
           style={{ color: blue, fontSize: 15, fontFamily: "Roboto_light" }}
         >
-          {course.title}
+           {course.title.length > 25 ? `${course.title.slice(0, 25)}...` : course.title}
         </Text>
         <Text
            style={{ color: blue, fontSize: 13, fontFamily: "Roboto_light" }}

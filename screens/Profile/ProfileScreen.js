@@ -14,12 +14,7 @@ import {
   Separator
 } from "native-base";
 
-import {
-  Text,
-  View,
-  TouchableOpacity,
-  AsyncStorage
-} from "react-native";
+import { Text, View, TouchableOpacity, AsyncStorage } from "react-native";
 import {
   DrawerActions,
   StackActions,
@@ -29,7 +24,7 @@ import { UserConnect } from "../../context/UserProvider";
 import { ProfileConnect } from "../../context/ProfileProvider";
 import { WorkshopConnect } from "../../context/WorkshopProvider";
 import Profile from "../../services/Profile";
-import Toast from 'react-native-root-toast';
+import Toast from "react-native-root-toast";
 
 import { headerBGcolor, headerFontColor } from "../../global";
 
@@ -54,18 +49,12 @@ const CourseFieldName = ({ field, last = false, onPress = () => {} }) => {
   const { bold, iconTxt, f, txt, light } = styles;
   return (
     <ListItem onPress={onPress} last={last}>
-      <Left style={{ flex:2 }}>
+      <Left style={{ flex: 2 }}>
         <Text style={{ ...bold, ...txt }}>{field}</Text>
       </Left>
       <Body style={{ ...f }} />
       <Right>
-        <Button style={{ height: 15 }} onPress={() => onPress()} transparent>
-          <Icon
-            type="MaterialIcons"
-            name="chevron-right"
-            style={{ ...light, ...iconTxt }}
-          />
-        </Button>
+        <Icon style={{ color: blue }} active name="arrow-forward" />
       </Right>
     </ListItem>
   );
@@ -90,14 +79,15 @@ class ProfileScreen extends Component {
 
   toggleLoad = () => this.setState({ loading: !this.state.loading });
 
-  showToast = text => Toast.show(text, {
-    duration: Toast.durations.SHORT,
-    position: Toast.positions.BOTTOM,
-    shadow: true,
-    animation: true,
-    hideOnPress: true,
-    delay: 0
-  })
+  showToast = text =>
+    Toast.show(text, {
+      duration: Toast.durations.SHORT,
+      position: Toast.positions.BOTTOM,
+      shadow: true,
+      animation: true,
+      hideOnPress: true,
+      delay: 0
+    });
 
   getProfile = () => Profile.getProfile();
 
@@ -155,7 +145,11 @@ class ProfileScreen extends Component {
         <Header style={{ backgroundColor: headerBGcolor }}>
           <Left style={{ flex: 1 }}>
             <Button onPress={() => this.openDrawer()} transparent>
-              <Icon type="MaterialIcons" style={{ color: headerFontColor }} name="menu" />
+              <Icon
+                type="MaterialIcons"
+                style={{ color: headerFontColor }}
+                name="menu"
+              />
             </Button>
           </Left>
           <Body
@@ -180,7 +174,10 @@ class ProfileScreen extends Component {
         <Content>
           {this.props.profile === null ? null : (
             <View style={{ flex: 1 }}>
-              <Separator style={{ backgroundColor: "#f4f4ff", height: 50 }} bordered>
+              <Separator
+                style={{ backgroundColor: "#f4f4ff", height: 50 }}
+                bordered
+              >
                 <View
                   style={{
                     ...f,
@@ -223,7 +220,10 @@ class ProfileScreen extends Component {
                 field="Supervisor's email"
                 value={this.props.profile.supervisor_email}
               />
-              <ListItem last>
+              <ListItem
+                onPress={() => this.props.navigation.push("ChangePassword")}
+                last
+              >
                 <Left style={{ ...f }}>
                   <Text style={{ ...bold, ...txt }}>Password</Text>
                 </Left>
@@ -243,7 +243,10 @@ class ProfileScreen extends Component {
                   </TouchableOpacity>
                 </Body>
               </ListItem>
-              <Separator style={{ backgroundColor: "#f4f4ff", height: 50 }} bordered>
+              <Separator
+                style={{ backgroundColor: "#f4f4ff", height: 50 }}
+                bordered
+              >
                 <Text style={{ ...bold, ...sep, color: blue }}>COURSES</Text>
               </Separator>
               <CourseFieldName
@@ -263,7 +266,8 @@ class ProfileScreen extends Component {
                 <Fragment>
                   <Separator
                     style={{ backgroundColor: "#f4f4ff", height: 50 }}
-                    bordered>
+                    bordered
+                  >
                     <Text style={{ ...bold, ...sep, color: blue }}>
                       SUPERVISOR
                     </Text>

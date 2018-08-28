@@ -3,13 +3,12 @@ import {
   Image,
   View,
   Text,
+  ToastAndroid,
   AsyncStorage,
   Dimensions
 } from "react-native";
-import Toast from 'react-native-root-toast';
 import { Button, Container, Content } from "native-base";
 import { Row, Grid, Col } from "react-native-easy-grid";
-import Expo from "expo";
 
 import UserResource from "../services/UserResource";
 
@@ -61,14 +60,7 @@ class LoginRegister extends Component {
     }
   }
 
-  showToast = text => Toast.show(text, {
-    duration: Toast.durations.LONG,
-    position: Toast.positions.BOTTOM,
-    shadow: true,
-    animation: true,
-    hideOnPress: true,
-    delay: 0
-  })
+  showToast = text => ToastAndroid.show(text, ToastAndroid.SHORT);
 
   renderTabStyle = tabId =>
     this.state.active === tabId ? styles.activeTab : styles.inActiveTab;
@@ -97,7 +89,7 @@ class LoginRegister extends Component {
     const { tabButton, imgBg, logo, tabs, tab, tabText } = styles;
 
     return (
-      <Container style={{ flex: 1,marginTop: Expo.Constants.statusBarHeight  }}>
+      <Container style={{ flex: 1 }}>
         <Image style={imgBg} source={require("../assets/signin.jpg")} />
         {this.state.loading ? (
           <Loading isVisible={this.state.loading} />
@@ -110,7 +102,11 @@ class LoginRegister extends Component {
                 alignItems: "center"
               }}
             >
-              <Image style={logo} source={require("../assets/logo.png")} />
+              <Image
+                resizeMode="center"
+                style={logo}
+                source={require("../assets/logo.png")}
+              />
             </View>
             <View style={{ height: 60 }}>
               <Grid>
@@ -170,20 +166,17 @@ const styles = {
     justifyContent: "center"
   },
   imgBg: {
-    resizeMode: "cover",
+    flex: 1,
+    resizeMode: "stretch",
     position: "absolute",
     width: "100%",
-    height
+    height: "100%"
   },
   logoCon: {
     width: "100%",
     alignItems: "center",
     justifyContent: "center",
     display: "flex"
-  },
-  logo: {
-    
-    resizeMode: "center"
   },
   tab: {
     flex: 1,
@@ -215,27 +208,3 @@ const styles = {
 };
 
 export default UserConnect(["setUser"])(LoginRegister);
-
-
-// return (
-//   <View
-//     style={{
-//       flex: 1,
-//       paddingTop: Platform.OS === "ios" ? 0 : Expo.Constants.statusBarHeight
-//     }}
-//   >
-//     <UserProvider>
-//       <WorkshopProvider>
-//         <CourseProvider>
-//           <ProfileProvider>
-//             <EvaluationProvider>
-//               <TeamCoursesProvider>
-//                 <AppStackNavigator />
-//               </TeamCoursesProvider>
-//             </EvaluationProvider>
-//           </ProfileProvider>
-//         </CourseProvider>
-//       </WorkshopProvider>
-//     </UserProvider>
-//   </View>
-// );

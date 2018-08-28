@@ -205,7 +205,7 @@ class SpecificCourse extends Component {
             style={{ color: "white", fontSize: 17 }}
             name="chevron-left"
           />
-          <Text style={{ color: "white", fontFamily: "Roboto_light" }}>
+          <Text style={{ color: "white", fontFamily: "Roboto_light", fontSize: 17 }}>
             Back
           </Text>
         </TouchableOpacity>
