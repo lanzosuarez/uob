@@ -6,7 +6,7 @@ import {
   RefreshControl,
   ScrollView
 } from "react-native";
-import Toast from 'react-native-root-toast';
+import Toast from "react-native-root-toast";
 import { Icon } from "native-base";
 
 import BannerImage from "./BannerImage";
@@ -17,8 +17,9 @@ import ConfirmDialog from "../ConfirmDialog";
 import ContentRepo from "../../services/ContentRepo";
 
 import Loading from "../Loading";
-import Expo from "expo"
+import Expo from "expo";
 import { UserConnect } from "../../context/UserProvider";
+import UserResource from "../../services/UserResource";
 
 class SpecificCourse extends Component {
   constructor(props) {
@@ -67,15 +68,15 @@ class SpecificCourse extends Component {
   toggleLoad = () => this.setState({ loading: !this.state.loading });
   toggleConfirm = () => this.setState({ showConfirm: !this.state.showConfirm });
 
-  showToast = text => Toast.show(text, {
-    duration: Toast.durations.SHORT,
-    position: Toast.positions.BOTTOM,
-    shadow: true,
-    animation: true,
-    hideOnPress: true,
-    delay: 0
-  })
-
+  showToast = text =>
+    Toast.show(text, {
+      duration: Toast.durations.SHORT,
+      position: Toast.positions.BOTTOM,
+      shadow: true,
+      animation: true,
+      hideOnPress: true,
+      delay: 0
+    });
 
   getWorkshop = () => {
     const { navigation } = this.props;
@@ -115,13 +116,14 @@ class SpecificCourse extends Component {
       .then(r => {
         this.toggleLoad();
         if (r.data) {
-          const { status, message,data } = r.data;
+          const { status, message, data } = r.data;
           if (status) {
             this.showToast(message);
             this.getWorkshop();
-            let user = {...this.props.user};
+            let user = { ...this.props.user };
             user.credits_available = data.credits_available;
             this.props.setUser(user);
+            UserResource.setUser(user);
           } else {
             this.showToast(message);
           }
@@ -186,7 +188,10 @@ class SpecificCourse extends Component {
             onRefresh={this.onRefresh}
           />
         }
-        contentContainerStyle={{ flex: 1, marginTop: Expo.Constants.statusBarHeight }}
+        contentContainerStyle={{
+          flex: 1,
+          marginTop: Expo.Constants.statusBarHeight
+        }}
       >
         <TouchableOpacity
           onPress={() => this.goBack()}
@@ -205,7 +210,9 @@ class SpecificCourse extends Component {
             style={{ color: "white", fontSize: 17 }}
             name="chevron-left"
           />
-          <Text style={{ color: "white", fontFamily: "Roboto_light", fontSize: 17 }}>
+          <Text
+            style={{ color: "white", fontFamily: "Roboto_light", fontSize: 17 }}
+          >
             Back
           </Text>
         </TouchableOpacity>
@@ -240,6 +247,4 @@ class SpecificCourse extends Component {
   }
 }
 
-export default UserConnect(["setUser","user"])(
-  SpecificCourse
-)
+export default UserConnect(["setUser", "user"])(SpecificCourse);

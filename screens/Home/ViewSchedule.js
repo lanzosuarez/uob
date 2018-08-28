@@ -21,6 +21,7 @@ import Schedule from "./Schedule";
 import { UserConnect } from "../../context/UserProvider";
 import Toast from 'react-native-root-toast';
 import { headerBGcolor, headerFontColor } from "../../global";
+import UserResource from "../../services/UserResource";
 
 const blue = "#00246a";
 
@@ -115,6 +116,7 @@ class ViewSchedule extends Component {
           creditToSubtract = this.props.navigation.getParam("credit", 0);
         user.credits_available = user.credits_available - creditToSubtract;
         this.props.setUser(user);
+        UserResource.setUser(user);
       }
     });
   };
