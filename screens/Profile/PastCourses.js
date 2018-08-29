@@ -41,9 +41,9 @@ class PastCourses extends Component {
   state = { loading: false, refreshing: false };
 
   componentDidMount() {
-    if (this.props.pastCourses === null) {
-      this.getCourses();
-    }
+    // if (this.props.pastCourses === null) {
+    this.getCourses();
+    // }
   }
 
   toggleLoad = () => this.setState({ loading: !this.state.loading });

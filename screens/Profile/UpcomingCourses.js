@@ -41,9 +41,9 @@ class UpcomingCourses extends Component {
   state = { loading: false, refreshing: false };
 
   componentDidMount() {
-    if (this.props.upcomingCourses === null) {
-      this.getCourses();
-    }
+    // if (this.props.upcomingCourses === null) {
+    this.getCourses();
+    // }
   }
 
   toggleLoad = () => this.setState({ loading: !this.state.loading });
@@ -198,7 +198,6 @@ class UpcomingCourses extends Component {
                     goToCourseSchedules={this.goToCourseSchedules}
                   />
                 ))}
-                
               </View>
             )}
           </ScrollView>
