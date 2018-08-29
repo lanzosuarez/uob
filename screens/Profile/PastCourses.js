@@ -13,7 +13,13 @@ import {
 } from "native-base";
 import { headerBGcolor, headerFontColor } from "../../global";
 
-import { Text, View, RefreshControl, Dimensions } from "react-native";
+import {
+  Text,
+  View,
+  RefreshControl,
+  Dimensions,
+  ScrollView
+} from "react-native";
 
 const { width } = Dimensions.get("window");
 
@@ -117,7 +123,13 @@ class PastCourses extends Component {
                 style={{ color: headerFontColor }}
                 name="chevron-left"
               />
-              <Text style={{ color: headerFontColor, fontFamily: "Roboto_light",fontSize: 17 }}>
+              <Text
+                style={{
+                  color: headerFontColor,
+                  fontFamily: "Roboto_light",
+                  fontSize: 17
+                }}
+              >
                 Back
               </Text>
             </Button>
@@ -149,18 +161,11 @@ class PastCourses extends Component {
               onRefresh={this.onRefresh}
             />
           }
-          contentContainerStyle={{
-            flex: 1
-          }}
         >
-          <View
+          <ScrollView
             style={{
               flex: 1,
-              paddingTop: 20,
-              // paddingRight: width * 0.05,
-              paddingLeft: width * 0.05,
-              flexWrap: "wrap",
-              flexDirection: "row"
+              paddingTop: 20
             }}
           >
             {courses.length === 0 ? (
@@ -176,15 +181,24 @@ class PastCourses extends Component {
                 You have no past courses
               </Text>
             ) : (
-              courses.map(c => (
-                <Course
-                  key={c.id}
-                  course={c}
-                  goToCourseSchedules={this.goToCourseSchedules}
-                />
-              ))
+              <View
+                style={{
+                  flex: 1,
+                  paddingLeft: width * 0.05,
+                  flexWrap: "wrap",
+                  flexDirection: "row"
+                }}
+              >
+                {courses.map(c => (
+                  <Course
+                    key={c.id}
+                    course={c}
+                    goToCourseSchedules={this.goToCourseSchedules}
+                  />
+                ))}
+              </View>
             )}
-          </View>
+          </ScrollView>
         </Content>
       </Container>
     );

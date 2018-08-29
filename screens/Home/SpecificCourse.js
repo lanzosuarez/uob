@@ -207,11 +207,11 @@ class SpecificCourse extends Component {
         >
           <Icon
             type="MaterialIcons"
-            style={{ color: "white", fontSize: 17 }}
+            style={{ color: "white", fontSize: 20 }}
             name="chevron-left"
           />
           <Text
-            style={{ color: "white", fontFamily: "Roboto_light", fontSize: 17 }}
+            style={{ color: "white", fontFamily: "Roboto_light", fontSize: 20 }}
           >
             Back
           </Text>

@@ -28,7 +28,7 @@ const Course = ({ course, goToCourseSchedules }) => (
       cardBody
     >
       <Image
-        defaultSource={ require("../../assets/defaultimg.png" )}
+        defaultSource={require("../../assets/defaultimg.png")}
         source={{ uri: course.image }}
         style={{
           flex: 1,
@@ -40,21 +40,24 @@ const Course = ({ course, goToCourseSchedules }) => (
       />
     </CardItem>
     <CardItem
+      onPress={() => goToCourseSchedules(course)}
       style={{
         borderBottomLeftRadius: 8,
         borderBottomRightRadius: 8,
         paddingLeft: 5,
         paddingTop: 5,
-        flexDirection:"column",
+        flexDirection: "column",
         alignItems: "flex-start"
       }}
     >
-      <Text style={{ color: blue, fontSize: 11, fontFamily: "Roboto_light" }}>
-      {course.title.length > 25 ? `${course.title.slice(0, 25)}...` : course.title}
+      <Text style={{ color: blue, fontSize: 15, fontFamily: "Roboto_light" }}>
+        {course.title.length > 25
+          ? `${course.title.slice(0, 25)}...`
+          : course.title}
       </Text>
-      <Text
-           style={{ color: blue, fontSize: 11, fontFamily: "Roboto_light" }}
-          >{course.credit} credits</Text>
+      <Text style={{ color: blue, fontSize: 13, fontFamily: "Roboto_light" }}>
+        {course.credit} credits
+      </Text>
     </CardItem>
   </Card>
 );

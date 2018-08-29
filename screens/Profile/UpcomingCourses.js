@@ -16,7 +16,8 @@ import {
   Text,
   View,
   RefreshControl,
-  Dimensions
+  Dimensions,
+  ScrollView
 } from "react-native";
 
 const { width } = Dimensions.get("window");
@@ -25,7 +26,7 @@ import { headerBGcolor, headerFontColor } from "../../global";
 import Course from "./Course";
 
 import { ProfileConnect } from "../../context/ProfileProvider";
-import Toast from 'react-native-root-toast';
+import Toast from "react-native-root-toast";
 
 import Profile from "../../services/Profile";
 import Loading from "../Loading";
@@ -47,15 +48,15 @@ class UpcomingCourses extends Component {
 
   toggleLoad = () => this.setState({ loading: !this.state.loading });
 
-  showToast = text => Toast.show(text, {
-    duration: Toast.durations.SHORT,
-    position: Toast.positions.BOTTOM,
-    shadow: true,
-    animation: true,
-    hideOnPress: true,
-    delay: 0
-  })
-
+  showToast = text =>
+    Toast.show(text, {
+      duration: Toast.durations.SHORT,
+      position: Toast.positions.BOTTOM,
+      shadow: true,
+      animation: true,
+      hideOnPress: true,
+      delay: 0
+    });
 
   toggleRefresh = () => this.setState({ refreshing: !this.state.refreshing });
   onRefresh = () => {
@@ -122,7 +123,13 @@ class UpcomingCourses extends Component {
                 style={{ color: headerFontColor }}
                 name="chevron-left"
               />
-              <Text style={{ color: headerFontColor, fontFamily: "Roboto_light", fontSize: 17 }}>
+              <Text
+                style={{
+                  color: headerFontColor,
+                  fontFamily: "Roboto_light",
+                  fontSize: 17
+                }}
+              >
                 Back
               </Text>
             </Button>
@@ -136,7 +143,7 @@ class UpcomingCourses extends Component {
           >
             <Title
               style={{
-                fontSize: 16,
+                fontSize: 15,
                 color: headerFontColor,
                 fontFamily: "AgendaBold"
               }}
@@ -154,18 +161,13 @@ class UpcomingCourses extends Component {
               onRefresh={this.onRefresh}
             />
           }
-          contentContainerStyle={{
-            
-          }}
         >
-          <View
+          <ScrollView
             style={{
+              display: "flex",
               flex: 1,
-              paddingTop: 20,
+              paddingTop: 20
               // paddingRight: width * 0.05,
-              paddingLeft: width * 0.05,
-              flexWrap: "wrap",
-              flexDirection: "row"
             }}
           >
             {courses.length === 0 ? (
@@ -181,15 +183,25 @@ class UpcomingCourses extends Component {
                 You have no upcoming courses
               </Text>
             ) : (
-              courses.map(c => (
-                <Course
-                  key={c.id}
-                  course={c}
-                  goToCourseSchedules={this.goToCourseSchedules}
-                />
-              ))
+              <View
+                style={{
+                  flex: 1,
+                  paddingLeft: width * 0.05,
+                  flexWrap: "wrap",
+                  flexDirection: "row"
+                }}
+              >
+                {courses.map(c => (
+                  <Course
+                    key={c.id}
+                    course={c}
+                    goToCourseSchedules={this.goToCourseSchedules}
+                  />
+                ))}
+                
+              </View>
             )}
-          </View>
+          </ScrollView>
         </Content>
       </Container>
     );

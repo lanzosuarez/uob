@@ -20,8 +20,8 @@ const BannerCarousel = props => {
   };
 
   let banners = props.banners || [];
-  if(props.banners){
-    if(props.banners.length === 0){
+  if (props.banners) {
+    if (props.banners.length === 0) {
       banners = props.courses || [];
     }
   }
@@ -41,7 +41,7 @@ const BannerCarousel = props => {
           }}
         >
           <Image
-            defaultSource={ require("../../assets/defaultimg.png" )}
+            defaultSource={require("../../assets/defaultimg.png")}
             style={styles.imgBg}
             source={{ uri: item.image_url }}
           />
@@ -54,13 +54,21 @@ const BannerCarousel = props => {
               backgroundColor: "rgba(0, 0, 0, 0.2)"
             }}
           />
-          <View style={{ marginBottom: 40, marginLeft: 20 }}>
+          <View
+            style={{
+              paddingLeft: 10,
+              paddingBottom: 5,
+              paddingTop: 5,
+              marginBottom: 40,
+              marginLeft: 20,
+              backgroundColor: "rgba(0, 0, 0, 0.3)"
+            }}
+          >
             <Text
               style={{
                 fontFamily: "AgendaBold",
                 color: "white",
-                fontSize: 20,
-                backgroundColor: "rgba(0, 0, 0, 0.2)"
+                fontSize: 20
               }}
             >
               {item.title}
