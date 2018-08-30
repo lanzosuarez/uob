@@ -194,6 +194,7 @@ class SpecificCourse extends Component {
         }}
       >
         <TouchableOpacity
+        
           onPress={() => this.goBack()}
           style={{
             position: "absolute",
@@ -240,7 +241,7 @@ class SpecificCourse extends Component {
           message="Are you sure you want to proceed with the withdrawal of the course? Your slot will be released for other learners."
           onCancel={this.toggleConfirm}
           onOk={this.withdraw}
-          height={210}
+          height={200}
         />
       </ScrollView>
     );

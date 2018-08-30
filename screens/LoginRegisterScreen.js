@@ -32,23 +32,26 @@ class LoginRegister extends Component {
 
   state = {
     active: 1,
-    loading: true,
-    pendingAccount: false
+    loading: true
   };
 
   async componentDidMount() {
     // if (this.props.navigation.getParam("from") !== "logout") {
-    const email = await AsyncStorage.getItem("unregistered_email");
-    console.log("notlogout");
-    if (email) {
-      this.setState({ pendingAccount: true, active: 0 });
-    }
+    // const email = await AsyncStorage.getItem("unregistered_email");
+    // console.log("notlogout");
+    // if (email) {
+    //   this.setState({ pendingAccount: true, active: 0 });
+    // }
     try {
       const user = await UserResource.getUser();
       if (user) {
-        this.gotoMain();
-        this.props.setUser(user);
-        this.toggleLoad();
+        if (user.is_activated) {
+          this.gotoMain();
+          this.props.setUser(user);
+          this.toggleLoad();
+        } else {
+          this.toggleLoad();
+        }
       } else {
         this.toggleLoad();
       }
@@ -74,7 +77,7 @@ class LoginRegister extends Component {
     }
   };
 
-  removePending = () => this.setState({ pendingAccount: false });
+  togglePending = () => this.setState({ pendingAccount: !this.state.pendingAccount });
 
   gotoMain = () => {
     const resetAction = StackActions.reset({
@@ -144,7 +147,6 @@ class LoginRegister extends Component {
                 />
               ) : (
                 <SignUpScreen
-                  removePending={this.removePending}
                   toggleTabs={this.toggleTabs}
                   gotoMain={this.gotoMain}
                   scrollToInput={this.scrollToView}

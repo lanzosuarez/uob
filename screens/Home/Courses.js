@@ -181,7 +181,7 @@ export class Courses extends Component {
             onOk={this.authorizeApp}
             isVisible={this.state.showAuthMessage}
             okText="I agree"
-            heading="Authorization"
+            heading="Authorisation"
             message="I understand and agree that my personal data may be shared to third party partners for course registration purposes"
           />
           {this.state.loading ? (

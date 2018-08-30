@@ -31,9 +31,9 @@ class CourseBookings extends Component {
   state = { loading: false, refreshing: false };
 
   componentDidMount() {
-    if (this.props.teamCourses === null) {
-      this.getCourses();
-    }
+    // if (this.props.teamCourses === null) {
+    this.getCourses();
+    // }
   }
 
   toggleLoad = () => this.setState({ loading: !this.state.loading });

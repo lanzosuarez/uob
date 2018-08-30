@@ -37,8 +37,8 @@ class SignUpScreen extends Component {
   };
 
   async componentWillMount() {
-    const email = await AsyncStorage.getItem("unregistered_email");
-    if (email) {
+    // const email = await AsyncStorage.getItem("unregistered_email");
+    if (this.props.pendingAccount) {
       this.setState({ email, verifyAccount: true });
       // this.setState({ email: "", verifyAccount: true });
     }
@@ -82,10 +82,10 @@ class SignUpScreen extends Component {
             console.log("message", message);
             this.showToast(message);
           } else {
-            AsyncStorage.setItem("unregistered_email", email).then(() => {
-              this.showToast(message);
-              this.toggleSignUpVerify();
-            });
+            // AsyncStorage.setItem("unregistered_email", email).then(() => {
+            this.showToast(message);
+            this.toggleSignUpVerify();
+            // });
           }
         })
         .catch(err => {
@@ -112,8 +112,8 @@ class SignUpScreen extends Component {
             this.showToast(message);
           } else {
             UserResource.setUser(data).then(d => {
-              AsyncStorage.removeItem("unregistered_email");
-              this.props.removePending();
+              // AsyncStorage.removeItem("unregistered_email");
+              // this.props.removePending();
               this.props.setUser(data);
               this.props.gotoMain();
             });
@@ -374,7 +374,13 @@ class SignUpScreen extends Component {
                       alignItems: "center"
                     }}
                   >
-                    <View style={{ display: "flex", flexDirection: "row" }}>
+                    <View
+                      style={{
+                        display: "flex",
+                        flexDirection: "row",
+                        fontFamily: "Roboto_light"
+                      }}
+                    >
                       <Text style={{ color: "white", fontSize: 13 }}>
                         By signing up, I agree to UOB's{" "}
                       </Text>
@@ -382,7 +388,8 @@ class SignUpScreen extends Component {
                         style={{
                           color: "red",
                           fontSize: 13,
-                          textDecorationLine: "underline"
+                          textDecorationLine: "underline",
+                          fontFamily: "Roboto_light"
                         }}
                       >
                         Terms of Service

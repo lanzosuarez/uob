@@ -22,7 +22,7 @@ class UserEvent extends Component {
           backgroundColor: "white",
           paddingLeft: 30,
           paddingRight: 30,
-          paddingTop: 15,
+          paddingTop: 17,
           flex: 1,
           alignItems: "center",
           minHeight: height
@@ -37,7 +37,7 @@ class UserEvent extends Component {
           <Text
             style={{
               fontFamily: "AgendaBold",
-              fontSize: 22,
+              fontSize: 25,
               fontWeight: "bold",
               color: blue,
               textAlign:"center"
@@ -47,7 +47,7 @@ class UserEvent extends Component {
           </Text>
           <Text
             style={{
-              fontSize: 15,
+              fontSize: 17,
               fontWeight: "100",
               color: blue,
               fontFamily: "Roboto_light"
@@ -69,7 +69,7 @@ class UserEvent extends Component {
           >
             <Text
               style={{
-                fontSize: 17,
+                fontSize: 19,
                 fontWeight: "bold",
                 color: blue,
                 fontFamily: "AgendaBold"
@@ -79,7 +79,7 @@ class UserEvent extends Component {
             </Text>
             <Text
               style={{
-                fontSize: 15,
+                fontSize: 17,
                 fontWeight: "100",
                 color: blue,
                 fontFamily: "Roboto_light"
@@ -103,7 +103,7 @@ class UserEvent extends Component {
           >
             <Text
               style={{
-                fontSize: 17,
+                fontSize: 19,
                 fontWeight: "bold",
                 color: blue,
                 fontFamily: "AgendaBold"
@@ -113,7 +113,7 @@ class UserEvent extends Component {
             </Text>
             <Text
               style={{
-                fontSize: 15,
+                fontSize: 17,
                 fontWeight: "100",
                 color: blue,
                 fontFamily: "Roboto_light"
@@ -136,7 +136,7 @@ class UserEvent extends Component {
           >
             <Text
               style={{
-                fontSize: 17,
+                fontSize: 19,
                 fontWeight: "bold",
                 color: blue,
                 fontFamily: "AgendaBold"
@@ -146,7 +146,7 @@ class UserEvent extends Component {
             </Text>
             <Text
               style={{
-                fontSize: 15,
+                fontSize: 17,
                 fontWeight: "100",
                 color: blue,
                 fontFamily: "Roboto_light"
@@ -168,7 +168,7 @@ class UserEvent extends Component {
               backgroundColor: "#00246a",
               padding: 3,
               height: 40,
-              width: 150,
+              width: 170,
               borderRadius: 10,
               justifyContent: "center",
               display: "flex",
@@ -177,7 +177,7 @@ class UserEvent extends Component {
           >
             <Text
               style={{
-                fontSize: 17,
+                fontSize: 19,
                 fontWeight: "900",
                 color: "white",
                 fontFamily: "AgendaBold"
@@ -189,7 +189,7 @@ class UserEvent extends Component {
         </View>
         <Text
           style={{
-            fontSize: 15,
+            fontSize: 17,
             fontWeight: "100",
             color: blue,
             fontFamily: "Roboto_light",

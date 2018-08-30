@@ -136,14 +136,14 @@ class UpcomingCourses extends Component {
           </Left>
           <Body
             style={{
-              flex: 3,
+              flex: 5,
               justifyContent: "center",
               alignItems: "center"
             }}
           >
             <Title
               style={{
-                fontSize: 15,
+                fontSize: 14,
                 color: headerFontColor,
                 fontFamily: "AgendaBold"
               }}

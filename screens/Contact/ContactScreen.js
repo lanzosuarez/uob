@@ -234,6 +234,7 @@ class Contact extends Component {
                 disabled={this.state.loading}
                 onPress={() => this.sendHelp()}
                 style={{
+                  height: 80,
                   borderRadius: 8,
                   flex: 1,
                   backgroundColor: blue,

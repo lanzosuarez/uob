@@ -168,6 +168,7 @@ class SignAttendance extends Component {
     this.toggleLoad();
     Profile.signAttendance(payload)
       .then(r => {
+        const { status, message, data } = r.data;
         this.toggleLoad();
         if (status) {
           this.getEventBatch();
