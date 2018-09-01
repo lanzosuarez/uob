@@ -241,7 +241,7 @@ class SpecificCourse extends Component {
           message="Are you sure you want to proceed with the withdrawal of the course? Your slot will be released for other learners."
           onCancel={this.toggleConfirm}
           onOk={this.withdraw}
-          height={200}
+          height={190}
         />
       </ScrollView>
     );

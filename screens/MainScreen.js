@@ -49,7 +49,7 @@ const CustomDrawerComponent = props => (
             <Text
               style={{
                 color: "white",
-                fontSize: 20,
+                fontSize: 22,
                 marginBottom: 5,
                 fontFamily: "AgendaBold"
               }}
@@ -59,7 +59,7 @@ const CustomDrawerComponent = props => (
             <Text
               style={{
                 color: "white",
-                fontSize: 14,
+                fontSize: 17,
                 fontWeight: "100",
                 fontFamily: "Roboto_light"
               }}
@@ -174,7 +174,7 @@ const MainDrawerNavigator = createDrawerNavigator(
   },
   {
     contentComponent: CustomDrawerComponent,
-    drawerWidth: width * 0.6,
+    drawerWidth: width * 0.7,
     drawerOpenRoute: "DrawerOpen",
     drawerCloseRoute: "DrawerClose",
     drawerToggleRoute: "DrawerToggle"

@@ -52,7 +52,7 @@ const NoUserEvent = props => {
           <View>
             <Text
               style={{
-                fontSize: 16,
+                fontSize: 18,
                 fontWeight: "100",
                 color: blue,
                 lineHeight: 22,

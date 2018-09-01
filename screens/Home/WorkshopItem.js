@@ -36,7 +36,7 @@ const WorkshopItem = props => {
               height: 30,
               width: "100%",
               flexDirection: "row",
-              justifyContent: "space-between",
+              justifyContent: "space-around",
               alignItems: "center",
               paddingLeft: 0,
               paddingRight: 0
@@ -46,7 +46,7 @@ const WorkshopItem = props => {
               <Text
                 numberOfLines={3}
                 style={{
-                  fontSize: 15,
+                  fontSize: 18,
                   color: blue,
                   fontFamily: "Roboto_light"
                 }}
@@ -55,7 +55,7 @@ const WorkshopItem = props => {
               </Text>
               <Text
                 style={{
-                  fontSize: 12,
+                  fontSize: 15,
                   color: blue,
                   fontFamily: "Roboto_light"
                 }}
@@ -63,13 +63,20 @@ const WorkshopItem = props => {
                 {credit} credits
               </Text>
             </View>
-            <View style={{ flex: 1 }}>
+            <View
+              style={{
+                flex: 1,
+                display: "flex",
+                justifyContent: "flex-end",
+                flexDirection: "row"
+              }}
+            >
               <Button
                 onPress={() => viewSchedules()}
                 style={{
                   padding: 3,
                   height: 35,
-                  flex:1,
+                  flex: 1,
                   borderRadius: 10,
                   justifyContent: "center",
                   display: "flex",

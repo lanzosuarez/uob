@@ -27,7 +27,7 @@ const MessageDialog = props => {
       <View
         style={{
           minHeight: height,
-          width: "80%",
+          width: 220,
           flex: 0,
           backgroundColor: "white",
           borderRadius: 20
@@ -38,8 +38,9 @@ const MessageDialog = props => {
             <View
               style={{
                 flex: 1,
-                padding: 20,
-                justifyContent: "flex-start",
+                paddingLeft: 15,
+                paddingRight: 15,
+                justifyContent: "center",
                 alignItems: "center",
                 flexDirection: "column"
               }}

@@ -33,7 +33,6 @@ export class Courses extends Component {
   constructor(props) {
     super(props);
   }
-
   state = {
     activeSlide: 0,
     loading: false,
@@ -89,7 +88,7 @@ export class Courses extends Component {
           const { data } = r.data;
           console.log(data);
 
-          if (this.props.user.is_authorize === false) {
+          if (!this.props.user.is_authorize) {
             this.showAuthMsg();
           }
           this.props.setBanners(data.banners);
