@@ -1,9 +1,10 @@
 import React from "react";
-import { View, Text } from "react-native";
+import { View, Text, Dimensions } from "react-native";
 import Modal from "react-native-modal";
 import { Button } from "native-base";
 import { Grid, Row } from "react-native-easy-grid";
 const blue = "#00246a";
+const { width } = Dimensions.get("window");
 
 const MessageDialog = props => {
   const {

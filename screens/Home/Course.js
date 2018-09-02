@@ -70,8 +70,8 @@ class Course extends Component {
             onPress={() => this.navigateToSpecifiCourse(item.id)}
             style={{ color: blue, fontSize: 15, fontFamily: "Roboto_light" }}
           >
-            {item.title.length > 25
-              ? `${item.title.slice(0, 25)}...`
+            {item.title.length > 22
+              ? `${item.title.slice(0, 22)}...`
               : item.title}
           </Text>
         </CardItem>

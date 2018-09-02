@@ -1,9 +1,11 @@
 import React from "react";
-import { View, Text } from "react-native";
+import { View, Text, Dimensions } from "react-native";
 import Modal from "react-native-modal";
 import { Button } from "native-base";
 import { Grid, Row, Col } from "react-native-easy-grid";
 const blue = "#00246a";
+
+const { width } = Dimensions.get("window");
 
 const MessageDialog = props => {
   const {
@@ -30,10 +32,10 @@ const MessageDialog = props => {
       <View
         style={{
           minHeight: height,
-          width: 220,
+          width: width * 0.7,
           flex: 0,
           backgroundColor: "white",
-          borderRadius: 20,
+          borderRadius: 20
         }}
       >
         <Grid>

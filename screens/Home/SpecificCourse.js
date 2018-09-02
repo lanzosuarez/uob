@@ -4,7 +4,8 @@ import {
   Text,
   TouchableOpacity,
   RefreshControl,
-  ScrollView
+  ScrollView,
+  Dimensions
 } from "react-native";
 import Toast from "react-native-root-toast";
 import { Icon } from "native-base";
@@ -20,6 +21,8 @@ import Loading from "../Loading";
 import Expo from "expo";
 import { UserConnect } from "../../context/UserProvider";
 import UserResource from "../../services/UserResource";
+
+const { height } = Dimensions.get("window");
 
 class SpecificCourse extends Component {
   constructor(props) {
@@ -194,7 +197,6 @@ class SpecificCourse extends Component {
         }}
       >
         <TouchableOpacity
-        
           onPress={() => this.goBack()}
           style={{
             position: "absolute",
@@ -241,7 +243,7 @@ class SpecificCourse extends Component {
           message="Are you sure you want to proceed with the withdrawal of the course? Your slot will be released for other learners."
           onCancel={this.toggleConfirm}
           onOk={this.withdraw}
-          height={190}
+          height={height * 0.4}
         />
       </ScrollView>
     );

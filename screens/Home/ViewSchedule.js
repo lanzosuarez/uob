@@ -12,18 +12,20 @@ import {
   Content
 } from "native-base";
 
-import { Text, View, RefreshControl } from "react-native";
+import { Text, View, RefreshControl, Dimensions } from "react-native";
 
 import ContentRepo from "../../services/ContentRepo";
 import Loading from "../Loading";
 import ConfirmDialog from "../ConfirmDialog";
 import Schedule from "./Schedule";
 import { UserConnect } from "../../context/UserProvider";
-import Toast from 'react-native-root-toast';
+import Toast from "react-native-root-toast";
 import { headerBGcolor, headerFontColor } from "../../global";
 import UserResource from "../../services/UserResource";
 
 const blue = "#00246a";
+
+const { height } = Dimensions.get("window");
 
 class ViewSchedule extends Component {
   constructor(props) {
@@ -45,15 +47,15 @@ class ViewSchedule extends Component {
   toggleLoad = () => this.setState({ loading: !this.state.loading });
   toggleConfirm = () => this.setState({ showConfirm: !this.state.showConfirm });
 
-  showToast = text => Toast.show(text, {
-    duration: Toast.durations.SHORT,
-    position: Toast.positions.BOTTOM,
-    shadow: true,
-    animation: true,
-    hideOnPress: true,
-    delay: 0
-  })
-
+  showToast = text =>
+    Toast.show(text, {
+      duration: Toast.durations.SHORT,
+      position: Toast.positions.BOTTOM,
+      shadow: true,
+      animation: true,
+      hideOnPress: true,
+      delay: 0
+    });
 
   toggleRefresh = () => this.setState({ refreshing: !this.state.refreshing });
   onRefresh = () => {
@@ -111,7 +113,7 @@ class ViewSchedule extends Component {
       : { event_batch_id };
     this.toggleConfirm();
     this.fireBookRq(payload).then(r => {
-      if(r){
+      if (r) {
         const user = { ...this.props.user },
           creditToSubtract = this.props.navigation.getParam("credit", 0);
         user.credits_available = user.credits_available - creditToSubtract;
@@ -136,7 +138,7 @@ class ViewSchedule extends Component {
         } else {
           return false;
           this.showToast(message);
-          return false
+          return false;
         }
       })
       .catch(err => {
@@ -165,7 +167,7 @@ class ViewSchedule extends Component {
         ) : (
           <Fragment>
             <ConfirmDialog
-              height={220}
+              height={height * 0.4}
               isVisible={showConfirm}
               okText="Confirm"
               heading="Booking Confirmation"
@@ -184,7 +186,12 @@ class ViewSchedule extends Component {
                     style={{ color: headerFontColor }}
                     name="chevron-left"
                   />
-                  <Text style={{ color: headerFontColor, fontFamily: "Roboto_light" }}>
+                  <Text
+                    style={{
+                      color: headerFontColor,
+                      fontFamily: "Roboto_light"
+                    }}
+                  >
                     Back
                   </Text>
                 </Button>

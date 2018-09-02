@@ -55,8 +55,8 @@ const Course = ({ course, goToCourseSchedules }) => (
           onPress={() => goToCourseSchedules(course)}
           style={{ color: blue, fontSize: 15, fontFamily: "Roboto_light" }}
         >
-          {course.title.length > 25
-            ? `${course.title.slice(0, 25)}...`
+          {course.title.length > 22
+            ? `${course.title.slice(0, 22)}...`
             : course.title}
         </Text>
         <Text

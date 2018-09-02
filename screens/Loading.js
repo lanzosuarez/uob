@@ -1,7 +1,9 @@
 import React, { Component } from "react";
-import { View, Text } from "react-native";
+import { View, Text, Dimensions } from "react-native";
 import Modal from "react-native-modal";
 import * as Progress from "react-native-progress";
+
+const {height, width} = Dimensions.get("window");
 
 const Loading = props => {
   const { isVisible, transparent = true, tip = "" } = props;
@@ -15,7 +17,9 @@ const Loading = props => {
       style={{
         flex: 1,
         justifyContent: "center",
-        alignItems: "center"
+        alignItems: "center",
+        width,
+        height
       }}
       transparent={transparent}
       isVisible={isVisible}
