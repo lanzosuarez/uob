@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Text, Image, View, Dimensions } from "react-native";
+import { Text, Image, View, Dimensions, Linking } from "react-native";
 import Toast from "react-native-root-toast";
 import MessageDialog from "../MessageDialog";
 
@@ -18,8 +18,7 @@ import {
   Content
 } from "native-base";
 import HelpDesk from "../../services/HelpDesk";
-import Loading from "../Loading";
-import { headerFontColor } from "../../global";
+import { headerFontColor, headerBGcolor } from "../../global";
 import { DrawerActions } from "react-navigation";
 
 const blue = "#00246a";
@@ -33,6 +32,18 @@ class Contact extends Component {
     contact_number: "",
     loading: false
   };
+
+  gotoFqa = async () => {
+    const link = `https://demo.uobsummit.com/faq`;
+    Linking.openURL(link)
+      .then(d => {
+        this.showToast("Opening browser");
+      })
+      .catch(err => {
+        this.showToast("Failed to open browser");
+      });
+  };
+
 
   checkFields = fields => fields.some(field => this.state[field].length === 0);
   showToast = text =>
@@ -91,7 +102,7 @@ class Contact extends Component {
           message="Your inquiry has been sent successfully. Our representative will get back to you shortly."
           isVisible={this.state.show}
         />
-        <Header style={{ backgroundColor: "#4c64a4" }}>
+        <Header style={{ backgroundColor: headerBGcolor }}>
           <Left style={{ flex: 1 }}>
             <Button onPress={() => this.openDrawer()} transparent>
               <Icon
@@ -161,6 +172,7 @@ class Contact extends Component {
                 }}
               >
                 <Text
+                  onPress={()=>this.gotoFqa()}
                   style={{
                     fontFamily: "AgendaBold",
                     textDecorationLine: "underline",

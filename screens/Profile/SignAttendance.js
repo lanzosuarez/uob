@@ -117,7 +117,7 @@ class SignAttendance extends Component {
       event_id,
       event_batch_id,
       class_schedule_id
-    } = this.state;
+    } = this.state.event;
     const payload = {
       user_event_id,
       event_batch_id,
@@ -125,6 +125,8 @@ class SignAttendance extends Component {
       class_schedule_id,
       signature
     };
+
+    console.log(payload);
     this.signAttendance(payload);
   };
 
@@ -147,12 +149,11 @@ class SignAttendance extends Component {
           imageURL,
           imageSize,
           imageURI => {
-            console.log(imageURI);
             ImageStore.getBase64ForTag(
               imageURI,
               base64Data => {
-                this.signRq(imageURI);
-                ImageStore.removeImageForTag(imageURI);
+                this.signRq(base64Data);
+                ImageStore.removeImageForTag(base64Data);
               },
               reason => console.warn(reason)
             );
@@ -171,7 +172,8 @@ class SignAttendance extends Component {
         const { status, message, data } = r.data;
         this.toggleLoad();
         if (status) {
-          this.getEventBatch();
+          this.setState({ event: null });
+          // this.getEventBatch();
         } else {
           this.showToast(message);
         }
@@ -272,7 +274,7 @@ class SignAttendance extends Component {
                     textAlign: "center"
                   }}
                 >
-                  {event ? event.name : ""}
+                  {event ? event.event_name : ""}
                 </Text>
                 <Text
                   style={{
@@ -304,6 +306,7 @@ class SignAttendance extends Component {
                     this.sketch,
                     options
                   );
+
                   this.setState({ imagePath: uri });
                 }}
               />

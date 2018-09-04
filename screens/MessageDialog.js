@@ -28,7 +28,7 @@ const MessageDialog = props => {
       <View
         style={{
           minHeight: height,
-          width: 220,
+          width: width * 0.7,
           flex: 0,
           backgroundColor: "white",
           borderRadius: 20

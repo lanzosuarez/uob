@@ -30,6 +30,7 @@ import { headerBGcolor, headerFontColor } from "../../global";
 
 const blue = "#00246a";
 import Loading from "../Loading";
+import { NotificationConnect } from "../../context/NotificationProvider";
 
 const FieldName = ({ field, value, last = false }) => {
   const { bold, txt, f, light } = styles;
@@ -134,6 +135,8 @@ class ProfileScreen extends Component {
     this.props.setGenres(null);
     this.props.setUser(null);
     this.props.setProfile(null);
+    this.props.removeListener();
+    this.props.removeInterval();
     // this.props.navigation.navigate("LoginRegister");
     this.gotoMain();
   };
@@ -349,8 +352,10 @@ const styles = {
   }
 };
 
-export default UserConnect(["setUser", "user"])(
-  WorkshopConnect(["setBanners", "setGenres"])(
-    ProfileConnect(["profile", "setProfile"])(ProfileScreen)
+export default UserConnect(["setUser", "user", "removeListener"])(
+  NotificationConnect(["removeInterval"])(
+    WorkshopConnect(["setBanners", "setGenres"])(
+      ProfileConnect(["profile", "setProfile"])(ProfileScreen)
+    )
   )
 );

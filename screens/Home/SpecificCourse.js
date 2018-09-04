@@ -89,7 +89,7 @@ class SpecificCourse extends Component {
       .then(r => {
         this.toggleLoad();
         const { message, status, data } = r.data;
-        console.log(data);
+        console.log("workshop", data);
         if (status) {
           if (data) {
             this.setState({ workshop: data });
@@ -226,7 +226,8 @@ class SpecificCourse extends Component {
             <BannerImage image_url={w ? w.image_url : "image"} />
             {w &&
             w.user_event &&
-            w.user_event.booking_status !== "withdrawn" ? (
+            (w.user_event.booking_status === "confirmed" ||
+              w.user_event.booking_status === "checked_in") ? (
               <UserEvent
                 withdrawConfirm={this.toggleConfirm}
                 workshop={this.state.workshop}

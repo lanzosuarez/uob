@@ -1,4 +1,5 @@
 import React from "react";
+import Notification from "../services/Notification";
 
 const NotificationContext = React.createContext();
 
@@ -26,10 +27,35 @@ export function NotificationConnect(params = []) {
 
 export class NotificationProvider extends React.Component {
   state = {
-    notifications: null
+    notifications: null,
+    intervalId: null
   };
 
-  setNotifications = notifications => this.setState({ notifications });
+  componentWillMount() {
+    let intervalId = window.setInterval(() => {
+      if (this.state.notifications) {
+        Notification.getNotifications()
+          .then(res => {
+            this.setNotifications(res.data.data);
+          })
+          .catch(err => {});
+      }
+    }, 3000);
+    this.setState({ intervalId });
+  }
+
+  componentWillUnmount() {
+    this.removeInterval();
+  }
+
+  removeInterval = () => {
+    window.clearInterval(this.state.intervalId);
+  };
+
+  setNotifications = notifications =>
+    this.setState({
+      notifications
+    });
 
   getNotifications = () => this.state.notifications;
 
@@ -39,7 +65,8 @@ export class NotificationProvider extends React.Component {
         value={{
           notifications: this.state.notifications,
           setNotifications: this.setNotifications,
-          getNotifications: this.getNotifications
+          getNotifications: this.getNotifications,
+          removeInterval: this.removeInterval
         }}
       >
         {this.props.children}
