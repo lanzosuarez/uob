@@ -28,7 +28,6 @@ import { headerBGcolor } from "../../global";
 
 const { CancelToken } = axios;
 
-
 export class Courses extends Component {
   constructor(props) {
     super(props);
@@ -49,6 +48,17 @@ export class Courses extends Component {
 
   componentDidMount() {
     this.fireGetWorkshop();
+    window.setInterval(async () => {
+      const deviceUser = await UserResource.getUser();
+      if (deviceUser) {
+        Profile.getProfile().then(res => {
+          if (res.data.data) {
+            deviceUser.credits_available = res.data.data.credits_available;
+            this.props.setUser(deviceUser);
+          }
+        });
+      }
+    }, 2000);
   }
 
   componentWillUnmount() {
@@ -86,7 +96,7 @@ export class Courses extends Component {
         .then(r => {
           this.toggleLoad();
           const { data } = r.data;
-          console.log(data);
+          console.log("data", r.data);
 
           if (!this.props.user.is_authorize) {
             this.showAuthMsg();
@@ -112,7 +122,9 @@ export class Courses extends Component {
     user.is_authorize = true;
     await UserResource.setUser(user);
     this.setState({ showAuthMessage: false });
-    await Profile.updateProfile({ is_authorize: true }, user.id);
+    Profile.updateProfile({ is_authorize: true }, user.id).then(res => {
+      console.log(res.data);
+    });
   };
 
   onRefresh = () => {
@@ -142,7 +154,11 @@ export class Courses extends Component {
         <Header style={{ backgroundColor: headerBGcolor }}>
           <Left style={{ flex: 1 }}>
             <Button onPress={() => this.openDrawer()} transparent>
-              <Icon type="MaterialIcons" style={{ color: "white" }} name="menu" />
+              <Icon
+                type="MaterialIcons"
+                style={{ color: "white" }}
+                name="menu"
+              />
             </Button>
           </Left>
           <Body
@@ -221,6 +237,6 @@ const styles = {
   }
 };
 
-export default UserConnect(["user"])(
+export default UserConnect(["user", "setUser"])(
   WorkshopConnect(["banners", "genres", "setBanners", "setGenres"])(Courses)
 );

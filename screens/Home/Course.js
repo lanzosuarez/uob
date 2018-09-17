@@ -45,17 +45,27 @@ class Course extends Component {
           }}
           cardBody
         >
-          <Image
-            defaultSource={require("../../assets/defaultimg.png")}
-            source={{ uri: item.image_url }}
+          <View
             style={{
               flex: 1,
               height: 100,
-              width: "100%",
+
               borderTopLeftRadius: 8,
-              borderTopRightRadius: 8
+              borderTopRightRadius: 8,
+              overflow: "hidden"
             }}
-          />
+          >
+            <Image
+              style={{
+                overflow: "hidden",
+                flex: 1,
+                height: 100
+              }}
+              resizeMode={"cover"}
+              defaultSource={require("../../assets/defaultimg.png")}
+              source={{ uri: item.image_url }}
+            />
+          </View>
         </CardItem>
         <CardItem
           onPress={() => this.navigateToSpecifiCourse(item.id)}

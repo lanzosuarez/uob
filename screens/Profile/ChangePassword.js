@@ -23,7 +23,8 @@ import { DrawerActions } from "react-navigation";
 import Profile from "../../services/Profile";
 import Loading from "../Loading";
 import { headerBGcolor, headerFontColor } from "../../global";
-import Toast from 'react-native-root-toast';
+import Toast from "react-native-root-toast";
+import { UserConnect } from "../../context/UserProvider";
 
 const blue = "#00246a";
 
@@ -81,10 +82,11 @@ class ChangePassword extends Component {
         newPassword: new_password
       } = this.state;
       Profile.changePassword({ old_password, new_password })
-        .then(r => {
+        .then(async r => {
           this.toggleLoad();
           const { status, message, data } = r.data;
           if (status) {
+            
             this.props.navigation.goBack();
           } else {
             this.showToast(message);
@@ -99,14 +101,15 @@ class ChangePassword extends Component {
     }
   };
 
-  showToast = text => Toast.show(text, {
-    duration: Toast.durations.SHORT,
-    position: Toast.positions.BOTTOM,
-    shadow: true,
-    animation: true,
-    hideOnPress: true,
-    delay: 0
-  })
+  showToast = text =>
+    Toast.show(text, {
+      duration: Toast.durations.SHORT,
+      position: Toast.positions.BOTTOM,
+      shadow: true,
+      animation: true,
+      hideOnPress: true,
+      delay: 0
+    });
 
   render() {
     const { bold, txt, f, light } = styles;
@@ -121,7 +124,9 @@ class ChangePassword extends Component {
                 style={{ color: headerFontColor }}
                 name="chevron-left"
               />
-              <Text style={{ color: headerFontColor, fontFamily: "Roboto_light" }}>
+              <Text
+                style={{ color: headerFontColor, fontFamily: "Roboto_light" }}
+              >
                 Back
               </Text>
             </Button>
@@ -145,9 +150,7 @@ class ChangePassword extends Component {
           </Body>
           <Right style={{ flex: 1 }} />
         </Header>
-        <Content
-          contentContainerStyle={{  backgroundColor: "#f4f4ff" }}
-        >
+        <Content contentContainerStyle={{ backgroundColor: "#f4f4ff" }}>
           <View
             stlye={{
               flex: 1,
@@ -242,4 +245,4 @@ const styles = {
   }
 };
 
-export default ChangePassword;
+export default UserConnect(["setUser"])(ChangePassword);

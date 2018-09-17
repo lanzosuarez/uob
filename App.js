@@ -1,5 +1,5 @@
 import React from "react";
-import { StyleSheet, Platform, View, Image } from "react-native";
+import { StyleSheet, Platform, View, Image, Text } from "react-native";
 
 import LoginRegisterScreen from "./screens/LoginRegisterScreen";
 import MainDrawerNavigator from "./screens/MainScreen";
@@ -15,6 +15,8 @@ import { TeamCoursesProvider } from "./context/TeamCourses";
 import { NotificationProvider } from "./context/NotificationProvider";
 
 import { AppLoading, Asset, SplashScreen } from "expo";
+
+Text.defaultProps.allowFontScaling = false;
 
 class App extends React.Component {
   state = {

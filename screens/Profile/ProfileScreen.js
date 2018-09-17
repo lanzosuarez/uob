@@ -50,7 +50,7 @@ const CourseFieldName = ({ field, last = false, onPress = () => {} }) => {
   const { bold, iconTxt, f, txt, light } = styles;
   return (
     <ListItem onPress={onPress} last={last}>
-      <Left style={{ flex: 2 }}>
+      <Left style={{ flex: 3 }}>
         <Text style={{ ...bold, ...txt }}>{field}</Text>
       </Left>
       <Body style={{ ...f }} />
@@ -66,12 +66,26 @@ class ProfileScreen extends Component {
     super(props);
   }
 
-  state = { loading: false };
+  state = { loading: false, interval: null };
 
   componentDidMount() {
     if (this.props.profile === null) {
       this.fireGetProfile();
     }
+  }
+
+  componentWillMount() {
+    let interval = window.setInterval(async () => {
+      let profile = this.props.profile;
+      if (profile) {
+        Profile.getProfile().then(res => {
+          if (res.data.data) {
+            this.props.setProfile(res.data.data);
+          }
+        });
+      }
+    }, 2000);
+    this.setState({ interval });
   }
 
   openDrawer = () => {
@@ -98,6 +112,7 @@ class ProfileScreen extends Component {
       .then(r => {
         this.toggleLoad();
         const { status, message, data } = r.data;
+        console.log(data);
         if (status) {
           this.props.setProfile(data);
         } else {
@@ -129,15 +144,14 @@ class ProfileScreen extends Component {
   };
 
   logOut = async () => {
-    console.log(this.props);
-    await AsyncStorage.removeItem("user");
+    this.toggleLoad();
+    await Profile.logout();
+    this.toggleLoad();
+    window.clearInterval(this.state.interval);
     this.props.setBanners(null);
     this.props.setGenres(null);
     this.props.setUser(null);
-    this.props.setProfile(null);
-    this.props.removeListener();
-    this.props.removeInterval();
-    // this.props.navigation.navigate("LoginRegister");
+    AsyncStorage.removeItem("user");
     this.gotoMain();
   };
 
@@ -261,11 +275,14 @@ class ProfileScreen extends Component {
                 onPress={() => this.props.navigation.push("PastCourses")}
                 field="Past Courses"
               />
-              <CourseFieldName
-                onPress={() => this.props.navigation.push("SignAttendance")}
-                field="Sign Attendance"
-                last={true}
-              />
+              {this.props.profile.digital_signature === false ? null : (
+                <CourseFieldName
+                  onPress={() => this.props.navigation.push("SignAttendance")}
+                  field="Sign Attendance"
+                  last={true}
+                />
+              )}
+
               {this.props.user && this.props.user.is_supervisor ? (
                 <Fragment>
                   <Separator
@@ -352,10 +369,8 @@ const styles = {
   }
 };
 
-export default UserConnect(["setUser", "user", "removeListener"])(
-  NotificationConnect(["removeInterval"])(
-    WorkshopConnect(["setBanners", "setGenres"])(
-      ProfileConnect(["profile", "setProfile"])(ProfileScreen)
-    )
+export default UserConnect(["setUser", "user"])(
+  WorkshopConnect(["setBanners", "setGenres"])(
+    ProfileConnect(["profile", "setProfile"])(ProfileScreen)
   )
 );

@@ -185,7 +185,7 @@ class CourseList extends Component {
               // paddingRight: width * 0.05,
               paddingLeft: width * 0.05,
               flexWrap: "wrap",
-              flexDirection: "row"
+              flexDirection: "row",
             }}
           >
             {this.state.courses.length === 0 ? (

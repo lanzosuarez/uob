@@ -27,29 +27,7 @@ export function NotificationConnect(params = []) {
 
 export class NotificationProvider extends React.Component {
   state = {
-    notifications: null,
-    intervalId: null
-  };
-
-  componentWillMount() {
-    let intervalId = window.setInterval(() => {
-      if (this.state.notifications) {
-        Notification.getNotifications()
-          .then(res => {
-            this.setNotifications(res.data.data);
-          })
-          .catch(err => {});
-      }
-    }, 3000);
-    this.setState({ intervalId });
-  }
-
-  componentWillUnmount() {
-    this.removeInterval();
-  }
-
-  removeInterval = () => {
-    window.clearInterval(this.state.intervalId);
+    notifications: null
   };
 
   setNotifications = notifications =>

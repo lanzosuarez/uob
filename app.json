@@ -2,18 +2,19 @@
   "expo": {
     "sdkVersion": "29.0.0",
     "privacy": "unlisted",
+    "version": "1.1.9",
     "splash": {
       "image": "./assets/splash.png",
       "resizeMode": "cover",
       "backgroundColor": "#ffffff"
     },
     "ios": {
-      "bundleIdentifier": "com.uosbsummit.app",
+      "bundleIdentifier": "com.livefitter.UOB-Summit",
       "icon": "./assets/icon.png",
-      "buildNumber": "13",
+      "buildNumber": "10",
       "infoPlist": {
         "NSLocationAlwaysUsageDescription": "Allow uobsummit to access you location"
       }
     }
   }
-}
+} 

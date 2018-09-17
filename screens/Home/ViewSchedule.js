@@ -91,6 +91,7 @@ class ViewSchedule extends Component {
       .then(r => {
         this.toggleLoad();
         const { status, message, data } = r.data;
+        console.log(data);
         if (status) {
           this.setState({ schedules: data });
         } else {

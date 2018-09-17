@@ -1,5 +1,6 @@
 import React from "react";
 import Profile from "../services/Profile";
+import UserResource from "../services/UserResource";
 
 const UserContext = React.createContext();
 
@@ -27,36 +28,13 @@ export function UserConnect(params = []) {
 
 export class UserProvider extends React.Component {
   state = {
-    user: null,
-    intervalId: null
-  };
-
-  componentWillMount() {
-    let intervalId = window.setInterval(() => {
-      // console.log(this.state.user);
-      if (this.state.user) {
-        Profile.getProfile().then(res => {
-          const user = { ...this.state.user };
-          user.credits_available = res.data.data.credits_available;
-          this.setState({ user });
-        });
-      }
-    }, 3000);
-    this.setState({ intervalId });
-  }
-
-  componentWillUnmount() {
-    this.removeListener();
-  }
-
-  removeListener = () => {
-    window.clearInterval(this.state.intervalId);
+    user: null
   };
 
   setUser = user => {
-    console.log("user set", user);
     this.setState({ user });
   };
+  
   getUser = () => this.state.user;
 
   render() {
@@ -65,8 +43,7 @@ export class UserProvider extends React.Component {
         value={{
           user: this.state.user,
           setUser: this.setUser,
-          getUser: this.getUser,
-          removeListener: this.removeListener
+          getUser: this.getUser
         }}
       >
         {this.props.children}

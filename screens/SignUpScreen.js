@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { View, AsyncStorage } from "react-native";
+import { View, Linking } from "react-native";
 import {
   Item,
   Input,
@@ -43,6 +43,18 @@ class SignUpScreen extends Component {
       // this.setState({ email: "", verifyAccount: true });
     }
   }
+
+
+  gotoTerms = async () => {
+    const link = `https://www.uobsummit.com/terms`
+    Linking.openURL(link)
+      .then(d => {
+        this.showToast("Opening browser");
+      })
+      .catch(err => {
+        this.showToast("Failed to open browser");
+      });
+  };
 
   checkFields = fields => fields.some(field => this.state[field].length === 0);
 
@@ -255,9 +267,10 @@ class SignUpScreen extends Component {
                           fontFamily: "Roboto_light"
                         }}
                       >
-                        By signing up, I agree to UOB's
+                        By signing up, I agree to UOB's {" "}
                       </Text>
                       <Text
+                        onPress={()=>this.gotoTerms()}
                         style={{
                           fontFamily: "Roboto_light",
                           color: "red",
@@ -321,7 +334,7 @@ class SignUpScreen extends Component {
                   </Button>
                 </View>
               </View>
-              <View style={{ height: 50 }}>
+              <View style={{ height: 70 }}>
                 <View
                   style={{
                     marginTop: 15,
@@ -385,6 +398,7 @@ class SignUpScreen extends Component {
                         By signing up, I agree to UOB's{" "}
                       </Text>
                       <Text
+                        onPress={()=>this.gotoTerms()}
                         style={{
                           color: "red",
                           fontSize: 13,

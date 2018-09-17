@@ -60,7 +60,7 @@ class EditProfile extends Component {
     });
   }
 
-  checkFields = fields => fields.some(field => this.state[field].length === 0);
+  checkFields = fields => fields.some(field => this.state[field] && this.state[field].length === 0);
 
   onChangeText = (key, val) => this.setState({ [key]: val });
 
@@ -80,6 +80,7 @@ class EditProfile extends Component {
   };
 
   updateProfile = () => {
+    console.log(this.state)
     if (this.checkFields(["supervisorName", "supervisorEmail"]) === false) {
       this.toggleLoad();
       const { supervisorName, supervisorEmail } = this.state;

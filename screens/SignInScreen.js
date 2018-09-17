@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { View, AsyncStorage } from "react-native";
+import { View, AsyncStorage, Linking } from "react-native";
 import {
   Item,
   Input,
@@ -45,6 +45,17 @@ class SignInScreen extends Component {
       this.props.toggleTabs(0);
     }
   }
+
+  gotoTerms = async () => {
+    const link = `https://www.uobsummit.com/terms`;
+    Linking.openURL(link)
+      .then(d => {
+        this.showToast("Opening browser");
+      })
+      .catch(err => {
+        this.showToast("Failed to open browser");
+      });
+  };
 
   checkFields = fields => fields.some(field => this.state[field].length === 0);
 
@@ -347,6 +358,7 @@ class SignInScreen extends Component {
                           By signing in, I agree to UOB's{" "}
                         </Text>
                         <Text
+                          onPress={() => this.gotoTerms()}
                           style={{
                             color: "red",
                             fontSize: 13,
@@ -477,9 +489,10 @@ class SignInScreen extends Component {
                             fontFamily: "Roboto_light"
                           }}
                         >
-                          By signing in , I agree to UOB 's
+                          By signing in , I agree to UOB 's{" "}
                         </Text>
                         <Text
+                          onPress={() => this.gotoTerms()}
                           style={{
                             color: "red",
                             fontSize: 13,
