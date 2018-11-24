@@ -12,33 +12,39 @@ import {
   Input
 } from "native-base";
 
-import { Text, View,Dimensions } from "react-native";
+import { Text, View, Dimensions } from "react-native";
 import { DrawerActions } from "react-navigation";
-import { CourseComsumer } from "../../context/CourseProvider";
-import Toast from 'react-native-root-toast';
-const { width } = Dimensions.get("window");
-import { headerBGcolor, headerFontColor } from "../../global";
-
+import { CourseComsumer, CourseConnect } from "../../context/CourseProvider";
+import Toast from "react-native-root-toast";
+import { headerFontColor } from "../../global";
 
 import Genre from "./Genre";
 
 const blue = "#00246a";
+const { width } = Dimensions.get("window");
 
 class SearchGenre extends Component {
   constructor(props) {
     super(props);
   }
 
-  state = { searchTitle: "", loading: false };
+  state = {
+    searchTitle: "",
+    loading: false,
+    showFilter: false,
+    min: "",
+    max: ""
+  };
 
-  showToast = text => Toast.show(text, {
-    duration: Toast.durations.SHORT,
-    position: Toast.positions.BOTTOM,
-    shadow: true,
-    animation: true,
-    hideOnPress: true,
-    delay: 0
-  })
+  showToast = text =>
+    Toast.show(text, {
+      duration: Toast.durations.SHORT,
+      position: Toast.positions.BOTTOM,
+      shadow: true,
+      animation: true,
+      hideOnPress: true,
+      delay: 0
+    });
 
   changeSearchTitle = searchTitle => this.setState({ searchTitle });
 
@@ -48,7 +54,7 @@ class SearchGenre extends Component {
 
   toggleLoad = () => this.setState({ loading: !this.state.loading });
 
-  back = () => this.props.navigation.goBack();
+  back = () => this.props.navigation.navigate("CourseList");
 
   goToWorkshop = course =>
     this.props.navigation.navigate("SpecificCourse", {
@@ -56,10 +62,24 @@ class SearchGenre extends Component {
       from: "SearchGenre"
     });
 
+  filterCredit = course => {
+    const { credit } = course;
+    const { max, min } = this.state;
+    if (max && min) {
+      return credit <= max && credit >= min;
+    } else if (min) {
+      return credit >= min;
+    } else if (max) {
+      return credit <= max;
+    } else {
+      return true;
+    }
+  };
+
   render() {
     return (
       <Container>
-        <Header style={{ backgroundColor: headerBGcolor }}>
+        <Header style={{ backgroundColor: blue }}>
           <Body
             style={{
               flex: 4,
@@ -68,42 +88,147 @@ class SearchGenre extends Component {
             }}
           >
             <Item
-              style={{ borderColor: headerFontColor, height: 35, borderRadius: 8 }}
+              style={{
+                borderColor: headerFontColor,
+                height: 35,
+                borderRadius: 8
+              }}
               rounded
             >
-              <Icon 
+              <Icon
                 style={{ color: headerFontColor }}
-                type="MaterialIcons" active name="search" />
+                type="MaterialIcons"
+                active
+                name="search"
+              />
               <Input
                 onChangeText={e => this.changeSearchTitle(e)}
                 style={{ fontFamily: "Roboto_light", color: headerFontColor }}
               />
             </Item>
           </Body>
-          <Right style={{ flex: 1 }}>
+          <Right
+            style={{ flex: 1, display: "flex", justifyContent: "space-around" }}
+          >
+            <Button
+              onPress={() =>
+                this.setState({ showFilter: !this.state.showFilter })
+              }
+              transparent
+            >
+              <Icon
+                style={{
+                  color: headerFontColor,
+                  fontFamily: "Roboto_light",
+                  fontSize: 20
+                }}
+                name="logo-usd"
+              />
+            </Button>
+
             <Button onPress={() => this.back()} transparent>
-              <Text style={{ color: headerFontColor, fontFamily: "Roboto_light" }}>
+              <Text
+                style={{ color: headerFontColor, fontFamily: "Roboto_light" }}
+              >
                 Cancel
               </Text>
             </Button>
           </Right>
         </Header>
         <Content contentContainerStyle={{ backgroundColor: "white" }}>
-          <View  style={{ 
+          {this.state.showFilter ? (
+            <View
+              style={{
+                paddingTop: 20,
+                paddingRight: 20,
+                paddingLeft: 20
+              }}
+            >
+              <Item
+                style={{
+                  borderColor: blue,
+                  height: 35,
+                  borderRadius: 8,
+                  marginBottom: 15
+                }}
+                rounded
+              >
+                <Icon
+                  style={{ color: headerFontColor }}
+                  type="MaterialIcons"
+                  active
+                />
+                <Input
+                  ref={ref => (this.minRef = ref)}
+                  autoCorrect={false}
+                  placeholder="Minimum Credits"
+                  value={this.state.min}
+                  onChangeText={e =>
+                    this.setState({ min: Number(parseInt(e, 10)) })
+                  }
+                  style={{
+                    fontFamily: "Roboto_light",
+                    color: blue
+                  }}
+                />
+              </Item>
+              <Item
+                style={{
+                  borderColor: blue,
+                  height: 35,
+                  borderRadius: 8
+                }}
+                rounded
+              >
+                <Icon
+                  style={{ color: headerFontColor }}
+                  type="MaterialIcons"
+                  active
+                />
+                <Input
+                  ref={ref => (this.maxRef = ref)}
+                  autoCorrect={false}
+                  placeholder="Maximum Credits"
+                  value={this.state.max}
+                  onChangeText={e =>
+                    this.setState({ max: Number(parseInt(e, 10)) })
+                  }
+                  style={{
+                    fontFamily: "Roboto_light",
+                    color: blue
+                  }}
+                />
+              </Item>
+            </View>
+          ) : null}
+          <View
+            style={{
               flex: 1,
               paddingTop: 20,
-              // paddingRight: width * 0.05,
-              paddingLeft: width * 0.05,
+              paddingLeft: width * 0.04,
+              display: "flex",
               flexWrap: "wrap",
-              flexDirection: "row" }}>
+              flexDirection: "row"
+             
+            }}
+          >
             <CourseComsumer>
               {({ courses }) => {
                 const searechedCourses = courses.filter(
-                  course => course.title.indexOf(this.state.searchTitle) > -1
+                  course =>
+                    (course.title.match(
+                      new RegExp(this.state.searchTitle, "gi")
+                    ) ||
+                      course.description.match(
+                        new RegExp(this.state.searchTitle, "gi")
+                      )) &&
+                    this.filterCredit(course)
                 );
                 if (searechedCourses.length > 0) {
-                  return searechedCourses.map(course => (
+                  return searechedCourses.map((course, index) => (
                     <Genre
+                      courses={courses}
+                      index={index}
                       key={course.id}
                       course={course}
                       goToWorkshop={this.goToWorkshop}
@@ -126,25 +251,10 @@ class SearchGenre extends Component {
               }}
             </CourseComsumer>
           </View>
-          {/* <View
-            style={{ flex: 1, justifyContent: "center", alignItems: "center" }}
-          >
-            {this.state.courses.length === 0 ? (
-              <Text style={{ color: blue }}>No Course to show</Text>
-            ) : (
-              this.state.courses.map(course => (
-                <CourseItem
-                  key={course.id}
-                  course={course}
-                  goToCourseSchedules={this.goToCourseSchedules}
-                />
-              ))
-            )}
-          </View> */}
         </Content>
       </Container>
     );
   }
 }
 
-export default SearchGenre;
+export default CourseConnect(["courses"])(SearchGenre);

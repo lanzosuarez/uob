@@ -80,6 +80,7 @@ class CourseBookings extends Component {
         this.toggleLoad();
         const { status, message, data } = r.data;
         if (status) {
+          this.showToast(message);
           const teamCourses = [...this.props.teamCourses],
             teamCourseIndex = teamCourses.findIndex(t => t.id === bookingId);
           if (teamCourseIndex > -1) {
@@ -95,7 +96,6 @@ class CourseBookings extends Component {
       .catch(err => {
         console.log(err);
         this.toggleLoad();
-        this.props.navigation.goBack();
         this.showToast(
           "Something went wrong. Try checking your internet connection"
         );

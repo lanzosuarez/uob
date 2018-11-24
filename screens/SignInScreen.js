@@ -19,6 +19,8 @@ import UserResource from "../services/UserResource";
 import { UserConnect } from "../context/UserProvider";
 
 import Loading from "./Loading";
+const forgotText =
+  "We have sent a reset password email to your email. Please click on the reset password link to set your new password";
 
 const transparentBg = "rgba(255, 255, 255, 0.8)";
 const blue = "#00246a";
@@ -144,10 +146,12 @@ class SignInScreen extends Component {
             this.showToast(message);
           } else {
             this.toggleForgot();
-            this.toggleShowMessage();
+            // this.toggleShowMessage();
+            this.showToast(forgotText);
           }
         })
         .catch(err => {
+          console.log(err);
           if (err.response) {
             this.toggleLoad();
             this.showToast(
@@ -213,6 +217,17 @@ class SignInScreen extends Component {
       });
   };
 
+  gotoFqa = async () => {
+    const link = "mailto://contact@uobsummit.com";
+    Linking.openURL(link)
+      .then(d => {
+        this.showToast("Opening email app");
+      })
+      .catch(err => {
+        this.showToast("Failed to email app");
+      });
+  };
+
   render() {
     const {
       mainCon,
@@ -225,9 +240,6 @@ class SignInScreen extends Component {
       forgotInput,
       forgotItem
     } = styles;
-
-    const forgotText =
-      "We have sent a reset password email to your email. Please click on the reset password link to set your new password";
 
     return (
       <Container style={mainCon}>
@@ -412,15 +424,15 @@ class SignInScreen extends Component {
                 </View>
                 <View
                   style={{
-                    height: 70
+                    height: 130
                   }}
                 >
                   <View
                     style={{
-                      marginTop: 15,
+                      marginTop: 20,
                       marginBottom: 20,
-                      width: "100%",
                       display: "flex",
+                      flexDirection: "column",
                       alignItems: "center"
                     }}
                   >
@@ -442,6 +454,49 @@ class SignInScreen extends Component {
                         Forgot your password
                       </Text>
                     </Button>
+                    <View
+                      style={{
+                        display: "flex",
+                        flexDirection: "column",
+                        justifyContent: "center",
+                        alignItems: "center"
+                      }}
+                      transparent
+                    >
+                      <Text
+                        uppercase={false}
+                        style={{
+                          color: "white",
+                          fontSize: 13,
+                          textAlign: "center",
+                          fontFamily: "Roboto_light"
+                        }}
+                      >
+                        If you do not posses a '@uobgroup.com' email,
+                      </Text>
+                      <Text
+                        style={{
+                          color: "white",
+                          fontSize: 13,
+                          textAlign: "center",
+                          fontFamily: "Roboto_light"
+                        }}
+                      >
+                        do update your account details by sending us an email at{" "}
+                        <Text
+                          onPress={this.gotoFqa}
+                          style={{
+                            textDecorationLine: "underline",
+                            color: "white",
+                            fontSize: 13,
+                            textAlign: "center",
+                            fontFamily: "Roboto_light"
+                          }}
+                        >
+                          contact@uobsummit.com
+                        </Text>
+                      </Text>
+                    </View>
                   </View>
                 </View>
                 <View
@@ -641,7 +696,7 @@ const styles = {
     backgroundColor: "rgba(255, 255, 255, 0)"
   },
   form: {
-    height: 130,
+    height: 140,
     paddingTop: 17,
     paddingLeft: 25,
     paddingRight: 25,
@@ -688,8 +743,9 @@ const styles = {
   },
   linkBtn: {
     width: "100%",
-    height: "100%",
+    // height: "100%",
     display: "flex",
+    flexDirection: "column",
     justifyContent: "center"
   }
 };

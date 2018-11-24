@@ -86,7 +86,7 @@ class ChangePassword extends Component {
           this.toggleLoad();
           const { status, message, data } = r.data;
           if (status) {
-            
+            this.showToast(message);
             this.props.navigation.goBack();
           } else {
             this.showToast(message);

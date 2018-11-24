@@ -44,9 +44,8 @@ class SignUpScreen extends Component {
     }
   }
 
-
   gotoTerms = async () => {
-    const link = `https://www.uobsummit.com/terms`
+    const link = `https://www.uobsummit.com/terms`;
     Linking.openURL(link)
       .then(d => {
         this.showToast("Opening browser");
@@ -94,13 +93,12 @@ class SignUpScreen extends Component {
             console.log("message", message);
             this.showToast(message);
           } else {
-            // AsyncStorage.setItem("unregistered_email", email).then(() => {
             this.showToast(message);
             this.toggleSignUpVerify();
-            // });
           }
         })
         .catch(err => {
+          console.log(err);
           this.toggleLoad();
           this.showToast(
             "Something went wrong. Try checking your internet connection"
@@ -267,10 +265,10 @@ class SignUpScreen extends Component {
                           fontFamily: "Roboto_light"
                         }}
                       >
-                        By signing up, I agree to UOB's {" "}
+                        By signing up, I agree to UOB's{" "}
                       </Text>
                       <Text
-                        onPress={()=>this.gotoTerms()}
+                        onPress={() => this.gotoTerms()}
                         style={{
                           fontFamily: "Roboto_light",
                           color: "red",
@@ -398,7 +396,7 @@ class SignUpScreen extends Component {
                         By signing up, I agree to UOB's{" "}
                       </Text>
                       <Text
-                        onPress={()=>this.gotoTerms()}
+                        onPress={() => this.gotoTerms()}
                         style={{
                           color: "red",
                           fontSize: 13,

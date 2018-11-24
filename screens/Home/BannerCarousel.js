@@ -43,7 +43,7 @@ const BannerCarousel = props => {
           <Image
             defaultSource={require("../../assets/defaultimg.png")}
             style={styles.imgBg}
-            source={{ uri: item.image_url }}
+            source={{ uri: item.image_url ? item.image_url : "" }}
           />
           <View
             style={{

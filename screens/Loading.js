@@ -19,7 +19,8 @@ const Loading = props => {
         justifyContent: "center",
         alignItems: "center",
         width,
-        height
+        height,
+      
       }}
       transparent={transparent}
       isVisible={isVisible}

@@ -34,7 +34,7 @@ class Contact extends Component {
   };
 
   gotoFqa = async () => {
-    const link = `https://demo.uobsummit.com/faq`;
+    const link = `https://www.uobsummit.com/faq`;
     Linking.openURL(link)
       .then(d => {
         this.showToast("Opening browser");
@@ -43,7 +43,6 @@ class Contact extends Component {
         this.showToast("Failed to open browser");
       });
   };
-
 
   checkFields = fields => fields.some(field => this.state[field].length === 0);
   showToast = text =>
@@ -172,7 +171,7 @@ class Contact extends Component {
                 }}
               >
                 <Text
-                  onPress={()=>this.gotoFqa()}
+                  onPress={() => this.gotoFqa()}
                   style={{
                     fontFamily: "AgendaBold",
                     textDecorationLine: "underline",

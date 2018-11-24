@@ -183,8 +183,10 @@ class PastCourses extends Component {
             ) : (
               <View
                 style={{
+                  paddingLeft: width * 0.04,
                   flex: 1,
-                  paddingLeft: width * 0.05,
+                  paddingTop: 20,
+                  display: "flex",
                   flexWrap: "wrap",
                   flexDirection: "row"
                 }}

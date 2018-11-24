@@ -132,6 +132,7 @@ class ViewSchedule extends Component {
         const { status, message } = r.data;
         if (status) {
           console.log(this.state.selectedSchedule);
+          this.showToast(message);
           this.props.navigation.replace("SpecificCourse", {
             id: this.state.selectedSchedule.event_id
           });
@@ -167,7 +168,7 @@ class ViewSchedule extends Component {
         ) : (
           <Fragment>
             <ConfirmDialog
-              height={height * 0.4}
+              height={height * 0.3}
               isVisible={showConfirm}
               okText="Confirm"
               heading="Booking Confirmation"

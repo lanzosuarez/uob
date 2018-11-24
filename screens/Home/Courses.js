@@ -95,20 +95,24 @@ export class Courses extends Component {
       ContentRepo.getContents()
         .then(r => {
           this.toggleLoad();
-          const { data } = r.data;
-          console.log("data", r.data);
+          if (r.data) {
+            const { data } = r.data;
 
-          if (!this.props.user.is_authorize) {
-            this.showAuthMsg();
+            if (!this.props.user.is_authorize) {
+              this.showAuthMsg();
+            }
+            this.props.setBanners(data.banners);
+            this.props.setGenres(data.genres);
           }
-          this.props.setBanners(data.banners);
-          this.props.setGenres(data.genres);
         })
         .catch(err => {
-          this.toggleLoad();
-          this.showToast(
-            "Something went wrong. Try checking your internet connection"
-          );
+          console.log(err);
+          if (err.response) {
+            this.toggleLoad();
+            this.showToast(
+              "Something went wrong. Try checking your internet connection"
+            );
+          }
         });
     }
   };

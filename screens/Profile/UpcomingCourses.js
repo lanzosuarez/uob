@@ -185,14 +185,17 @@ class UpcomingCourses extends Component {
             ) : (
               <View
                 style={{
+                  paddingLeft: width * 0.04,
                   flex: 1,
-                  paddingLeft: width * 0.05,
+                  paddingTop: 15,
+                  display: "flex",
                   flexWrap: "wrap",
                   flexDirection: "row"
                 }}
               >
                 {courses.map(c => (
                   <Course
+                    courses={courses}
                     key={c.id}
                     course={c}
                     goToCourseSchedules={this.goToCourseSchedules}

@@ -1,6 +1,4 @@
-import React, {
-  Component
-} from "react";
+import React, { Component } from "react";
 
 import {
   Header,
@@ -15,29 +13,17 @@ import {
   List
 } from "native-base";
 
-import {
-  View,
-  Linking,
-  Text,
-  RefreshControl
-} from "react-native";
-import {
-  DrawerActions
-} from "react-navigation";
+import { View, Linking, Text, RefreshControl } from "react-native";
+import { DrawerActions } from "react-navigation";
 import Evaluation from "../../services/Evaluation";
 import Toast from "react-native-root-toast";
-import {
-  headerBGcolor,
-  headerFontColor
-} from "../../global";
+import { headerBGcolor, headerFontColor, API_URL } from "../../global";
 import UserResource from "../../services/UserResource";
 
 import Loading from "../Loading";
 
 import EvaluationsItem from "./EvaluationsItem";
-import {
-  EvaluationConnect
-} from "../../context/EvaluationProvider";
+import { EvaluationConnect } from "../../context/EvaluationProvider";
 
 const blue = "#00246a";
 
@@ -73,27 +59,25 @@ class EvaluationsScreen extends Component {
       delay: 0
     });
 
-  toggleLoad = () => this.setState({
-    loading: !this.state.loading
-  });
+  toggleLoad = () =>
+    this.setState({
+      loading: !this.state.loading
+    });
 
   openDrawer = () => {
     this.props.navigation.dispatch(DrawerActions.openDrawer());
   };
 
-  toggleRefresh = () => this.setState({
-    refreshing: !this.state.refreshing
-  });
+  toggleRefresh = () =>
+    this.setState({
+      refreshing: !this.state.refreshing
+    });
   onRefresh = () => {
     this.toggleRefresh();
     Evaluation.getEvaluations()
       .then(r => {
         this.toggleRefresh();
-        const {
-          status,
-          message,
-          data
-        } = r.data;
+        const { status, message, data } = r.data;
         if (status) {
           this.props.setEvaluations(data);
           this.setState({
@@ -116,11 +100,7 @@ class EvaluationsScreen extends Component {
     Evaluation.getEvaluations()
       .then(r => {
         this.toggleLoad();
-        const {
-          status,
-          message,
-          data
-        } = r.data;
+        const { status, message, data } = r.data;
         console.log("evaluation", data);
         if (status) {
           this.props.setEvaluations(data);
@@ -141,11 +121,8 @@ class EvaluationsScreen extends Component {
   };
 
   goToEvaluate = async (batchId, eventId) => {
-    const {
-      authentication_token,
-      email
-    } = await UserResource.getUser();
-    const link = `https://demo.uobsummit.com/user_evaluations/new?event_batch_id=${batchId}&event_id=${eventId}&auth_token=${authentication_token}&user_email=${email}`;
+    const { authentication_token, email } = await UserResource.getUser();
+    const link = `${API_URL}/user_evaluations/new?event_batch_id=${batchId}&event_id=${eventId}&auth_token=${authentication_token}&user_email=${email}`;
     Linking.openURL(link)
       .then(d => {
         this.showToast("Opening browser");
@@ -156,119 +133,94 @@ class EvaluationsScreen extends Component {
   };
 
   render() {
-    return ( <
-      Container >
-      <
-      Loading isVisible = {
-        this.state.loading
-      }
-      transparent = {
-        false
-      }
-      /> <
-      Header style = {
-        {
-          backgroundColor: headerBGcolor
-        }
-      } >
-      <
-      Left style = {
-        {
-          flex: 1
-        }
-      } >
-      <
-      Button onPress = {
-        () => this.openDrawer()
-      }
-      transparent >
-      <
-      Icon type = "MaterialIcons"
-      style = {
-        {
-          color: headerFontColor
-        }
-      }
-      name = "menu" /
-      >
-      <
-      /Button> <
-      /Left> <
-      Body style = {
-        {
-          flex: 1,
-          justifyContent: "center",
-          alignItems: "center"
-        }
-      } >
-      <
-      Title style = {
-        {
-          fontFamily: "AgendaBold",
-          fontSize: 15,
-          color: headerFontColor
-        }
-      } >
-      Evaluations <
-      /Title> <
-      /Body> <
-      Right style = {
-        {
-          flex: 1
-        }
-      }
-      /> <
-      /Header> <
-      Content refreshControl = { <
-        RefreshControl
-        tintColor = "#00246a"
-        refreshing = {
-          this.state.refreshing
-        }
-        onRefresh = {
-          this.onRefresh
-        }
-        />
-      } >
-      <
-      View style = {
-        {
-          flex: 1,
-          paddingRight: 10
-        }
-      } > {
-        this.state.evaluations.length === 0 ? ( <
-          Text style = {
-            {
-              color: blue,
-              fontFamily: "Roboto_light",
-              textAlign: "center",
-              marginTop: 20
-            }
-          } >
-          No Evaluations to show <
-          /Text>
-        ) : ( <
-          List > {
-            this.state.evaluations.map(evaluation => ( <
-              EvaluationsItem goToEvaluate = {
-                this.goToEvaluate
-              }
-              key = {
-                evaluation.event_id
-              }
-              evaluation = {
-                evaluation
-              }
+    return (
+      <Container>
+        <Loading isVisible={this.state.loading} transparent={false} />
+        <Header
+          style={{
+            backgroundColor: headerBGcolor
+          }}
+        >
+          <Left
+            style={{
+              flex: 1
+            }}
+          >
+            <Button onPress={() => this.openDrawer()} transparent>
+              <Icon
+                type="MaterialIcons"
+                style={{
+                  color: headerFontColor
+                }}
+                name="menu"
               />
-            ))
-          } <
-          /List>
-        )
-      } <
-      /View> <
-      /Content> <
-      /Container>
+            </Button>
+          </Left>
+          <Body
+            style={{
+              flex: 1,
+              justifyContent: "center",
+              alignItems: "center"
+            }}
+          >
+            <Title
+              style={{
+                fontFamily: "AgendaBold",
+                fontSize: 15,
+                color: headerFontColor
+              }}
+            >
+              Evaluations
+            </Title>
+          </Body>
+          <Right
+            style={{
+              flex: 1
+            }}
+          />
+        </Header>
+        <Content
+          refreshControl={
+            <RefreshControl
+              tintColor="#00246a"
+              refreshing={this.state.refreshing}
+              onRefresh={this.onRefresh}
+            />
+          }
+        >
+          <View
+            style={{
+              flex: 1,
+              paddingRight: 10
+            }}
+          >
+            
+            {this.state.evaluations.length === 0 ? (
+              <Text
+                style={{
+                  color: blue,
+                  fontFamily: "Roboto_light",
+                  textAlign: "center",
+                  marginTop: 20
+                }}
+              >
+                No Evaluations to show
+              </Text>
+            ) : (
+              <List>
+                
+                {this.state.evaluations.map(evaluation => (
+                  <EvaluationsItem
+                    goToEvaluate={this.goToEvaluate}
+                    key={evaluation.event_id}
+                    evaluation={evaluation}
+                  />
+                ))}
+              </List>
+            )}
+          </View>
+        </Content>
+      </Container>
     );
   }
 }

@@ -33,7 +33,8 @@ class Course extends Component {
         style={{
           borderColor: "#f0f0f0",
           borderRadius: 8,
-          borderBottomWidth: 2
+          borderBottomWidth: 2,
+          height: 220
         }}
       >
         <CardItem
@@ -63,7 +64,7 @@ class Course extends Component {
               }}
               resizeMode={"cover"}
               defaultSource={require("../../assets/defaultimg.png")}
-              source={{ uri: item.image_url }}
+              source={{ uri: item.image_url ? item.image_url : "" }}
             />
           </View>
         </CardItem>
@@ -73,16 +74,24 @@ class Course extends Component {
             borderBottomLeftRadius: 8,
             borderBottomRightRadius: 8,
             paddingLeft: 5,
-            paddingTop: 5
+            paddingTop: 5,
+            flexDirection: "column",
+            justifyContent: "space-between",
+            alignItems: "flex-start",
+            flex: 1
           }}
         >
           <Text
             onPress={() => this.navigateToSpecifiCourse(item.id)}
             style={{ color: blue, fontSize: 15, fontFamily: "Roboto_light" }}
           >
-            {item.title.length > 22
-              ? `${item.title.slice(0, 22)}...`
-              : item.title}
+            {item.title}
+          </Text>
+          <Text
+            onPress={() => navigateToSpecifiCourse(item._id)}
+            style={{ color: blue, fontSize: 13, fontFamily: "AgendaBold" }}
+          >
+            {item.credit} credits
           </Text>
         </CardItem>
       </Card>
@@ -92,7 +101,7 @@ class Course extends Component {
   render() {
     const { genre } = this.props;
     return (
-      <View style={{ height: 180, marginBottom: 15, paddingBottom: 10 }}>
+      <View style={{ height: 260, marginBottom: 15, paddingBottom: 10 }}>
         <View
           style={{
             paddingLeft: 15,
@@ -133,6 +142,7 @@ class Course extends Component {
             renderItem={this.renderItem}
             sliderWidth={width}
             itemWidth={200}
+            itemHeight={220}
             inactiveSlideOpacity={1}
             inactiveSlideScale={1}
           />

@@ -1,14 +1,8 @@
 import React, { Component } from "react";
-import {
-  Image,
-  View,
-  Text,
-  ToastAndroid,
-  AsyncStorage,
-  Dimensions
-} from "react-native";
+import { Image, View, Text, Dimensions, Alert, AsyncStorage } from "react-native";
 import { Button, Container, Content } from "native-base";
 import { Row, Grid, Col } from "react-native-easy-grid";
+import Toast from "react-native-root-toast";
 
 import UserResource from "../services/UserResource";
 
@@ -18,6 +12,7 @@ import Loading from "./Loading";
 
 import { StackActions, NavigationActions } from "react-navigation";
 import { UserConnect } from "../context/UserProvider";
+import { Updates } from "expo";
 
 const { height } = Dimensions.get("window");
 
@@ -36,13 +31,9 @@ class LoginRegister extends Component {
   };
 
   async componentDidMount() {
-    // if (this.props.navigation.getParam("from") !== "logout") {
-    // const email = await AsyncStorage.getItem("unregistered_email");
-    // console.log("notlogout");
-    // if (email) {
-    //   this.setState({ pendingAccount: true, active: 0 });
-    // }
     try {
+      // this.checkUpdates();
+      // AsyncStorage.clear();
       const user = await UserResource.getUser();
       if (user) {
         if (user.is_activated) {
@@ -63,7 +54,71 @@ class LoginRegister extends Component {
     }
   }
 
-  showToast = text => ToastAndroid.show(text, ToastAndroid.SHORT);
+  checkUpdates = async () => {
+    try {
+      console.log("checking for updates");
+      const update = await Updates.checkForUpdateAsync();
+      if (update.isAvailable) {
+        this.showUpdateDialog();
+      }
+    } catch (e) {
+      // handle or log error
+    }
+  };
+
+  showUpdateDialog = () => {
+    Alert.alert(
+      "A new version of this app is available.",
+      "Click 'Download now' to start the download",
+      [
+        { text: "Not now" },
+        {
+          text: "Download now",
+          onPress: async () => {
+            try {
+              this.showToast(
+                "Download started. The app will notify you once its done"
+              );
+              await Updates.fetchUpdateAsync();
+              this.showReloadDialog();
+            } catch (error) {
+              this.showToast(
+                "Download failed. Please check you internet connection"
+              );
+            }
+          }
+        }
+      ],
+      { cancelable: false }
+    );
+  };
+
+  showReloadDialog = () => {
+    Alert.alert(
+      "New version is available",
+      "Restart is required for the changes to reflect",
+      [
+        { text: "Later" },
+        {
+          text: "Restart now",
+          onPress: () => {
+            Updates.reloadFromCache();
+          }
+        }
+      ],
+      { cancelable: false }
+    );
+  };
+
+  showToast = text =>
+    Toast.show(text, {
+      duration: Toast.durations.SHORT,
+      position: Toast.positions.BOTTOM,
+      shadow: true,
+      animation: true,
+      hideOnPress: true,
+      delay: 0
+    });
 
   renderTabStyle = tabId =>
     this.state.active === tabId ? styles.activeTab : styles.inActiveTab;
@@ -77,7 +132,8 @@ class LoginRegister extends Component {
     }
   };
 
-  togglePending = () => this.setState({ pendingAccount: !this.state.pendingAccount });
+  togglePending = () =>
+    this.setState({ pendingAccount: !this.state.pendingAccount });
 
   gotoMain = () => {
     const resetAction = StackActions.reset({

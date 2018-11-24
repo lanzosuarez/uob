@@ -33,7 +33,6 @@ const WorkshopItem = props => {
         <Body>
           <View
             style={{
-              height: 30,
               width: "100%",
               flexDirection: "row",
               justifyContent: "space-around",
@@ -43,7 +42,7 @@ const WorkshopItem = props => {
             }}
           >
             <View style={{ flex: 2 }}>
-              <Text
+              {/* <Text
                 numberOfLines={3}
                 style={{
                   fontSize: 18,
@@ -52,10 +51,10 @@ const WorkshopItem = props => {
                 }}
               >
                 {type}
-              </Text>
+              </Text> */}
               <Text
                 style={{
-                  fontSize: 15,
+                  fontSize: 18,
                   color: blue,
                   fontFamily: "Roboto_light"
                 }}

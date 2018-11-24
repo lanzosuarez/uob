@@ -11,8 +11,8 @@ import {
   Button
 } from "native-base";
 
-import Toast from 'react-native-root-toast';
-import { Text, View, RefreshControl ,Dimensions } from "react-native";
+import Toast from "react-native-root-toast";
+import { Text, View, RefreshControl, Dimensions } from "react-native";
 import { DrawerActions } from "react-navigation";
 import ContentRepo from "../../services/ContentRepo";
 import { CourseConnect } from "../../context/CourseProvider";
@@ -62,14 +62,15 @@ class CourseList extends Component {
       });
   };
 
-  showToast = text => Toast.show(text, {
-    duration: Toast.durations.SHORT,
-    position: Toast.positions.BOTTOM,
-    shadow: true,
-    animation: true,
-    hideOnPress: true,
-    delay: 0
-  })
+  showToast = text =>
+    Toast.show(text, {
+      duration: Toast.durations.SHORT,
+      position: Toast.positions.BOTTOM,
+      shadow: true,
+      animation: true,
+      hideOnPress: true,
+      delay: 0
+    });
 
   toggleLoad = () => this.setState({ loading: !this.state.loading });
 
@@ -117,6 +118,7 @@ class CourseList extends Component {
         this.toggleLoad();
         const { status, message, data } = r.data;
         if (status) {
+          console.log(data);
           this.props.setCourses(data.items);
           this.setState({ courses: data.items, title: data.title });
         } else {
@@ -139,7 +141,11 @@ class CourseList extends Component {
         <Header style={{ backgroundColor: headerBGcolor }}>
           <Left style={{ flex: 1 }}>
             <Button onPress={() => this.openDrawer()} transparent>
-              <Icon type="MaterialIcons" style={{ color: headerFontColor }} name="menu" />
+              <Icon
+                type="MaterialIcons"
+                style={{ color: headerFontColor }}
+                name="menu"
+              />
             </Button>
           </Left>
           <Body
@@ -180,12 +186,12 @@ class CourseList extends Component {
         >
           <View
             style={{
+              paddingLeft: width * 0.04,
               flex: 1,
               paddingTop: 20,
-              // paddingRight: width * 0.05,
-              paddingLeft: width * 0.05,
+              display: "flex",
               flexWrap: "wrap",
-              flexDirection: "row",
+              flexDirection: "row"
             }}
           >
             {this.state.courses.length === 0 ? (
@@ -200,8 +206,9 @@ class CourseList extends Component {
                 No Course to show
               </Text>
             ) : (
-              this.state.courses.map(course => (
+              this.state.courses.map((course, index) => (
                 <CourseItem
+                  index={index}
                   key={course.id}
                   course={course}
                   goToCourseSchedules={this.goToCourseSchedules}

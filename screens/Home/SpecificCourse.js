@@ -5,10 +5,13 @@ import {
   TouchableOpacity,
   RefreshControl,
   ScrollView,
-  Dimensions
+  Dimensions,
+  BackHandler
 } from "react-native";
 import Toast from "react-native-root-toast";
 import { Icon } from "native-base";
+
+import { StackActions, NavigationActions } from "react-navigation";
 
 import BannerImage from "./BannerImage";
 import NoUserEvent from "./NoUserEvent";
@@ -37,10 +40,18 @@ class SpecificCourse extends Component {
   };
 
   componentDidMount() {
+    BackHandler.addEventListener("hardwareBackPress", this.handlePress);
     this.getWorkshop();
   }
 
+  componentWillUnmount() {
+    BackHandler.removeEventListener("hardwareBackPress", this.handlePress);
+  }
+
+  handlePress = () => this.goBack();
+
   toggleRefresh = () => this.setState({ refreshing: !this.state.refreshing });
+
   onRefresh = () => {
     this.toggleRefresh();
     const { navigation } = this.props;
@@ -142,42 +153,40 @@ class SpecificCourse extends Component {
   };
 
   goBack = () => {
+    const go = route => {
+      const resetAction = StackActions.reset({
+        index: 0,
+        actions: [NavigationActions.navigate({ routeName: route })]
+      });
+      this.props.navigation.dispatch(resetAction);
+    };
     const fromRoute = this.props.navigation.getParam("from");
-    console.log(fromRoute);
     switch (fromRoute) {
       case "Home": {
-        this.props.navigation.navigate("HomeCourses");
+        go("HomeCourses");
         break;
       }
       case "Courses": {
-        this.props.navigation.navigate("CourseList");
+        go("CourseList");
         break;
       }
       case "UpcomingCourses": {
-        this.props.navigation.navigate("UpcomingCourses");
+        go("UpcomingCourses");
         break;
       }
       case "PastCourses": {
-        this.props.navigation.navigate("PastCourses");
+        go("PastCourses");
         break;
       }
       case "SearchGenre": {
-        this.props.navigation.navigate("SearchGenre");
+        go("SearchGenre");
         break;
       }
       default: {
-        this.props.navigation.navigate("HomeCourses");
+        go("HomeCourses");
         break;
       }
-      // case "GenreCourses": {
-      //   this.props.navigation.navigate("GenreCourses");
-      //   break;
-      // }
     }
-    // if (fromRoute === "Home") {
-    // } else if (fromRoute) {
-    //   this.props.navigation.navigate("CourseList");
-    // }
   };
 
   render() {
@@ -195,6 +204,7 @@ class SpecificCourse extends Component {
           flex: 1,
           marginTop: Expo.Constants.statusBarHeight
         }}
+        style={{ flex: 1, backgroundColor: "white" }}
       >
         <TouchableOpacity
           onPress={() => this.goBack()}

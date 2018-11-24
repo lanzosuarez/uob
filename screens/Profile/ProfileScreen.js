@@ -283,7 +283,7 @@ class ProfileScreen extends Component {
                 />
               )}
 
-              {this.props.user && this.props.user.is_supervisor ? (
+              {/* {this.props.user && this.props.user.is_supervisor ? (
                 <Fragment>
                   <Separator
                     style={{ backgroundColor: "#f4f4ff", height: 50 }}
@@ -299,7 +299,7 @@ class ProfileScreen extends Component {
                     last={true}
                   />
                 </Fragment>
-              ) : null}
+              ) : null} */}
               <Separator
                 style={{
                   borderBottomWidth: 0,

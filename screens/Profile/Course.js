@@ -8,16 +8,17 @@ const { width } = Dimensions.get("window");
 
 const blue = "#00246a";
 
-const Course = ({ course, goToCourseSchedules }) => (
+const Course = ({ course, goToCourseSchedules,courses }) => (
   <TouchableOpacity onPress={() => goToCourseSchedules(course)}>
     <Card
       style={{
-        height: 170,
+        height: 220,
         borderColor: "#f0f0f0",
         borderRadius: 8,
         borderBottomWidth: 2,
-        width: width * 0.4,
-        marginRight: width * 0.05
+        width: width * 0.45,
+        alignSelf: "flex-start"
+        // marginRight: width * 0.05
       }}
     >
       <CardItem
@@ -47,7 +48,7 @@ const Course = ({ course, goToCourseSchedules }) => (
             }}
             resizeMode={"cover"}
             defaultSource={require("../../assets/defaultimg.png")}
-            source={{ uri: course.image }}
+            source={{ uri: course.image_url }}
           />
         </View>
       </CardItem>
@@ -59,20 +60,20 @@ const Course = ({ course, goToCourseSchedules }) => (
           paddingLeft: 5,
           paddingTop: 5,
           flexDirection: "column",
-          alignItems: "flex-start"
+          alignItems: "flex-start",
+          flex: 1,
+          justifyContent: "space-between"
         }}
       >
         <Text
           onPress={() => goToCourseSchedules(course)}
           style={{ color: blue, fontSize: 15, fontFamily: "Roboto_light" }}
         >
-          {course.title.length > 16
-            ? `${course.title.slice(0, 16)}...`
-            : course.title}
+          {course.title}
         </Text>
         <Text
           onPress={() => goToCourseSchedules(course)}
-          style={{ color: blue, fontSize: 13, fontFamily: "Roboto_light" }}
+          style={{ color: blue, fontSize: 13, fontFamily: "AgendaBold" }}
         >
           {course.credit} credits
         </Text>

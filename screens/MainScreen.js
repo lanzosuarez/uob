@@ -1,5 +1,12 @@
 import React, { Component, Fragment } from "react";
-import { Text, View, SafeAreaView, ScrollView, Dimensions, Platform } from "react-native";
+import {
+  Text,
+  View,
+  SafeAreaView,
+  ScrollView,
+  Dimensions,
+  Platform
+} from "react-native";
 import Expo from "expo";
 import {
   createDrawerNavigator,
@@ -33,14 +40,19 @@ const blue = "#00246a";
 const { width } = Dimensions.get("window");
 
 const CustomDrawerComponent = props => (
-  <SafeAreaView style={{ flex: 1, backgroundColor: blue, marginTop: Expo.Constants.statusBarHeight }}>
+  <SafeAreaView
+    style={{
+      flex: 1,
+      backgroundColor: blue,
+      marginTop: Expo.Constants.statusBarHeight
+    }}
+  >
     <View
       style={{
         justifyContent: "center",
         paddingLeft: 40,
         paddingTop: 40,
-        paddingBottom: 35,
-        
+        paddingBottom: 35
       }}
     >
       <UserComsumer>
@@ -92,7 +104,9 @@ const MainDrawerNavigator = createDrawerNavigator(
         {
           HomeCourses: { screen: Courses },
           SpecificCourse: { screen: SpecificCourse },
-          ViewSchedule: { screen: ViewSchedule }
+          ViewSchedule: { screen: ViewSchedule },
+          CourseList: { screen: CourseList },
+          SearchGenre: { screen: SearchGenre }
         },
         {
           initialRouteName: "HomeCourses",
@@ -156,7 +170,7 @@ const MainDrawerNavigator = createDrawerNavigator(
           EditProfile: { screen: EditProfile },
           UpcomingCourses: { screen: UpcomingCourses },
           PastCourses: { screen: PastCourses },
-          CourseBookings: { screen: CourseBookings },
+          // CourseBookings: { screen: CourseBookings },
           SignAttendance: { screen: SignAttendance }
         },
         {
@@ -164,6 +178,12 @@ const MainDrawerNavigator = createDrawerNavigator(
           headerMode: "none"
         }
       )
+    },
+    CourseBookings: {
+      navigationOptions: {
+        drawerLabel: "Supervisor Approval "
+      },
+      screen: CourseBookings
     },
     Contact: {
       navigationOptions: {

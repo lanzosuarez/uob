@@ -12,9 +12,8 @@ import {
   Button
 } from "native-base";
 
-import { Text, View ,
-  Dimensions} from "react-native";
-import Toast from 'react-native-root-toast';
+import { Text, View, Dimensions } from "react-native";
+import Toast from "react-native-root-toast";
 import { DrawerActions } from "react-navigation";
 import ContentRepo from "../../services/ContentRepo";
 import { CourseConnect } from "../../context/CourseProvider";
@@ -38,14 +37,15 @@ class GenreCourses extends Component {
     this.getGenreCourses(genreId);
   }
 
-  showToast = text => Toast.show(text, {
-    duration: Toast.durations.SHORT,
-    position: Toast.positions.BOTTOM,
-    shadow: true,
-    animation: true,
-    hideOnPress: true,
-    delay: 0
-  })
+  showToast = text =>
+    Toast.show(text, {
+      duration: Toast.durations.SHORT,
+      position: Toast.positions.BOTTOM,
+      shadow: true,
+      animation: true,
+      hideOnPress: true,
+      delay: 0
+    });
 
   toggleLoad = () => this.setState({ loading: !this.state.loading });
 
@@ -91,8 +91,20 @@ class GenreCourses extends Component {
         <Loading isVisible={this.state.loading} transparent={false} />
         <Header style={{ backgroundColor: headerBGcolor }}>
           <Left style={{ flex: 1 }}>
-            <Button onPress={() => this.openDrawer()} transparent>
-              <Icon type="MaterialIcons" style={{ color: headerFontColor }} name="menu" />
+            <Button
+              onPress={() => this.props.navigation.navigate("Home")}
+              transparent
+            >
+              <Icon
+                type="MaterialIcons"
+                style={{ color: headerFontColor }}
+                name="chevron-left"
+              />
+              <Text
+                style={{ color: headerFontColor, fontFamily: "Roboto_medium" }}
+              >
+                Back
+              </Text>
             </Button>
           </Left>
           <Body
@@ -124,13 +136,14 @@ class GenreCourses extends Component {
         </Header>
         <Content>
           <View
-            style={{ 
+            style={{
+              paddingLeft: width * 0.04,
               flex: 1,
               paddingTop: 20,
-              // paddingRight: width * 0.05,
-              paddingLeft: width * 0.05,
+              display: "flex",
               flexWrap: "wrap",
-              flexDirection: "row" }}
+              flexDirection: "row"
+            }}
           >
             {this.state.courses.length === 0 ? (
               <Text style={{ color: blue, fontFamily: "Roboto_light" }}>

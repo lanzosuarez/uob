@@ -8,16 +8,17 @@ const { width } = Dimensions.get("window");
 
 const blue = "#00246a";
 
-const CourseItem = ({ course, goToCourseSchedules }) => {
+const CourseItem = ({ course, goToCourseSchedules, index }) => {
   return (
     <TouchableOpacity onPress={() => goToCourseSchedules(course)}>
       <Card
         style={{
-          height: 170,
+          height: 220,
           borderRadius: 8,
           borderBottomWidth: 2,
-          width: width * 0.4,
-          marginRight: width * 0.05
+          width: width * 0.45,
+         
+          // marginRight: (index + 1) % 2 !== 0 ? width * 0.08 : 0
         }}
       >
         <CardItem
@@ -44,18 +45,20 @@ const CourseItem = ({ course, goToCourseSchedules }) => {
               }}
               resizeMode={"cover"}
               defaultSource={require("../../assets/defaultimg.png")}
-              source={{ uri: course.image_url }}
+              source={{ uri: course.image_url ? course.image_url : "" }}
             />
           </View>
         </CardItem>
         <CardItem
           onPress={() => goToCourseSchedules(course)}
           style={{
+            flex: 1,
             borderBottomLeftRadius: 8,
             borderBottomRightRadius: 8,
             paddingLeft: 5,
             paddingTop: 5,
             flexDirection: "column",
+            justifyContent: "space-between",
             alignItems: "flex-start"
           }}
         >
@@ -63,13 +66,11 @@ const CourseItem = ({ course, goToCourseSchedules }) => {
             onPress={() => goToCourseSchedules(course)}
             style={{ color: blue, fontSize: 15, fontFamily: "Roboto_light" }}
           >
-            {course.title.length > 16
-              ? `${course.title.slice(0, 16)}...`
-              : course.title}
+            {course.title}
           </Text>
           <Text
             onPress={() => goToCourseSchedules(course)}
-            style={{ color: blue, fontSize: 13, fontFamily: "Roboto_light" }}
+            style={{ color: blue, fontSize: 13, fontFamily: "AgendaBold" }}
           >
             {course.credit} credits
           </Text>

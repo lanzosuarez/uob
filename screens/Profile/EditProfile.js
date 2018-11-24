@@ -99,6 +99,7 @@ class EditProfile extends Component {
             profile = Object.assign(profile, data);
             this.props.setProfile(profile);
             this.props.navigation.goBack();
+            this.showToast(message);
           } else {
             this.showToast(message);
           }

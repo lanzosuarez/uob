@@ -6,16 +6,16 @@ import { CardItem, Card } from "native-base";
 const { width } = Dimensions.get("window");
 const blue = "#00246a";
 
-const Genre = ({ course, goToWorkshop }) => (
+const Genre = ({ course, goToWorkshop, index, courses }) => (
   <TouchableOpacity onPress={() => goToWorkshop(course)}>
     <Card
       style={{
-        height: 170,
+        height: 220,
         borderColor: "#f0f0f0",
         borderRadius: 8,
         borderBottomWidth: 2,
-        width: width * 0.4,
-        marginRight: width * 0.05
+        width: width * 0.45,
+        // marginRight: (index + 1) % 2 !== 0 ? width * 0.08 : 0
       }}
     >
       <CardItem
@@ -45,18 +45,20 @@ const Genre = ({ course, goToWorkshop }) => (
             }}
             resizeMode={"cover"}
             defaultSource={require("../../assets/defaultimg.png")}
-            source={{ uri: course.image_url }}
+            source={{ uri: course.image_url ? course.image_url : "" }}
           />
         </View>
       </CardItem>
       <CardItem
         onPress={() => goToWorkshop(course)}
         style={{
+          flex: 1,
           borderBottomLeftRadius: 8,
           borderBottomRightRadius: 8,
           paddingLeft: 5,
           paddingTop: 5,
           flexDirection: "column",
+          justifyContent: "space-between",
           alignItems: "flex-start"
         }}
       >
@@ -64,13 +66,11 @@ const Genre = ({ course, goToWorkshop }) => (
           onPress={() => goToWorkshop(course)}
           style={{ color: blue, fontSize: 15, fontFamily: "Roboto_light" }}
         >
-          {course.title.length > 16
-            ? `${course.title.slice(0, 16)}...`
-            : course.title}
+          {course.title}
         </Text>
         <Text
           onPress={() => goToWorkshop(course)}
-          style={{ color: blue, fontSize: 13, fontFamily: "Roboto_light" }}
+          style={{ color: blue, fontSize: 13, fontFamily: "AgendaBold" }}
         >
           {course.credit} credits
         </Text>

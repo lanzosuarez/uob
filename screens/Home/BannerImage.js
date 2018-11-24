@@ -15,9 +15,9 @@ const BannerImage = ({ image_url }) => (
       }}
     />
     <Image
-      defaultSource={ require("../../assets/defaultimg.png" )}
+      defaultSource={require("../../assets/defaultimg.png")}
       style={styles.imgBg}
-      source={{ uri: image_url }}
+      source={{ uri: image_url ? image_url : "" }}
     />
   </View>
 );
