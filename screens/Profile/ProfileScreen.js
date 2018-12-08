@@ -144,10 +144,10 @@ class ProfileScreen extends Component {
   };
 
   logOut = async () => {
+    window.clearInterval(this.state.interval);
     this.toggleLoad();
     await Profile.logout();
     this.toggleLoad();
-    window.clearInterval(this.state.interval);
     this.props.setBanners(null);
     this.props.setGenres(null);
     this.props.setUser(null);

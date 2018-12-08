@@ -45,7 +45,7 @@ class SignUpScreen extends Component {
   }
 
   gotoTerms = async () => {
-    const link = `https://www.uobsummit.com/terms`;
+    const link = `https://the.uobsummit.com/terms`;
     Linking.openURL(link)
       .then(d => {
         this.showToast("Opening browser");

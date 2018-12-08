@@ -10,7 +10,8 @@ import {
   Content,
   Button,
   Right,
-  List
+  List,
+  Badge
 } from "native-base";
 
 import { View, RefreshControl, Text } from "react-native";
@@ -18,7 +19,7 @@ import { DrawerActions } from "react-navigation";
 import Notification from "../../services/Notification";
 
 import NotificationItem from "./NotificationItem";
-import Toast from 'react-native-root-toast';
+import Toast from "react-native-root-toast";
 
 import Loading from "../Loading";
 import { NotificationConnect } from "../../context/NotificationProvider";
@@ -27,6 +28,8 @@ import { headerBGcolor, headerFontColor } from "../../global";
 const blue = "#00246a";
 
 class NotificationsScreen extends Component {
+
+
   constructor(props) {
     super(props);
   }
@@ -41,14 +44,15 @@ class NotificationsScreen extends Component {
     }
   }
 
-  showToast = text => Toast.show(text, {
-    duration: Toast.durations.SHORT,
-    position: Toast.positions.BOTTOM,
-    shadow: true,
-    animation: true,
-    hideOnPress: true,
-    delay: 0
-  })
+  showToast = text =>
+    Toast.show(text, {
+      duration: Toast.durations.SHORT,
+      position: Toast.positions.BOTTOM,
+      shadow: true,
+      animation: true,
+      hideOnPress: true,
+      delay: 0
+    });
 
   toggleLoad = () => this.setState({ loading: !this.state.loading });
 
@@ -129,7 +133,11 @@ class NotificationsScreen extends Component {
         <Header style={{ backgroundColor: headerBGcolor }}>
           <Left style={{ flex: 1 }}>
             <Button onPress={() => this.openDrawer()} transparent>
-              <Icon type="MaterialIcons" style={{ color: headerFontColor }} name="menu" />
+              <Icon
+                type="MaterialIcons"
+                style={{ color: headerFontColor }}
+                name="menu"
+              />
             </Button>
           </Left>
           <Body

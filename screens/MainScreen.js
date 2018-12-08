@@ -34,6 +34,7 @@ import CourseBookings from "./Profile/CourseBookings";
 import NotifBody from "./Notifications/NotifBody";
 
 import { UserComsumer } from "../context/UserProvider";
+import NotifBadge from "./Notifications/NotifBadge";
 
 const blue = "#00246a";
 
@@ -146,7 +147,7 @@ const MainDrawerNavigator = createDrawerNavigator(
     },
     Notifications: {
       navigationOptions: {
-        drawerLabel: "Notifications "
+        drawerLabel: NotifBadge
       },
       screen: createStackNavigator(
         {
@@ -171,7 +172,8 @@ const MainDrawerNavigator = createDrawerNavigator(
           UpcomingCourses: { screen: UpcomingCourses },
           PastCourses: { screen: PastCourses },
           // CourseBookings: { screen: CourseBookings },
-          SignAttendance: { screen: SignAttendance }
+          SignAttendance: { screen: SignAttendance },
+          SpecificCourse: { screen: SpecificCourse }
         },
         {
           initialRouteName: "Profile",

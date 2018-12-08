@@ -16,10 +16,9 @@ import {
   Input
 } from "native-base";
 
-
 import { Text, View, Dimensions } from "react-native";
 
-import Toast from 'react-native-root-toast';
+import Toast from "react-native-root-toast";
 
 import { DrawerActions } from "react-navigation";
 
@@ -50,44 +49,44 @@ class EditProfile extends Component {
     super(props);
   }
 
-  state = { loading: false, supervisorName: "", supervisorEmail: "" };
+  state = { loading: false, supervisorEmail: "" };
 
   componentDidMount() {
     const { supervisor_name, supervisor_email } = this.props.profile;
     this.setState({
-      supervisorName: supervisor_name,
+      // supervisorName: supervisor_name,
       supervisorEmail: supervisor_email
     });
   }
 
-  checkFields = fields => fields.some(field => this.state[field] && this.state[field].length === 0);
+  checkFields = fields => fields.some(field => this.state[field].length === 0);
 
   onChangeText = (key, val) => this.setState({ [key]: val });
 
   toggleLoad = () => this.setState({ loading: !this.state.loading });
 
-  showToast = text => Toast.show(text, {
-    duration: Toast.durations.SHORT,
-    position: Toast.positions.BOTTOM,
-    shadow: true,
-    animation: true,
-    hideOnPress: true,
-    delay: 0
-  })
+  showToast = text =>
+    Toast.show(text, {
+      duration: Toast.durations.SHORT,
+      position: Toast.positions.BOTTOM,
+      shadow: true,
+      animation: true,
+      hideOnPress: true,
+      delay: 0
+    });
 
   openDrawer = () => {
     this.props.navigation.dispatch(DrawerActions.openDrawer());
   };
 
   updateProfile = () => {
-    console.log(this.state)
-    if (this.checkFields(["supervisorName", "supervisorEmail"]) === false) {
+    if (this.checkFields(["supervisorEmail"]) === false) {
       this.toggleLoad();
       const { supervisorName, supervisorEmail } = this.state;
       Profile.updateProfile(
         {
-          supervisor: supervisorEmail,
-          supervisor_name: supervisorName
+          supervisor: supervisorEmail
+          // supervisor_name: supervisorName
         },
         this.props.profile.id
       )
@@ -102,6 +101,10 @@ class EditProfile extends Component {
             this.showToast(message);
           } else {
             this.showToast(message);
+            const { supervisor_email } = this.props.profile;
+            this.setState({
+              supervisorEmail: supervisor_email
+            });
           }
         })
         .catch(err => {
@@ -129,7 +132,9 @@ class EditProfile extends Component {
                 style={{ color: headerFontColor }}
                 name="chevron-left"
               />
-              <Text style={{ color: headerFontColor, fontFamily: "Roboto_light" }}>
+              <Text
+                style={{ color: headerFontColor, fontFamily: "Roboto_light" }}
+              >
                 Back
               </Text>
             </Button>
@@ -162,17 +167,18 @@ class EditProfile extends Component {
             }}
           >
             <Form style={{ backgroundColor: "white", marginTop: 40 }}>
-              <Item inlineLabel>
+              {/* <Item inlineLabel>
                 <Label style={{ ...bold, ...txt }}>Supervisor's name</Label>
                 <Input
                   value={this.state.supervisorName}
                   onChangeText={e => this.onChangeText("supervisorName", e)}
                   style={{ ...light, ...txt }}
                 />
-              </Item>
+              </Item> */}
               <Item inlineLabel last>
                 <Label style={{ ...bold, ...txt }}>Supervisor's email</Label>
                 <Input
+                  placeholder="Enter supervisor email here"
                   value={this.state.supervisorEmail}
                   onChangeText={e => this.onChangeText("supervisorEmail", e)}
                   style={{ ...light, ...txt }}

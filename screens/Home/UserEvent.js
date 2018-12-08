@@ -14,7 +14,7 @@ class UserEvent extends Component {
 
   render() {
     const { workshop: w, withdrawConfirm } = this.props;
-    
+
     let ue = w ? w.user_event : null;
     console.log(ue);
     return (
@@ -202,7 +202,8 @@ class UserEvent extends Component {
                 color: blue,
                 fontFamily: "Roboto_light",
                 lineHeight: 20,
-                textAlign: "left"
+                textAlign: "left",
+                paddingTop: 10
               }}
             >
               {w ? w.description : ""}

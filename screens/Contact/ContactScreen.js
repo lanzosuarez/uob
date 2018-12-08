@@ -34,7 +34,7 @@ class Contact extends Component {
   };
 
   gotoFqa = async () => {
-    const link = `https://www.uobsummit.com/faq`;
+    const link = `https://the.uobsummit.com/faq`;
     Linking.openURL(link)
       .then(d => {
         this.showToast("Opening browser");

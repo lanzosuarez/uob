@@ -2,7 +2,7 @@
   "expo": {
     "sdkVersion": "29.0.0",
     "privacy": "unlisted",
-    "version": "1.1.12",
+    "version": "0.1.0",
     "orientation": "portrait",
     "splash": {
       "image": "./assets/splash.png",
@@ -13,9 +13,9 @@
       "checkAutomatically": "ON_ERROR_RECOVERY"
     },
     "ios": {
-      "bundleIdentifier": "com.livefitter.UOB-Summit",
+      "bundleIdentifier": "com.uobsummit.app",
       "icon": "./assets/icon.png",
-      "buildNumber": "4",
+      "buildNumber": "19",
       "infoPlist": {
         "NSLocationAlwaysUsageDescription": "Allow uobsummit to access you location"
       }

@@ -49,7 +49,7 @@ class SignInScreen extends Component {
   }
 
   gotoTerms = async () => {
-    const link = `https://www.uobsummit.com/terms`;
+    const link = `https://the.uobsummit.com/terms`;
     Linking.openURL(link)
       .then(d => {
         this.showToast("Opening browser");
@@ -472,7 +472,7 @@ class SignInScreen extends Component {
                           fontFamily: "Roboto_light"
                         }}
                       >
-                        If you do not posses a '@uobgroup.com' email,
+                        If you do not possess a '@uobgroup.com' email,
                       </Text>
                       <Text
                         style={{
@@ -482,7 +482,7 @@ class SignInScreen extends Component {
                           fontFamily: "Roboto_light"
                         }}
                       >
-                        do update your account details by sending us an email at{" "}
+                        do update your account details by sending an email {" "}
                         <Text
                           onPress={this.gotoFqa}
                           style={{
@@ -493,7 +493,7 @@ class SignInScreen extends Component {
                             fontFamily: "Roboto_light"
                           }}
                         >
-                          contact@uobsummit.com
+                          to contact@uobsummit.com
                         </Text>
                       </Text>
                     </View>

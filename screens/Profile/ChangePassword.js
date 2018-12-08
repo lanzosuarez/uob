@@ -150,7 +150,9 @@ class ChangePassword extends Component {
           </Body>
           <Right style={{ flex: 1 }} />
         </Header>
-        <Content contentContainerStyle={{ backgroundColor: "#f4f4ff" }}>
+        <Content
+          contentContainerStyle={{ backgroundColor: "#f4f4ff", flex: 1 }}
+        >
           <View
             stlye={{
               flex: 1,
@@ -162,6 +164,7 @@ class ChangePassword extends Component {
               <Item inlineLabel>
                 <Label style={{ ...bold, ...txt }}>Current password</Label>
                 <Input
+                  placeholder="Enter current password here"
                   value={this.state.currentPassword}
                   onChangeText={e => this.onChangeText("currentPassword", e)}
                   style={{ ...light, ...txt }}
@@ -171,6 +174,7 @@ class ChangePassword extends Component {
               <Item inlineLabel>
                 <Label style={{ ...bold, ...txt }}>New password</Label>
                 <Input
+                  placeholder="Enter new password here"
                   value={this.state.newPassword}
                   onChangeText={e => this.onChangeText("newPassword", e)}
                   style={{ ...light, ...txt }}
@@ -180,6 +184,7 @@ class ChangePassword extends Component {
               <Item inlineLabel last>
                 <Label style={{ ...bold, ...txt }}>Confirm password</Label>
                 <Input
+                  placeholder="Confirm new password here"
                   value={this.state.confirmPassword}
                   onChangeText={e => this.onChangeText("confirmPassword", e)}
                   style={{ ...light, ...txt }}
@@ -189,6 +194,7 @@ class ChangePassword extends Component {
             </Form>
             <View
               style={{
+                flex: 1,
                 display: "flex",
                 flexDirection: "row",
                 width: "100%",

@@ -97,17 +97,21 @@ class UpcomingCourses extends Component {
         if (status) {
           this.props.setUpcomingCourses(data);
         } else {
-          this.props.navigation.goBack();
+          this.goback();
           this.showToast(message);
         }
       })
       .catch(err => {
         this.toggleLoad();
-        this.props.navigation.goBack();
+        this.goback();
         this.showToast(
           "Something went wrong. Try checking your internet connection"
         );
       });
+  };
+
+  goback = () => {
+    this.props.navigation.navigate("Profile");
   };
 
   render() {
@@ -117,7 +121,7 @@ class UpcomingCourses extends Component {
         <Loading isVisible={this.state.loading} transparent={false} />
         <Header style={{ backgroundColor: headerBGcolor }}>
           <Left style={{ flex: 1 }}>
-            <Button onPress={() => this.props.navigation.goBack()} transparent>
+            <Button onPress={() => this.goback()} transparent>
               <Icon
                 type="MaterialIcons"
                 style={{ color: headerFontColor }}
