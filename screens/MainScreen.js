@@ -121,6 +121,7 @@ const MainDrawerNavigator = createDrawerNavigator(
       },
       screen: createStackNavigator(
         {
+          SpecificCourse: { screen: SpecificCourse },
           CourseList: { screen: CourseList },
           GenreCourses: { screen: GenreCourses },
           SearchGenre: { screen: SearchGenre }

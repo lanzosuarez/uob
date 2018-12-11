@@ -19,6 +19,7 @@ import UserResource from "../services/UserResource";
 import { UserConnect } from "../context/UserProvider";
 
 import Loading from "./Loading";
+import { WEB_URL } from "../global";
 const forgotText =
   "We have sent a reset password email to your email. Please click on the reset password link to set your new password";
 
@@ -49,7 +50,7 @@ class SignInScreen extends Component {
   }
 
   gotoTerms = async () => {
-    const link = `https://the.uobsummit.com/terms`;
+    const link = `${WEB_URL}/terms`;
     Linking.openURL(link)
       .then(d => {
         this.showToast("Opening browser");

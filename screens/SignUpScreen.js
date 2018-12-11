@@ -16,6 +16,7 @@ import Toast from "react-native-root-toast";
 import AuthService from "../services/Auth";
 import UserResource from "../services/UserResource";
 import { UserConnect } from "../context/UserProvider";
+import { WEB_URL } from "../global";
 
 const transparentBg = "rgba(255, 255, 255, 0.8)";
 const blue = "#00246a";
@@ -45,7 +46,7 @@ class SignUpScreen extends Component {
   }
 
   gotoTerms = async () => {
-    const link = `https://the.uobsummit.com/terms`;
+    const link = `${WEB_URL}/terms`;
     Linking.openURL(link)
       .then(d => {
         this.showToast("Opening browser");

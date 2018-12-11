@@ -31,13 +31,17 @@ const NotifBadge = props => {
       {n > 0 && (
         <Badge
           style={{
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            minWidth: 25,
             backgroundColor: "red",
             marginRight: 20,
             marginTop: 15,
             marginBottom: 15
           }}
         >
-          <Text style={{ color: "white" }}>{n}</Text>
+          <Text style={{ color: "white", fontSize: 12 }}>{n}</Text>
         </Badge>
       )}
     </View>
