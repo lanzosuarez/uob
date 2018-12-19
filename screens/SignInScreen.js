@@ -483,7 +483,7 @@ class SignInScreen extends Component {
                           fontFamily: "Roboto_light"
                         }}
                       >
-                        do update your account details by sending an email {" "}
+                        do update your account details by sending an email to{" "}
                         <Text
                           onPress={this.gotoFqa}
                           style={{
@@ -494,7 +494,7 @@ class SignInScreen extends Component {
                             fontFamily: "Roboto_light"
                           }}
                         >
-                          to contact@uobsummit.com
+                         contact@uobsummit.com
                         </Text>
                       </Text>
                     </View>

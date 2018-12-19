@@ -1,33 +1,31 @@
 import React, { Component } from "react";
 
 import {
+  View,
   Text,
   TouchableOpacity,
   RefreshControl,
   ScrollView,
-  Dimensions,
   BackHandler
 } from "react-native";
-import Toast from "react-native-root-toast";
+
 import { Icon } from "native-base";
 
-import { StackActions, NavigationActions } from "react-navigation";
-
-import BannerImage from "./BannerImage";
-import NoUserEvent from "./NoUserEvent";
-import UserEvent from "./UserEvent";
+import BannerImage from "../Home/BannerImage";
+import NoUserEvent from "../Home/NoUserEvent";
+import UserEvent from "../Home/UserEvent";
 import ConfirmDialog from "../ConfirmDialog";
 
 import ContentRepo from "../../services/ContentRepo";
 
 import Loading from "../Loading";
-import Expo from "expo";
 import { UserConnect } from "../../context/UserProvider";
 import UserResource from "../../services/UserResource";
+// import { StackActions, NavigationActions } from "react-navigation";?
 
-const { height } = Dimensions.get("window");
+import Toast from "react-native-root-toast";
 
-class SpecificCourse extends Component {
+class ProfileCourse extends Component {
   constructor(props) {
     super(props);
   }
@@ -51,7 +49,6 @@ class SpecificCourse extends Component {
   handlePress = () => this.goBack();
 
   toggleRefresh = () => this.setState({ refreshing: !this.state.refreshing });
-
   onRefresh = () => {
     this.toggleRefresh();
     const { navigation } = this.props;
@@ -82,6 +79,7 @@ class SpecificCourse extends Component {
   toggleLoad = () => this.setState({ loading: !this.state.loading });
   toggleConfirm = () => this.setState({ showConfirm: !this.state.showConfirm });
 
+  
   showToast = text =>
     Toast.show(text, {
       duration: Toast.durations.SHORT,
@@ -100,7 +98,7 @@ class SpecificCourse extends Component {
       .then(r => {
         this.toggleLoad();
         const { message, status, data } = r.data;
-        console.log("workshop", data);
+        console.log(data);
         if (status) {
           if (data) {
             this.setState({ workshop: data });
@@ -154,11 +152,11 @@ class SpecificCourse extends Component {
 
   goBack = () => {
     const go = route => {
-      const resetAction = StackActions.reset({
-        index: 0,
-        actions: [NavigationActions.navigate({ routeName: route })]
-      });
-      this.props.navigation.dispatch(resetAction);
+      //   const resetAction = StackActions.reset({
+      //     index: 0,
+      //     actions: [NavigationActions.navigate({ routeName: route })]
+      //   });
+      this.props.navigation.navigate(route);
     };
     const fromRoute = this.props.navigation.getParam("from");
     switch (fromRoute) {
@@ -200,65 +198,67 @@ class SpecificCourse extends Component {
             onRefresh={this.onRefresh}
           />
         }
-        contentContainerStyle={{
-          flex: 1,
-          marginTop: Expo.Constants.statusBarHeight
-        }}
         style={{ flex: 1, backgroundColor: "white" }}
       >
-        <TouchableOpacity
-          onPress={() => this.goBack()}
-          style={{
-            position: "absolute",
-            left: 10,
-            top: 5,
-            zIndex: 2,
-            display: "flex",
-            flexDirection: "row",
-            alignItems: "center"
-          }}
-        >
-          <Icon
-            type="MaterialIcons"
-            style={{ color: "white", fontSize: 30 }}
-            name="chevron-left"
-          />
-          <Text
-            style={{ color: "white", fontFamily: "Roboto_light", fontSize: 30 }}
+        <View style={{ flex: 1 }}>
+          <TouchableOpacity
+            onPress={() => this.goBack()}
+            style={{
+              position: "absolute",
+              left: 10,
+              top: 5,
+              zIndex: 2,
+              display: "flex",
+              flexDirection: "row",
+              alignItems: "center"
+            }}
           >
-            Back
-          </Text>
-        </TouchableOpacity>
-        {this.state.loading ? (
-          <Loading isVisible={this.state.loading} transparent={false} />
-        ) : (
-          <ScrollView style={{ flex: 1 }}>
-            <BannerImage image_url={w ? w.image_url : "image"} />
-            {w &&
-            w.user_event &&
-            (w.user_event.booking_status === "confirmed" ||
-              w.user_event.booking_status === "checked_in") ? (
-              <UserEvent
-                withdrawConfirm={this.toggleConfirm}
-                workshop={this.state.workshop}
-              />
-            ) : (
-              <NoUserEvent workshop={this.state.workshop} />
-            )}
-          </ScrollView>
-        )}
-        <ConfirmDialog
-          isVisible={this.state.showConfirm}
-          okText="Confirm"
-          heading="Withdrawal Confirmation"
-          message="Are you sure you want to proceed with the withdrawal of the course? Your slot will be released for other learners."
-          onCancel={this.toggleConfirm}
-          onOk={this.withdraw}
-          height={height * 0.2}
-        />
+            <Icon
+              type="MaterialIcons"
+              style={{ color: "white", fontSize: 30 }}
+              name="chevron-left"
+            />
+            <Text
+              style={{
+                color: "white",
+                fontFamily: "Roboto_medium",
+                fontSize: 30
+              }}
+            >
+              Back
+            </Text>
+          </TouchableOpacity>
+          {this.state.loading ? (
+            <Loading isVisible={this.state.loading} transparent={false} />
+          ) : (
+            <View style={{ flex: 1 }}>
+              <BannerImage image_url={w ? w.image_url : "image"} />
+              {w &&
+              w.user_event &&
+              (w.user_event.booking_status === "confirmed" ||
+                w.user_event.booking_status === "checked_in") ? (
+                <UserEvent
+                  withdrawConfirm={this.toggleConfirm}
+                  workshop={this.state.workshop}
+                />
+              ) : (
+                <NoUserEvent workshop={this.state.workshop} />
+              )}
+            </View>
+          )}
+          <ConfirmDialog
+            isVisible={this.state.showConfirm}
+            okText="Confirm"
+            heading="Withdrawal Confirmation"
+            message="Are you sure you want to proceed with the withdrawal of the course? Your slot will be released for other learners."
+            onCancel={this.toggleConfirm}
+            onOk={this.withdraw}
+            height={165}
+          />
+        </View>
       </ScrollView>
     );
   }
 }
 
-export default UserConnect(["setUser", "user"])(SpecificCourse);
+export default UserConnect(["setUser", "user"])(ProfileCourse);

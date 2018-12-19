@@ -3,7 +3,7 @@ import { View, Text, Dimensions } from "react-native";
 import Modal from "react-native-modal";
 import * as Progress from "react-native-progress";
 
-const {height, width} = Dimensions.get("window");
+const { height, width } = Dimensions.get("window");
 
 const Loading = props => {
   const { isVisible, transparent = true, tip = "" } = props;
@@ -15,12 +15,10 @@ const Loading = props => {
       backdropColor="white"
       backdropOpacity={0.7}
       style={{
+        display: "flex",
         flex: 1,
         justifyContent: "center",
-        alignItems: "center",
-        width,
-        height,
-      
+        alignItems: "center"
       }}
       transparent={transparent}
       isVisible={isVisible}

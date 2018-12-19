@@ -35,6 +35,7 @@ import NotifBody from "./Notifications/NotifBody";
 
 import { UserComsumer } from "../context/UserProvider";
 import NotifBadge from "./Notifications/NotifBadge";
+import ProfileCourse from "./Profile/ProfileCourse";
 
 const blue = "#00246a";
 
@@ -174,7 +175,7 @@ const MainDrawerNavigator = createDrawerNavigator(
           PastCourses: { screen: PastCourses },
           // CourseBookings: { screen: CourseBookings },
           SignAttendance: { screen: SignAttendance },
-          SpecificCourse: { screen: SpecificCourse }
+          ProfileCourse: { screen: ProfileCourse }
         },
         {
           initialRouteName: "Profile",

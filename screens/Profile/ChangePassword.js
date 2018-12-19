@@ -162,7 +162,9 @@ class ChangePassword extends Component {
           >
             <Form style={{ backgroundColor: "white", marginTop: 40 }}>
               <Item inlineLabel>
-                <Label style={{ ...bold, ...txt }}>Current password</Label>
+                <Label style={{ ...bold, ...txt, width: 150 }}>
+                  Current password
+                </Label>
                 <Input
                   placeholder="Enter current password here"
                   value={this.state.currentPassword}
@@ -172,7 +174,9 @@ class ChangePassword extends Component {
                 />
               </Item>
               <Item inlineLabel>
-                <Label style={{ ...bold, ...txt }}>New password</Label>
+                <Label style={{ ...bold, ...txt, width: 150 }}>
+                  New password
+                </Label>
                 <Input
                   placeholder="Enter new password here"
                   value={this.state.newPassword}
@@ -182,7 +186,9 @@ class ChangePassword extends Component {
                 />
               </Item>
               <Item inlineLabel last>
-                <Label style={{ ...bold, ...txt }}>Confirm password</Label>
+                <Label style={{ ...bold, ...txt, width: 150 }}>
+                  Confirm password
+                </Label>
                 <Input
                   placeholder="Confirm new password here"
                   value={this.state.confirmPassword}

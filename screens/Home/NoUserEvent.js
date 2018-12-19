@@ -56,7 +56,8 @@ const NoUserEvent = props => {
               marginTop: 20,
               fontFamily: "Roboto_medium",
               textAlign: "left",
-              paddingTop: 10
+              paddingTop: 10,
+              paddingBottom: 20
             }}
           >
             {w ? w.description : ""}

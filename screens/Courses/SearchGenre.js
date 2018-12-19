@@ -117,12 +117,13 @@ class SearchGenre extends Component {
               transparent
             >
               <Icon
+                type="MaterialIcons"
                 style={{
                   color: headerFontColor,
                   fontFamily: "Roboto_light",
                   fontSize: 20
                 }}
-                name="logo-usd"
+                name="filter-list"
               />
             </Button>
 
@@ -209,7 +210,6 @@ class SearchGenre extends Component {
               display: "flex",
               flexWrap: "wrap",
               flexDirection: "row"
-             
             }}
           >
             <CourseComsumer>

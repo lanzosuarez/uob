@@ -28,8 +28,6 @@ import { headerBGcolor, headerFontColor } from "../../global";
 const blue = "#00246a";
 
 class NotificationsScreen extends Component {
-
-
   constructor(props) {
     super(props);
   }
@@ -71,7 +69,7 @@ class NotificationsScreen extends Component {
         notif.read = true;
         notifications.splice(nIndex, 1, notif);
         this.props.setNotifications(notifications);
-        Notification.readNotification(notif.id);
+        Notification.readNotification(notif.id)
       }
     }
   };

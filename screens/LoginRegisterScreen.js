@@ -1,5 +1,12 @@
 import React, { Component } from "react";
-import { Image, View, Text, Dimensions, Alert, AsyncStorage } from "react-native";
+import {
+  Image,
+  View,
+  Text,
+  Dimensions,
+  Alert,
+  AsyncStorage
+} from "react-native";
 import { Button, Container, Content } from "native-base";
 import { Row, Grid, Col } from "react-native-easy-grid";
 import Toast from "react-native-root-toast";
@@ -141,7 +148,6 @@ class LoginRegister extends Component {
       actions: [NavigationActions.navigate({ routeName: "Main" })]
     });
     this.props.navigation.dispatch(resetAction);
-    // this.props.navigation.navigate("Main");
   };
 
   render() {

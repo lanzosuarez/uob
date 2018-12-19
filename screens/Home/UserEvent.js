@@ -203,7 +203,8 @@ class UserEvent extends Component {
                 fontFamily: "Roboto_light",
                 lineHeight: 20,
                 textAlign: "left",
-                paddingTop: 10
+                paddingTop: 10,
+                paddingBottom: 20
               }}
             >
               {w ? w.description : ""}

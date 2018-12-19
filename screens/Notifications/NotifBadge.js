@@ -34,7 +34,7 @@ const NotifBadge = props => {
             display: "flex",
             justifyContent: "center",
             alignItems: "center",
-            minWidth: 25,
+            minWidth: 30,
             backgroundColor: "red",
             marginRight: 20,
             marginTop: 15,

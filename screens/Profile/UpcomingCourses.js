@@ -81,7 +81,7 @@ class UpcomingCourses extends Component {
 
   goToCourseSchedules = course => {
     console.log(course.id);
-    this.props.navigation.navigate("SpecificCourse", {
+    this.props.navigation.navigate("ProfileCourse", {
       id: course.id,
       from: "UpcomingCourses"
     });

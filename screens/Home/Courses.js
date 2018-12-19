@@ -39,7 +39,8 @@ export class Courses extends Component {
     loading: false,
     refreshing: false,
     error: false,
-    showAuthMessage: false
+    showAuthMessage: false,
+    getNotificationsInterval: null
   };
 
   cancelToken = CancelToken.source();
@@ -62,10 +63,17 @@ export class Courses extends Component {
         });
       }
     }, 2000);
+
+    const getNotificationsInterval = window.setInterval(async () => {
+      this.getNotifications();
+    }, 10000);
+
+    this.setState({ getNotificationsInterval });
   }
 
   componentWillUnmount() {
     this.cancelToken.cancel();
+    window.clearInterval(this.state.getNotificationsInterval);
   }
 
   showToast = text =>
@@ -121,26 +129,24 @@ export class Courses extends Component {
   };
 
   getNotifications = () => {
-    if (this.props.notifications === null) {
-      Notification.getNotifications()
-        .then(r => {
-          // this.toggleLoad();
-          const { status, message, data } = r.data;
-          if (status) {
-            this.props.setNotifications(data);
-            this.setState({ notifications: data });
-          } else {
-            // this.showToast(message);
-            this.props.navigation.goBack();
-          }
-        })
-        .catch(err => {
-          // this.toggleLoad();
-          this.showToast(
-            "Something went wrong. Try checking your internet connection"
-          );
-        });
-    }
+    Notification.getNotifications()
+      .then(r => {
+        // this.toggleLoad();
+        const { status, message, data } = r.data;
+        if (status) {
+          this.props.setNotifications(data);
+          this.setState({ notifications: data });
+        } else {
+          // this.showToast(message);
+          // this.props.navigation.goBack();
+        }
+      })
+      .catch(err => {
+        // this.toggleLoad();
+        // this.showToast(
+        //   "Something went wrong. Try checking your internet connection"
+        // );
+      });
   };
 
   openDrawer = () => {
