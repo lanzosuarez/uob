@@ -2,10 +2,11 @@ import React, { Component } from "react";
 
 import { View, Text, ScrollView, Dimensions } from "react-native";
 import { Button } from "native-base";
+import HTML from "react-native-render-html";
 
 const blue = "#00246a";
 
-const { height } = Dimensions.get("window");
+const { width } = Dimensions.get("window");
 
 class UserEvent extends Component {
   constructor(props) {
@@ -194,8 +195,14 @@ class UserEvent extends Component {
                 </Text>
               </Button>
             </View>
-            <Text
-              style={{
+
+            <HTML
+              listsPrefixesRenderers={{
+                ul: (htmlAttribs, children, convertedCSSStyles, passProps) => {
+                  return <Text style={{ color: blue }}> &#8226;</Text>;
+                }
+              }}
+              baseFontStyle={{
                 flex: 1,
                 fontSize: 16,
                 fontWeight: "100",
@@ -204,11 +211,11 @@ class UserEvent extends Component {
                 lineHeight: 20,
                 textAlign: "left",
                 paddingTop: 10,
-                paddingBottom: 20
+                paddingBottom: 30
               }}
-            >
-              {w ? w.description : ""}
-            </Text>
+              html={w ? w.description : ""}
+              imagesMaxWidth={width}
+            />
           </View>
         </View>
       </ScrollView>

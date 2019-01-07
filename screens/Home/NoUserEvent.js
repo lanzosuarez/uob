@@ -2,12 +2,12 @@ import React from "react";
 
 import { Text, View, Dimensions, ScrollView } from "react-native";
 
-import { Container, Content } from "native-base";
+import HTML from "react-native-render-html";
 
 import Workshops from "./Workshops";
 
 const blue = "#00246a";
-const { height } = Dimensions.get("window");
+const { width } = Dimensions.get("window");
 
 const NoUserEvent = props => {
   const { workshop: w } = props;
@@ -46,22 +46,28 @@ const NoUserEvent = props => {
             />
           </View>
 
-          <Text
-            style={{
+          <HTML
+            listsPrefixesRenderers={{
+              ul: (htmlAttribs, children, convertedCSSStyles, passProps) => {
+                return (
+                  <Text style={{ color: blue, marginRight: 10 }}> &#8226;</Text>
+                );
+              }
+            }}
+            baseFontStyle={{
               flex: 1,
               fontSize: 16,
               fontWeight: "100",
               color: blue,
+              fontFamily: "Roboto_light",
               lineHeight: 20,
-              marginTop: 20,
-              fontFamily: "Roboto_medium",
               textAlign: "left",
               paddingTop: 10,
-              paddingBottom: 20
+              paddingBottom: 30
             }}
-          >
-            {w ? w.description : ""}
-          </Text>
+            html={w ? w.description : ""}
+            imagesMaxWidth={width}
+          />
         </View>
       </View>
     </ScrollView>

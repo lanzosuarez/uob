@@ -24,6 +24,8 @@ import UserResource from "../../services/UserResource";
 // import { StackActions, NavigationActions } from "react-navigation";?
 
 import Toast from "react-native-root-toast";
+import Profile from "../../services/Profile";
+import { ProfileConnect } from "../../context/ProfileProvider";
 
 class ProfileCourse extends Component {
   constructor(props) {
@@ -79,7 +81,6 @@ class ProfileCourse extends Component {
   toggleLoad = () => this.setState({ loading: !this.state.loading });
   toggleConfirm = () => this.setState({ showConfirm: !this.state.showConfirm });
 
-  
   showToast = text =>
     Toast.show(text, {
       duration: Toast.durations.SHORT,
@@ -136,6 +137,7 @@ class ProfileCourse extends Component {
             user.credits_available = data.credits_available;
             this.props.setUser(user);
             UserResource.setUser(user);
+            this.getCourses();
           } else {
             this.showToast(message);
           }
@@ -148,6 +150,23 @@ class ProfileCourse extends Component {
           "Something went wrong. Try checking your internet connection"
         );
       });
+  };
+
+  getCourses = () => {
+    this.toggleLoad();
+    Profile.getCourses("upcoming")
+      .then(r => {
+        this.toggleLoad();
+        const { status, message, data } = r.data;
+
+        if (status) {
+          this.props.setUpcomingCourses(data);
+        } else {
+          // this.goback();
+          // this.showToast(message);
+        }
+      })
+      .catch(err => {});
   };
 
   goBack = () => {
@@ -206,7 +225,7 @@ class ProfileCourse extends Component {
             style={{
               position: "absolute",
               left: 10,
-              top: 5,
+              top: 35,
               zIndex: 2,
               display: "flex",
               flexDirection: "row",
@@ -215,14 +234,14 @@ class ProfileCourse extends Component {
           >
             <Icon
               type="MaterialIcons"
-              style={{ color: "white", fontSize: 30 }}
+              style={{ color: "white", fontSize: 22 }}
               name="chevron-left"
             />
             <Text
               style={{
                 color: "white",
-                fontFamily: "Roboto_medium",
-                fontSize: 30
+                fontFamily: "Roboto_light",
+                fontSize: 22
               }}
             >
               Back
@@ -261,4 +280,6 @@ class ProfileCourse extends Component {
   }
 }
 
-export default UserConnect(["setUser", "user"])(ProfileCourse);
+export default ProfileConnect(["setUpcomingCourses"])(
+  UserConnect(["setUser", "user"])(ProfileCourse)
+);

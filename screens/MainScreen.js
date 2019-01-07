@@ -36,6 +36,7 @@ import NotifBody from "./Notifications/NotifBody";
 import { UserComsumer } from "../context/UserProvider";
 import NotifBadge from "./Notifications/NotifBadge";
 import ProfileCourse from "./Profile/ProfileCourse";
+import CoursesCourse from "./Courses/CoursesCourse";
 
 const blue = "#00246a";
 
@@ -122,10 +123,11 @@ const MainDrawerNavigator = createDrawerNavigator(
       },
       screen: createStackNavigator(
         {
-          SpecificCourse: { screen: SpecificCourse },
           CourseList: { screen: CourseList },
           GenreCourses: { screen: GenreCourses },
-          SearchGenre: { screen: SearchGenre }
+          SearchGenre: { screen: SearchGenre },
+          ViewSchedule: { screen: ViewSchedule },
+          SpecificCourse: { screen: CoursesCourse }
         },
         {
           initialRouteName: "CourseList",

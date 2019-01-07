@@ -390,7 +390,7 @@ class SignUpScreen extends Component {
                       style={{
                         display: "flex",
                         flexDirection: "row",
-                        fontFamily: "Roboto_light"
+                       
                       }}
                     >
                       <Text style={{ color: "white", fontSize: 13 }}>
