@@ -21,7 +21,6 @@ import { StackActions, NavigationActions } from "react-navigation";
 import { UserConnect } from "../context/UserProvider";
 import { Updates } from "expo";
 
-
 const { height } = Dimensions.get("window");
 
 class LoginRegister extends Component {

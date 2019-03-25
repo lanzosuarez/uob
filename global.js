@@ -1,5 +1,7 @@
-export const API_URL = "https://uobsummit-demo.herokuapp.com";
-export const WEB_URL = "https://demo.uobsummit.com";
+// export const API_URL = "https://uobsummit-demo.herokuapp.com";
+// export const WEB_URL = "https://demo.uobsummit.com";
+export const API_URL = "https://the-uobsummit-staging.herokuapp.com";
+export const WEB_URL = "https://the-uobsummit-staging.herokuapp.com";
 
 export const generateUrl = uri => {
   return `${API_URL}/api/v5/${uri}`;

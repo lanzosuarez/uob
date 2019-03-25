@@ -150,13 +150,20 @@ class CoursesCourse extends Component {
   };
 
   goBack = () => {
-    const go = route => {
+    const go = (route, params = {}) => {
       this.props.navigation.navigate(route);
     };
-    const fromRoute = this.props.navigation.getParam("from");
+    const { navigation } = this.props;
+    const fromRoute = navigation.getParam("from");
+
     switch (fromRoute) {
       case "Courses": {
         go("CourseList");
+        break;
+      }
+      case "GenreCourses": {
+        const genreId = navigation.getParam("genreId");
+        go("GenreCourses", { id: genreId });
         break;
       }
       case "SearchGenre": {

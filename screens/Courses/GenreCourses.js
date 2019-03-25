@@ -50,9 +50,11 @@ class GenreCourses extends Component {
   toggleLoad = () => this.setState({ loading: !this.state.loading });
 
   goToCourseSchedules = course => {
+    const genreId = this.props.navigation.getParam("id");
     this.props.navigation.navigate("SpecificCourse", {
       id: course.id,
-      from: "Courses"
+      genreId,
+      from: "GenreCourses"
     });
   };
 

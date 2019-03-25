@@ -389,8 +389,7 @@ class SignUpScreen extends Component {
                     <View
                       style={{
                         display: "flex",
-                        flexDirection: "row",
-                       
+                        flexDirection: "row"
                       }}
                     >
                       <Text style={{ color: "white", fontSize: 13 }}>

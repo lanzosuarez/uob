@@ -1,8 +1,7 @@
 import React, { Component } from "react";
-
-import { View, Text, ScrollView, Dimensions } from "react-native";
+import { View, Text, ScrollView, Dimensions, StyleSheet } from "react-native";
 import { Button } from "native-base";
-import HTML from "react-native-render-html";
+import HTMLView from "react-native-htmlview";
 
 const blue = "#00246a";
 
@@ -131,11 +130,7 @@ class UserEvent extends Component {
                 </Text>
               </View>
             </View>
-            <View
-              style={{
-                marginBottom: 10
-              }}
-            >
+            {ue.class_dates && ue.class_dates.length > 1 && (
               <View
                 style={{
                   alignItems: "center",
@@ -144,26 +139,31 @@ class UserEvent extends Component {
               >
                 <Text
                   style={{
+                    marginBottom: 10,
                     fontSize: 17,
                     fontWeight: "bold",
                     color: blue,
                     fontFamily: "AgendaBold"
                   }}
                 >
-                  Time
+                  Class Dates
                 </Text>
-                <Text
-                  style={{
-                    fontSize: 15,
-                    fontWeight: "100",
-                    color: blue,
-                    fontFamily: "Roboto_light"
-                  }}
-                >
-                  {ue ? ue.time : ""}
-                </Text>
+                {ue.class_dates.map((d, i) => (
+                  <Text
+                    key={i}
+                    style={{
+                      marginBottom: (i + 1) % 2 === 0 ? 10 : 0,
+                      fontWeight: "100",
+                      fontSize: 15,
+                      color: blue,
+                      fontFamily: "Roboto_light"
+                    }}
+                  >
+                    {d}
+                  </Text>
+                ))}
               </View>
-            </View>
+            )}
             <View
               style={{
                 marginBottom: 20,
@@ -196,25 +196,10 @@ class UserEvent extends Component {
               </Button>
             </View>
 
-            <HTML
-              listsPrefixesRenderers={{
-                ul: (htmlAttribs, children, convertedCSSStyles, passProps) => {
-                  return <Text style={{ color: blue }}> &#8226;</Text>;
-                }
-              }}
-              baseFontStyle={{
-                flex: 1,
-                fontSize: 16,
-                fontWeight: "100",
-                color: blue,
-                fontFamily: "Roboto_light",
-                lineHeight: 20,
-                textAlign: "left",
-                paddingTop: 10,
-                paddingBottom: 30
-              }}
-              html={w ? w.description : ""}
-              imagesMaxWidth={width}
+            <HTMLView
+              paragraphBreak={false}
+              value={w ? w.description : `<p>hello</p>`}
+              stylesheet={styles}
             />
           </View>
         </View>
@@ -222,5 +207,40 @@ class UserEvent extends Component {
     );
   }
 }
+
+const styles = StyleSheet.create({
+  p: {
+    fontSize: 16,
+    fontWeight: "100",
+    color: "#00246a",
+    fontFamily: "Roboto_light",
+    lineHeight: 20
+  },
+  ul: {
+    fontSize: 16,
+    fontWeight: "100",
+    color: "#00246a",
+    fontFamily: "Roboto_light"
+  },
+  li: {
+    fontSize: 16,
+    fontWeight: "100",
+    color: "#00246a",
+    fontFamily: "Roboto_light"
+  },
+  strong: {
+    fontSize: 16,
+    fontWeight: "bold",
+    color: "#00246a",
+    fontFamily: "AgendaBold"
+  },
+  em: {
+    fontStyle: "italic",
+    fontFamily: "AgendaBold",
+    fontSize: 16,
+    fontWeight: "bold",
+    color: "#00246a"
+  }
+});
 
 export default UserEvent;

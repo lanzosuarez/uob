@@ -31,7 +31,8 @@ class App extends React.Component {
     await Expo.Font.loadAsync({
       Roboto_light: require("./assets/Fonts/AgendaLight.ttf"),
       Roboto_medium: require("./assets/Fonts/AgendaMedium.ttf"),
-      AgendaBold: require("./assets/Fonts/AgendaBold.ttf")
+      AgendaBold: require("./assets/Fonts/AgendaBold.ttf"),
+      AgendaItalic: require("./assets/Fonts/AgendaItalic.ttf")
     });
 
     const cacheImages = images.map(image => {

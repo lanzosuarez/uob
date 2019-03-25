@@ -1,13 +1,48 @@
 import React from "react";
 
-import { Text, View, Dimensions, ScrollView } from "react-native";
+import { Text, View, Dimensions, ScrollView, StyleSheet } from "react-native";
 
-import HTML from "react-native-render-html";
+import HTMLView from "react-native-htmlview";
 
 import Workshops from "./Workshops";
 
 const blue = "#00246a";
 const { width } = Dimensions.get("window");
+
+const styles = StyleSheet.create({
+  p: {
+    fontSize: 16,
+    fontWeight: "100",
+    color: "#00246a",
+    fontFamily: "Roboto_light",
+    lineHeight: 20
+  },
+  ul: {
+    fontSize: 16,
+    fontWeight: "100",
+    color: "#00246a",
+    fontFamily: "Roboto_light"
+  },
+  li: {
+    fontSize: 16,
+    fontWeight: "100",
+    color: "#00246a",
+    fontFamily: "Roboto_light"
+  },
+  strong: {
+    fontSize: 16,
+    fontWeight: "bold",
+    color: "#00246a",
+    fontFamily: "AgendaBold"
+  },
+  em: {
+    fontStyle: "italic",
+    fontFamily: "AgendaItalic",
+    fontSize: 16,
+    fontWeight: "900",
+    color: "#00246a"
+  }
+});
 
 const NoUserEvent = props => {
   const { workshop: w } = props;
@@ -39,34 +74,17 @@ const NoUserEvent = props => {
               {w ? w.title : ""}
             </Text>
           </View>
-          <View style={{ paddingLeft: 20, paddingRight: 20 }}>
+          <View style={{ paddingLeft: 20, paddingRight: 20, marginBottom: 15 }}>
             <Workshops
               workshopId={w ? w.id : ""}
               workshop_types={w ? w.workshop_types : []}
             />
           </View>
-
-          <HTML
-            listsPrefixesRenderers={{
-              ul: (htmlAttribs, children, convertedCSSStyles, passProps) => {
-                return (
-                  <Text style={{ color: blue, marginRight: 10 }}> &#8226;</Text>
-                );
-              }
-            }}
-            baseFontStyle={{
-              flex: 1,
-              fontSize: 16,
-              fontWeight: "100",
-              color: blue,
-              fontFamily: "Roboto_light",
-              lineHeight: 20,
-              textAlign: "left",
-              paddingTop: 10,
-              paddingBottom: 30
-            }}
-            html={w ? w.description : ""}
-            imagesMaxWidth={width}
+          <HTMLView
+         
+            value={w ? w.description : `<p>hello</p>`}
+            // value={`<em>hello</em>`}
+            stylesheet={styles}
           />
         </View>
       </View>
